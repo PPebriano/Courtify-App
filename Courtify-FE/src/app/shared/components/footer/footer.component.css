@@ -1,0 +1,29 @@
+.footer-container {
+  background-color: #0d0f12;
+  color: #94a3b8;
+  padding: 1rem 2rem;
+  border-top: 1px solid #1e293b;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-brand {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+  letter-spacing: 1px;
+  font-family: "Oswald", "Impact", sans-serif;
+  text-transform: uppercase;
+}
+
+.footer-copyright {
+  font-size: 1rem;
+  color: #94a3b8;
+}

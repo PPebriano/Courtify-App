@@ -1,0 +1,15 @@
+<section class="hero-banner">
+  <div class="hero-content">
+    <h1 class="hero-title">{{ title }}</h1>
+
+    <p class="hero-subtitle" *ngIf="subtitle">
+      {{ subtitle }}
+    </p>
+
+    <div class="hero-actions" *ngIf="actionButtonLabel">
+      <button class="btn btn-primary" (click)="onButtonClick()">
+        {{ actionButtonLabel }}
+      </button>
+    </div>
+  </div>
+</section>
