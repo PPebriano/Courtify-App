@@ -1,1 +1,63 @@
-<p>login works!</p>
+<div class="login-wrapper">
+  <div class="login-card">
+    <!-- BRAND LOGO -->
+    <h1 class="courtify-logo">Courtify</h1>
+    <p class="login-subtitle">Silakan masuk ke akun Anda</p>
+
+    <!-- FORM -->
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="loginForm.valid && onSubmit()"
+      class="login-form"
+    >
+      <!-- USERNAME FORM -->
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          id="username"
+          type="text"
+          formControlName="username"
+          placeholder="Masukkan username Anda"
+        />
+
+        @if (
+          loginForm.get("username")?.errors?.["usernameValidator"]?.result &&
+          loginForm.get("username")?.touched
+        ) {
+          <small class="error-text">
+            {{
+              loginForm.get("username")?.errors?.["usernameValidator"]?.message
+            }}
+          </small>
+        }
+      </div>
+
+      <!-- PASSWORD FORM -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="Msukkan password and"
+        />
+
+        @if (
+          loginForm.get("password")?.errors?.["passwordValidator"]?.result &&
+          loginForm.get("password")?.touched
+        ) {
+          <small class="error-text">
+            {{
+              loginForm.get("password")?.errors?.["passwordValidator"]?.message
+            }}
+          </small>
+        }
+      </div>
+
+      <!-- SUBMIT BUTTON -->
+      <button type="submit" class="btn-submit" [disabled]="!loginForm.valid">
+        Masuk
+      </button>
+    </form>
+  </div>
+</div>
