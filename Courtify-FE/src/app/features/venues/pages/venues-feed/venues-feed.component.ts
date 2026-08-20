@@ -16,7 +16,7 @@ export class VenuesFeedComponent {
 
   venues = signal<VenueResponseType[]>([
     {
-      venueId: 1,
+      id: 1,
       venueName: 'Courtify Pondok Indah',
       address:
         'Jl. Pondok Indah No.40 Kec. Kebayoran Baru Kota Jakarta Selatan',
@@ -24,7 +24,7 @@ export class VenuesFeedComponent {
       isActive: true,
     },
     {
-      venueId: 2,
+      id: 2,
       venueName: 'Courtify Kembangan',
       address: 'Jl. Kembangan No.30 Kec. Kebon Jeruk Kota Jakarta Barat',
       phoneNumber: '0821954732',
