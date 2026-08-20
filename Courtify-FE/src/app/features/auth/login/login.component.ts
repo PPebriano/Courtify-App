@@ -4,6 +4,10 @@ import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
 import { LoginRequestType } from '../../../core/models/request/login-request-type';
 import { APP_ROUTES } from '../../../shared/constants/routes';
+import {
+  passwordValidator,
+  usernameValidator,
+} from '../../../core/validator/validator';
 
 @Component({
   selector: 'app-login',
@@ -18,8 +22,8 @@ export class LoginComponent {
   private router = inject(Router);
 
   loginForm = this.formBuilder.group({
-    username: ['', []],
-    password: ['', []],
+    username: ['', [usernameValidator]],
+    password: ['', [passwordValidator]],
   });
 
   onSubmit() {
