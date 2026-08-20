@@ -13,10 +13,22 @@ export const routes: Routes = [
   {
     path: APP_ROUTES.VENUES,
     // canActivate: [authGuard],
-    loadComponent: () =>
-      import('./features/venues/pages/venues-feed/venues-feed.component').then(
-        (m) => m.VenuesFeedComponent,
-      ),
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import('./features/venues/pages/venues-feed/venues-feed.component').then(
+            (m) => m.VenuesFeedComponent,
+          ),
+      },
+      {
+        path: ':venueId',
+        loadComponent: () =>
+          import('./features/venues/pages/venue-detail/venue-detail.component').then(
+            (m) => m.VenueDetailComponent,
+          ),
+      },
+    ],
   },
   {
     path: APP_ROUTES.BOOK,

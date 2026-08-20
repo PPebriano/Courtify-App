@@ -1,0 +1,15 @@
+<section class="hero-banner">
+  <div class="hero-content">
+    <h1 class="venue-name">{{ venueDetail?.venueName }}</h1>
+
+    <p class="venue-address">{{ venueDetail?.address }}</p>
+
+    <span class="status-badge" [class.active]="venueDetail?.isActive">
+      {{ venueDetail?.isActive ? "Active" : "InActive" }}
+    </span>
+
+    <p class="venue-phone-number">
+      <span class="label">Telp:</span>{{ venueDetail?.phoneNumber }}
+    </p>
+  </div>
+</section>

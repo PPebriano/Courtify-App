@@ -19,6 +19,15 @@
 
   <!-- VENUES SECTION -->
   <section class="venues-section">
-    <!-- Nanti komponen Card Venues ditaruh di sini -->
+    <h1 class="venues-title">Our Venues</h1>
+
+    <div class="venues-grid">
+      @for (venue of venues(); track venue.venueId) {
+        <app-venues-card
+          [venue]="venue"
+          illustrationImage="https://images.unsplash.com/photo-1772946277847-066d013d6ab8?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGZhc2lsaXRhcyUyMG9sYWhyYWdhfGVufDB8fDB8fHww"
+        ></app-venues-card>
+      }
+    </div>
   </section>
 </div>

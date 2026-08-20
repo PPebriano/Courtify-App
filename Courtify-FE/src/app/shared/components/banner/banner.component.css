@@ -1,6 +1,5 @@
 .hero-banner {
   padding: 4rem 2rem 3rem;
-  max-width: 900px;
   margin: 0 auto;
   text-align: left;
 
@@ -25,7 +24,7 @@
   .hero-actions {
     display: flex;
     gap: 1rem;
-    align-items: center;
+    align-items: start;
   }
 }
 
