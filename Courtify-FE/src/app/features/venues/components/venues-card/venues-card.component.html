@@ -1,0 +1,18 @@
+<div class="venues-card" [routerLink]="['/', APP_ROUTES.VENUES, venue.venueId]">
+  <!-- VENUES IMAGE -->
+  <div class="image-wrapper">
+    <img [src]="illustrationImage" alt="illustration" />
+    <span class="status-badge" [class.active]="venue.isActive">
+      {{ venue.isActive ? "Active" : "InActive" }}
+    </span>
+  </div>
+
+  <!-- VENUES INFO CONTAINER -->
+  <div class="venues-info-container">
+    <h2 class="venue-name">{{ venue.venueName }}</h2>
+    <p class="venue-address">{{ venue.address }}</p>
+    <p class="venue-phone-number">
+      <span class="label">Telp:</span> {{ venue.phoneNumber }}
+    </p>
+  </div>
+</div>

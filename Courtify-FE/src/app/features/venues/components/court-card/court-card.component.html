@@ -1,0 +1,19 @@
+<div class="court-card">
+  <!-- VENUES IMAGE -->
+  <div class="image-wrapper">
+    <img [src]="illustrationImage" alt="illustration" />
+    <span class="status-badge" [class.active]="court.isAvailable">
+      {{ court.isAvailable ? "Available" : "UnAvailable" }}
+    </span>
+  </div>
+
+  <!-- VENUES INFO CONTAINER -->
+  <div class="court-info-container">
+    <h2 class="court-name">{{ court.courtName }}</h2>
+    <p class="court-info">Price: {{ court.hourlyRate }} per hour</p>
+    <p class="court-info">Category: {{ court.courtCategory.categoryName }}</p>
+    <p class="court-info">
+      Category Description: {{ court.courtCategory.description }}
+    </p>
+  </div>
+</div>

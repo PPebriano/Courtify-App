@@ -1,0 +1,20 @@
+<div class="venue-detail-container">
+  <!-- BANNER iNFORMATION -->
+  <app-venue-detail-banner
+    [venueDetail]="venueDetail()"
+  ></app-venue-detail-banner>
+
+  <!-- COURTS INFORMATION -->
+  <section class="courts-section">
+    <h1 class="courts-title">Available Courts</h1>
+
+    <div class="courts-grid">
+      @for (court of venueDetail()?.courts; track court.courtId) {
+        <app-court-card
+          [court]="court"
+          illustrationImage="https://cdn1-production-images-kly.akamaized.net/tUSYlk_xkuk1-V_pQ0FfK4paR20=/0x291:7088x4286/1280x720/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/2924534/original/077372900_1569651822-max-libertine-nep8cl_5jhU-unsplash.jpg"
+        ></app-court-card>
+      }
+    </div>
+  </section>
+</div>

@@ -1,0 +1,47 @@
+.hero-banner {
+  padding: 4rem 2rem 3rem;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.venue-name {
+  font-size: 3.5rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+  color: #ffffff;
+  font-family: "Oswald", "Impact", sans-serif;
+  text-transform: uppercase;
+}
+
+.venue-address {
+  font-size: 1rem;
+  color: #94a3b8;
+  line-height: 1.6;
+  max-width: 650px;
+  margin-bottom: 1rem;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 1rem;
+  background-color: #ef4444;
+  color: #ffffff;
+  margin-bottom: 1rem;
+
+  &.active {
+    background-color: #10b981;
+  }
+}
+
+.venue-phone-number {
+  font-size: 0.85rem;
+  color: #cbd5e1;
+
+  .label {
+    color: #00b2fe;
+    font-weight: 600;
+  }
+}
