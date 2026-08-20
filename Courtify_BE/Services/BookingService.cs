@@ -16,7 +16,7 @@ namespace CourtifyBE.Services
 
         public async Task<Bookings?> GetByIdAsync(long id)
         {
-            return await _bookingRepository.GetByIdAsync(id, "Courts", "BookingAddOns", "PaymentReceipts");
+            return await _bookingRepository.GetByIdAsync(id, "Courts", "BookingAddOns.Equipment", "PaymentReceipts");
         }
 
         public async Task<List<Bookings>> GetAllAsync(string? status, DateTime? createdAt)

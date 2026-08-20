@@ -21,5 +21,13 @@ namespace CourtifyBE.Controllers
             var response = bookings.Select(_bookingService.ToDetailResponse).ToList();
             return Ok(response);
         }
+
+        [HttpGet("{id:long}")] // GET /api/booking/{id}
+        public async Task<IActionResult> GetBooking(long id)
+        {
+            var booking = await _bookingService.GetByIdAsync(id);
+            if (booking == null) return NotFound();
+            return Ok(_bookingService.ToDetailResponse(booking));
+        }
     }
 }
