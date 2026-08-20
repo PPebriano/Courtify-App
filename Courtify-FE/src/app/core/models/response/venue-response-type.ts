@@ -1,5 +1,5 @@
 export type VenueResponseType = {
-  venueId: number;
+  id: number;
   venueName: string;
   address: string;
   phoneNumber: string;
