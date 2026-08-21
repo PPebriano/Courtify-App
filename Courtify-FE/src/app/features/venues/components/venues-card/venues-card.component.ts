@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input } from '@angular/core';
 import { VenueResponseType } from '../../../../core/models/response/venue-response-type';
 import { RouterLink } from '@angular/router';
 import { APP_ROUTES } from '../../../../shared/constants/routes';
-import { CourtResponseType } from '../../../../core/models/response/court-response-type';
 
 @Component({
   selector: 'app-venues-card',

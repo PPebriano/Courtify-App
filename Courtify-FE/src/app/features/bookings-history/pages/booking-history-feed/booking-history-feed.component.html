@@ -7,6 +7,15 @@
 
   <!-- BOOKING HISTORY SECTION -->
   <section class="booking-history-section">
-    <!-- Nanti komponen card history ditaruh disini -->
+    <h1 class="booking-history-title">Booking History</h1>
+    <div class="booking-history-grid">
+      @for (booking of bookingHistories; track booking.id) {
+        <app-booking-card
+          [booking]="booking"
+          [route]="APP_ROUTES.HISTORY"
+          illustrationImage="https://images.unsplash.com/photo-1697736667820-84fc04ef7462?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8dmludGFnZSUyMHNwb3J0fGVufDB8fDB8fHww"
+        ></app-booking-card>
+      }
+    </div>
   </section>
 </div>
