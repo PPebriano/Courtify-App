@@ -31,7 +31,10 @@ export class LoginComponent {
     this.authService.login(payload).subscribe({
       next: (response) => {
         console.log(response);
-        this.authService.setToken(response.token);
+        this.authService.setTokenAndUserId(
+          response.token,
+          response.admin.adminId,
+        );
         this.router.navigate([APP_ROUTES.VENUES]);
       },
     });

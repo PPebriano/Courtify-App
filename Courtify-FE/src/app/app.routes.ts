@@ -12,7 +12,7 @@ export const routes: Routes = [
   },
   {
     path: APP_ROUTES.VENUES,
-    // canActivate: [authGuard],
+    canActivate: [authGuard],
     children: [
       {
         path: '',
@@ -32,7 +32,7 @@ export const routes: Routes = [
   },
   {
     path: APP_ROUTES.BOOK,
-    // canActivate: [authGuard],
+    canActivate: [authGuard],
     loadComponent: () =>
       import('./features/booking/pages/booking-feed/booking-feed.component').then(
         (m) => m.BookingFeedComponent,
@@ -40,7 +40,7 @@ export const routes: Routes = [
   },
   {
     path: APP_ROUTES.HISTORY,
-    // canActivate: [authGuard],
+    canActivate: [authGuard],
     loadComponent: () =>
       import('./features/bookings-history/pages/booking-history-feed/booking-history-feed.component').then(
         (m) => m.BookingHistoryFeedComponent,
