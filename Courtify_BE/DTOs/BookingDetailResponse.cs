@@ -8,8 +8,8 @@
         public long CourtId { get; set; }
         public string CustomerName { get; set; } = string.Empty;
         public DateTime BookingDate { get; set; }
-        public TimeOnly StartTime { get; set; }
-        public TimeOnly EndTime { get; set; }
+        public TimeSpan StartTime { get; set; }
+        public TimeSpan EndTime { get; set; }
         public int TotalHours { get; set; }
         public decimal BaseAmount { get; set; }
         public decimal TotalAmount { get; set; }

@@ -33,11 +33,11 @@ namespace CourtifyBE.Models
 
         [Required]
         [Column("START_TIME")]
-        public TimeOnly StartTime { get; set; }
+        public TimeSpan StartTime { get; set; }
 
         [Required]
         [Column("END_TIME")]
-        public TimeOnly EndTime { get; set; }
+        public TimeSpan EndTime { get; set; }
 
         [Required]
         [Column("TOTAL_HOURS")]
