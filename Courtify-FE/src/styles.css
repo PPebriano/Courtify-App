@@ -5,10 +5,23 @@
   box-sizing: border-box;
 }
 
-html,
-body {
+html, body {
+  background-color: #0d0f12 !important;
+  color: #ffffff;
   margin: 0;
   padding: 0;
-  width: 100%;
-  overflow-x: hidden;
+}
+
+html {
+  overscroll-behavior-y: none;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+html, body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }

@@ -21,16 +21,16 @@ export class VenuesFeedComponent {
   }
 
   private fetchVenues() {
-    const dummyValue = [
-      {
-        id: 1,
-        nameVenue: 'Courtify Pondok Indah',
-        address: 'Jl Pondok Indah',
-        phoneNumber: '08998372422',
-        isActive: true,
-      },
-    ];
-    this.venues = dummyValue;
+    // const dummyValue = [
+    //   {
+    //     id: 1,
+    //     nameVenue: 'Courtify Pondok Indah',
+    //     address: 'Jl Pondok Indah',
+    //     phoneNumber: '08998372422',
+    //     isActive: true,
+    //   },
+    // ];
+    // this.venues = dummyValue;
 
     this.venuesService.venues().subscribe({
       next: (response) => {

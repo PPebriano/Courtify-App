@@ -34,12 +34,12 @@
           "
         />
         @if (
-          bookForm.get("customerName")?.errors?.["customerNameValidator"]
-            ?.result && bookForm.get("customerName")?.touched
+          bookForm.get("customerName")?.hasError("customerNameValidator") &&
+          bookForm.get("customerName")?.touched
         ) {
           <small class="error-text">
             {{
-              bookForm.get("customerName")?.errors?.["customerNameValidator"]
+              bookForm.get("customerName")?.getError("customerNameValidator")
                 ?.message
             }}
           </small>
@@ -58,12 +58,12 @@
           "
         />
         @if (
-          bookForm.get("bookingDate")?.errors?.["bookingDateValidator"]
-            ?.result && bookForm.get("bookingDate")?.touched
+          bookForm.get("bookingDate")?.hasError("bookingDateValidator") &&
+          bookForm.get("bookingDate")?.touched
         ) {
           <small class="error-text">
             {{
-              bookForm.get("bookingDate")?.errors?.["bookingDateValidator"]
+              bookForm.get("bookingDate")?.getError("bookingDateValidator")
                 ?.message
             }}
           </small>
@@ -78,8 +78,8 @@
             type="time"
             formControlName="startTime"
             [class.input-error]="
-              (bookForm.errors?.['timeOperationalError'] ||
-                bookForm.errors?.['timeSequenceError']) &&
+              (bookForm.hasError('timeOperationalError') ||
+                bookForm.hasError('timeSequenceError')) &&
               (bookForm.get('startTime')?.touched ||
                 bookForm.get('endTime')?.touched)
             "
@@ -92,8 +92,8 @@
             type="time"
             formControlName="endTime"
             [class.input-error]="
-              (bookForm.errors?.['timeOperationalError'] ||
-                bookForm.errors?.['timeSequenceError']) &&
+              (bookForm.hasError('timeOperationalError') ||
+                bookForm.hasError('timeSequenceError')) &&
               (bookForm.get('startTime')?.touched ||
                 bookForm.get('endTime')?.touched)
             "
@@ -102,20 +102,20 @@
       </div>
 
       @if (
-        bookForm.errors?.["timeOperationalError"] &&
+        bookForm.hasError("timeOperationalError") &&
         (bookForm.get("startTime")?.touched || bookForm.get("endTime")?.touched)
       ) {
         <small class="error-text">
-          {{ bookForm.errors?.["timeOperationalError"]?.message }}
+          {{ bookForm.getError("timeOperationalError")?.message }}
         </small>
       }
 
       @if (
-        bookForm.errors?.["timeSequenceError"] &&
+        bookForm.hasError("timeSequenceError") &&
         (bookForm.get("startTime")?.touched || bookForm.get("endTime")?.touched)
       ) {
         <small class="error-text">
-          {{ bookForm.errors?.["timeSequenceError"]?.message }}
+          {{ bookForm.getError("timeSequenceError")?.message }}
         </small>
       }
 

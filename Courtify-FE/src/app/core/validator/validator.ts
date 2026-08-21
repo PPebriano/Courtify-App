@@ -97,6 +97,7 @@ function checkOperationalHours(
   if (startTime < OPERATIONAL_START || startTime > OPERATIONAL_END) {
     return {
       timeOperationalError: {
+        result: true,
         message: 'Jam mulai harus di antara jam 08:00 sampai 22:00',
       },
     };
@@ -105,6 +106,7 @@ function checkOperationalHours(
   if (endTime < OPERATIONAL_START || endTime > OPERATIONAL_END) {
     return {
       timeOperationalError: {
+        result: true,
         message: 'Jam selesai harus di antara jam 08:00 sampai 22:00',
       },
     };
@@ -113,6 +115,7 @@ function checkOperationalHours(
   if (startTime >= endTime) {
     return {
       timeSequenceError: {
+        result: true,
         message: 'Jam selesai harus setelah jam mulai',
       },
     };

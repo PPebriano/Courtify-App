@@ -41,4 +41,7 @@ export class BookingsService {
       status,
     );
   }
+
+  cancelBooking(id: number) {}
+  
 }

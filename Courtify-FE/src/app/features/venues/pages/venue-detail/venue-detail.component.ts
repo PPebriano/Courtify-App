@@ -36,27 +36,27 @@ export class VenueDetailComponent {
   }
 
   private fetchVenueDetail(venueId: string | null) {
-    const dummyValue = {
-      id: 1,
-      venueName: 'Courtify Pondok Indah',
-      address: 'Jl Pondok Indah',
-      phoneNumber: '08998372422',
-      isActive: true,
-      courts: [
-        {
-          courtId: 12,
-          courtName: 'CTFY Padel-1',
-          courtCategory: {
-            categoryName: 'Lapangan Padel',
-            description: 'Lapangan padel indoor dengan lapangan vinyl',
-          },
-          hourlyRate: 100000,
-          isAvailable: true,
-        },
-      ],
-    };
+    // const dummyValue = {
+    //   id: 1,
+    //   venueName: 'Courtify Pondok Indah',
+    //   address: 'Jl Pondok Indah',
+    //   phoneNumber: '08998372422',
+    //   isActive: true,
+    //   courts: [
+    //     {
+    //       courtId: 12,
+    //       courtName: 'CTFY Padel-1',
+    //       courtCategory: {
+    //         categoryName: 'Lapangan Padel',
+    //         description: 'Lapangan padel indoor dengan lapangan vinyl',
+    //       },
+    //       hourlyRate: 100000,
+    //       isAvailable: true,
+    //     },
+    //   ],
+    // };
 
-    this.venueDetail = dummyValue;
+    // this.venueDetail = dummyValue;
 
     if (venueId) {
       this.venuesService.venueDetail(Number(venueId)).subscribe({

@@ -1,0 +1,90 @@
+<div class="detail-container">
+  <!-- TOP BAR / HEADER -->
+  <div class="detail-header">
+    <div class="header-titles">
+      <span class="booking-code">{{ bookingDetail?.bookingCode }}</span>
+      <h1 class="customer-name">{{ bookingDetail?.customerName }}</h1>
+    </div>
+  </div>
+
+  <!-- MAIN GRID -->
+  <div class="detail-content">
+    <!-- LEFT SECTION: MATCH & TIME INFORMATION -->
+    <div class="info-card">
+      <h3 class="section-title">Schedule Details</h3>
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="label">Date</span>
+          <span class="value">{{ bookingDetail?.bookingDate }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Time Slot</span>
+          <span class="value"
+            >{{ bookingDetail?.startTime }} - {{ bookingDetail?.endTime }}</span
+          >
+        </div>
+        <div class="info-item">
+          <span class="label">Duration</span>
+          <span class="value">{{ bookingDetail?.totalHours }} Hours</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Created At</span>
+          <span class="value">{{ bookingDetail?.createdAt }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADD-ONS SECTION -->
+    @if (bookingDetail?.bookingAddOns !== null) {
+      <div class="info-card">
+        <h3 class="section-title">Equipment Add-ons</h3>
+
+        <div class="addons-list">
+          @for (addOn of bookingDetail?.bookingAddOns; track addOn.id) {
+            <div class="addon-item">
+              <span class="addon-label">
+                {{ addOn.equipmentName }}
+                <span class="addon-qty">x {{ addOn.quantity }}</span>
+              </span>
+              <span class="addon-price">Rp {{ addOn.subtotal }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- PAYMENT SUMMARY -->
+    <div class="info-card payment-summary">
+      <h3 class="section-title">Payment Summary</h3>
+      <div class="price-row">
+        <span>Court Base Price</span>
+        <span>Rp {{ bookingDetail?.baseAmount }}</span>
+      </div>
+      <div class="price-row">
+        <span>Add-ons Total</span>
+        <span>Rp {{ bookingDetail?.grandTotal }}</span>
+      </div>
+      <div class="divider"></div>
+      <div class="price-row grand-total">
+        <span>Grand Total</span>
+        <span class="total-amount">Rp {{ bookingDetail?.grandTotal }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTION FOOTER -->
+  @if (bookingDetail?.status === "ACTIVE") {
+    <div class="action-footer">
+      <button class="btn-cancel" (click)="cancelBooking()">
+        Cancel Booking
+      </button>
+      <button
+        class="btn-complete"
+        (click)="completeBooking()"
+        [disabled]="isSubmitting"
+      >
+        {{ isSubmitting ? "Processing..." : "Complete Booking" }}
+      </button>
+    </div>
+  }
+</div>
