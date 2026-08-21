@@ -14,17 +14,28 @@ import { VenuesService } from '../../../../core/services/venues.service';
 export class VenuesFeedComponent {
   private venuesService = inject(VenuesService);
 
-  venues = signal<VenueResponseType[]>([]);
+  venues: VenueResponseType[] = [];
 
   ngOnInit() {
     this.fetchVenues();
   }
 
   private fetchVenues() {
+    const dummyValue = [
+      {
+        id: 1,
+        venueName: 'Courtify Pondok Indah',
+        address: 'Jl Pondok Indah',
+        phoneNumber: '08998372422',
+        isActive: true,
+      },
+    ];
+    this.venues = dummyValue;
+
     this.venuesService.venues().subscribe({
       next: (response) => {
         console.log(response);
-        this.venues.set(response);
+        this.venues = response;
       },
     });
   }

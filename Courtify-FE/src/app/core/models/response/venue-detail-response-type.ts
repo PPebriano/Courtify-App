@@ -5,6 +5,6 @@ export type VenueDetailResponseType = {
   venueName: string;
   address: string;
   phoneNumber: string;
-  isActive: false;
+  isActive: boolean;
   courts: CourtResponseType[];
 };

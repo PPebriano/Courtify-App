@@ -1,0 +1,82 @@
+<div class="modal-overlay" (click)="close.emit()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <!-- MODAL HEADER -->
+    <div class="modal-header">
+      <div>
+        <h2 class="modal-title">Book {{ court.courtName }}</h2>
+        <p class="modal-subtitle">Court reservation and Add Ons Form</p>
+      </div>
+      <button class="btn-close" (click)="close.emit()">✕</button>
+    </div>
+
+    <!-- MODAL FORM -->
+    <form [formGroup]="bookForm" (ngSubmit)="onSubmit()" class="modal-body">
+      <!-- CUSTOMER NAME -->
+      <div class="form-group">
+        <label for="customerName">Customer Name</label>
+        <input
+          id="customerName"
+          type="text"
+          formControlName="customerName"
+          placeholder="Masukkan nama pelanggan"
+        />
+      </div>
+
+      <!-- BOOKING DATE -->
+      <div class="form-group">
+        <label for="bookingDate">Booking Date</label>
+        <input id="bookingDate" type="date" formControlName="bookingDate" />
+      </div>
+
+      <!-- START TIME & END TIME -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="startTime">Start Time</label>
+          <input id="startTime" type="time" formControlName="startTime" />
+        </div>
+        <div class="form-group">
+          <label for="endTime">End Time</label>
+          <input id="endTime" type="time" formControlName="endTime" />
+        </div>
+      </div>
+
+      <!-- ADD-ONS SECTION -->
+      <div class="addons-section" formArrayName="addons">
+        <h3 class="addons-title">Equipment Add-Ons</h3>
+        <div class="addons-list">
+          @for (addon of availableAddons; track addon.id; let i = $index) {
+            <div class="addon-card" [formGroupName]="i">
+              <label class="checkbox-container">
+                <input type="checkbox" formControlName="selected" />
+                <span class="addon-name">{{ addon.name }}</span>
+                <span class="addon-price">Rp {{ addon.price }}</span>
+              </label>
+
+              @if (addonsFormArray.at(i).get("selected")?.value) {
+                <div class="qty-wrapper">
+                  <span class="qty-label">Qty:</span>
+                  <input
+                    type="number"
+                    formControlName="quantity"
+                    min="1"
+                    class="qty-input"
+                  />
+                </div>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- ACTIONS -->
+      <div class="modal-actions">
+        <button type="button" class="btn-cancel" (click)="close.emit()">
+          Cancel
+        </button>
+        <button type="submit" class="btn-submit" [disabled]="bookForm.invalid">
+          Place Booking
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
