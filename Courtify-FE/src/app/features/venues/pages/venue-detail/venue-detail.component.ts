@@ -37,7 +37,7 @@ export class VenueDetailComponent {
 
   private fetchVenueDetail(venueId: string | null) {
     const dummyValue = {
-      venueId: 1,
+      id: 1,
       venueName: 'Courtify Pondok Indah',
       address: 'Jl Pondok Indah',
       phoneNumber: '08998372422',

@@ -21,6 +21,7 @@ export class LoginComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
 
+  showError: boolean = false;
   loginForm = this.formBuilder.group({
     username: ['', [usernameValidator]],
     password: ['', [passwordValidator]],
@@ -36,6 +37,9 @@ export class LoginComponent {
           response.admin.adminId,
         );
         this.router.navigate([APP_ROUTES.VENUES]);
+      },
+      error: (err) => {
+        this.showError = true;
       },
     });
   }

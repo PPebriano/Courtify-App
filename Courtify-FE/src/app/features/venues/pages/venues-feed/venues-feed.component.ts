@@ -24,7 +24,7 @@ export class VenuesFeedComponent {
     const dummyValue = [
       {
         id: 1,
-        venueName: 'Courtify Pondok Indah',
+        nameVenue: 'Courtify Pondok Indah',
         address: 'Jl Pondok Indah',
         phoneNumber: '08998372422',
         isActive: true,

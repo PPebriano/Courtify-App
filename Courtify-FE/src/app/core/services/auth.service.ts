@@ -16,9 +16,7 @@ export class AuthService {
   login(payload: LoginRequestType) {
     return this.http.post<LoginResponseType>(
       `${environtment.apiUrl}/api/login`,
-      {
-        payload,
-      },
+      payload,
     );
   }
 
