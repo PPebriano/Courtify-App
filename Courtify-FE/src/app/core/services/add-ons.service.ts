@@ -10,7 +10,7 @@ export class AddOnsService {
   http = inject(HttpClient);
 
   addOns() {
-    return this.http.get<EquipmentAddOnsResponseType>(
+    return this.http.get<EquipmentAddOnsResponseType[]>(
       `${environtment.apiUrl}/api/equipment-add-ons`,
     );
   }

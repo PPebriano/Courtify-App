@@ -1,6 +1,5 @@
 <div class="modal-overlay" (click)="close.emit()">
   <div class="modal-content" (click)="$event.stopPropagation()">
-    <!-- MODAL HEADER -->
     <div class="modal-header">
       <div>
         <h2 class="modal-title">Book {{ court.courtName }}</h2>
@@ -9,9 +8,19 @@
       <button class="btn-close" (click)="close.emit()">✕</button>
     </div>
 
-    <!-- MODAL FORM -->
     <form [formGroup]="bookForm" (ngSubmit)="onSubmit()" class="modal-body">
-      <!-- CUSTOMER NAME -->
+      @if (successMessage) {
+        <div class="alert-success">
+          {{ successMessage }}
+        </div>
+      }
+
+      @if (errorMessage) {
+        <div class="alert-error">
+          {{ errorMessage }}
+        </div>
+      }
+
       <div class="form-group">
         <label for="customerName">Customer Name</label>
         <input
@@ -19,37 +28,106 @@
           type="text"
           formControlName="customerName"
           placeholder="Masukkan nama pelanggan"
+          [class.input-error]="
+            bookForm.get('customerName')?.invalid &&
+            bookForm.get('customerName')?.touched
+          "
         />
+        @if (
+          bookForm.get("customerName")?.errors?.["customerNameValidator"]
+            ?.result && bookForm.get("customerName")?.touched
+        ) {
+          <small class="error-text">
+            {{
+              bookForm.get("customerName")?.errors?.["customerNameValidator"]
+                ?.message
+            }}
+          </small>
+        }
       </div>
 
-      <!-- BOOKING DATE -->
       <div class="form-group">
         <label for="bookingDate">Booking Date</label>
-        <input id="bookingDate" type="date" formControlName="bookingDate" />
+        <input
+          id="bookingDate"
+          type="date"
+          formControlName="bookingDate"
+          [class.input-error]="
+            bookForm.get('bookingDate')?.invalid &&
+            bookForm.get('bookingDate')?.touched
+          "
+        />
+        @if (
+          bookForm.get("bookingDate")?.errors?.["bookingDateValidator"]
+            ?.result && bookForm.get("bookingDate")?.touched
+        ) {
+          <small class="error-text">
+            {{
+              bookForm.get("bookingDate")?.errors?.["bookingDateValidator"]
+                ?.message
+            }}
+          </small>
+        }
       </div>
 
-      <!-- START TIME & END TIME -->
       <div class="form-row">
         <div class="form-group">
           <label for="startTime">Start Time</label>
-          <input id="startTime" type="time" formControlName="startTime" />
+          <input
+            id="startTime"
+            type="time"
+            formControlName="startTime"
+            [class.input-error]="
+              (bookForm.errors?.['timeOperationalError'] ||
+                bookForm.errors?.['timeSequenceError']) &&
+              (bookForm.get('startTime')?.touched ||
+                bookForm.get('endTime')?.touched)
+            "
+          />
         </div>
         <div class="form-group">
           <label for="endTime">End Time</label>
-          <input id="endTime" type="time" formControlName="endTime" />
+          <input
+            id="endTime"
+            type="time"
+            formControlName="endTime"
+            [class.input-error]="
+              (bookForm.errors?.['timeOperationalError'] ||
+                bookForm.errors?.['timeSequenceError']) &&
+              (bookForm.get('startTime')?.touched ||
+                bookForm.get('endTime')?.touched)
+            "
+          />
         </div>
       </div>
 
-      <!-- ADD-ONS SECTION -->
+      @if (
+        bookForm.errors?.["timeOperationalError"] &&
+        (bookForm.get("startTime")?.touched || bookForm.get("endTime")?.touched)
+      ) {
+        <small class="error-text">
+          {{ bookForm.errors?.["timeOperationalError"]?.message }}
+        </small>
+      }
+
+      @if (
+        bookForm.errors?.["timeSequenceError"] &&
+        (bookForm.get("startTime")?.touched || bookForm.get("endTime")?.touched)
+      ) {
+        <small class="error-text">
+          {{ bookForm.errors?.["timeSequenceError"]?.message }}
+        </small>
+      }
+
       <div class="addons-section" formArrayName="addons">
         <h3 class="addons-title">Equipment Add-Ons</h3>
         <div class="addons-list">
-          @for (addon of availableAddons; track addon.id; let i = $index) {
+          @for (addon of equipmentAddOns; track addon.id; let i = $index) {
             <div class="addon-card" [formGroupName]="i">
               <label class="checkbox-container">
                 <input type="checkbox" formControlName="selected" />
-                <span class="addon-name">{{ addon.name }}</span>
-                <span class="addon-price">Rp {{ addon.price }}</span>
+                <span class="addon-name">{{ addon.itemName }}</span>
+                <span class="addon-price">Rp {{ addon.rentalFee }}</span>
               </label>
 
               @if (addonsFormArray.at(i).get("selected")?.value) {
@@ -68,13 +146,21 @@
         </div>
       </div>
 
-      <!-- ACTIONS -->
       <div class="modal-actions">
-        <button type="button" class="btn-cancel" (click)="close.emit()">
+        <button
+          type="button"
+          class="btn-cancel"
+          (click)="close.emit()"
+          [disabled]="isSubmitting"
+        >
           Cancel
         </button>
-        <button type="submit" class="btn-submit" [disabled]="bookForm.invalid">
-          Place Booking
+        <button
+          type="submit"
+          class="btn-submit"
+          [disabled]="bookForm.invalid || isSubmitting"
+        >
+          {{ isSubmitting ? "Processing..." : "Place Booking" }}
         </button>
       </div>
     </form>

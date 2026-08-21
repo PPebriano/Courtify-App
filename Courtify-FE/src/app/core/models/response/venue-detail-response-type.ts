@@ -1,7 +1,7 @@
 import { CourtResponseType } from './court-response-type';
 
 export type VenueDetailResponseType = {
-  venueId: number;
+  id: number;
   venueName: string;
   address: string;
   phoneNumber: string;
