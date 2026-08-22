@@ -7,8 +7,9 @@ namespace CourtifyBE.Services
     {
         Task<Bookings?> GetByIdAsync(long id);
         Task<List<Bookings>> GetAllAsync(string? status, DateTime? createdAt);
+        Task<bool>CancelAsync(long id);
         BookingDetailResponse ToDetailResponse(Bookings? bookings);
-        //Task<BookingDetailResponse> CreateFullTransactionAsync(CreateBookingRequest request, long currentAdminId);
+        Task<BookingDetailResponse> CreateFullTransactionAsync(CreateBookingRequest request, long currentAdminId);
 
     }
 }

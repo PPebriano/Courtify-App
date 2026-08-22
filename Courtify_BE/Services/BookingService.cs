@@ -34,7 +34,7 @@ namespace CourtifyBE.Services
             var bookings = query.AsQueryable();
 
             if (!string.IsNullOrEmpty(status))
-                bookings = bookings.Where(b => b.Status.Equals(status, StringComparison.OrdinalIgnoreCase));
+                bookings = bookings.Where(b => b.Status.ToString().Equals(status, StringComparison.OrdinalIgnoreCase));
 
             if (createdAt.HasValue)
                 bookings = bookings.Where(b => b.CreatedAt.Date == createdAt.Value.Date);
@@ -42,110 +42,153 @@ namespace CourtifyBE.Services
             return bookings.ToList();
         }
 
-        //public async Task<BookingDetailResponse> CreateFullTransactionAsync(CreateBookingRequest request, long adminId)
-        //{
-        //    // Validasi 
-        //    var court = await _courtRepository.GetByIdAsync(request.CourtsId);
-        //    if (court == null) throw new Exception("Lapangan tidak ada");
+        public async Task<BookingDetailResponse> CreateFullTransactionAsync(CreateBookingRequest request, long adminId)
+        {
+            // Validasi 
+            var court = await _courtRepository.GetByIdAsync(request.CourtId);
+            if (court == null) throw new Exception("Lapangan tidak ada");
 
-        //    int total_hours = (int) (request.EndTime - request.StartTime).TotalHours;
-        //    if (total_hours <= 0) throw new Exception("Waktu sewa tidak valid");
+            int total_hours = (int)(request.EndTime - request.StartTime).TotalHours;
+            if (total_hours <= 0) throw new Exception("Waktu sewa tidak valid");
 
-        //    // Biaya dasar lapangan
-        //    decimal baseAmount = 0;
-        //    TimeSpan currentHour = request.StartTime;
+            // Biaya dasar lapangan
+            decimal baseAmount = 0;
+            TimeSpan currentHour = request.StartTime;
 
-        //    bool isWeekend = request.BookingDate.DayOfWeek == DayOfWeek.Saturday ||
-        //        request.BookingDate.DayOfWeek == DayOfWeek.Sunday;
+            bool isWeekend = request.BookingDate.DayOfWeek == DayOfWeek.Saturday ||
+                request.BookingDate.DayOfWeek == DayOfWeek.Sunday;
 
-        //    for(int i=0 ; i<total_hours; i++)
-        //    {
-        //        decimal hourlyRate = 0;
-        //        if (currentHour >= TimeSpan.FromHours(8) && currentHour < TimeSpan.FromHours(17))
-        //        {
-        //            hourlyRate = 100000;
-        //        }
-        //        else if (currentHour >= TimeSpan.FromHours(17) && currentHour < TimeSpan.FromHours(22))
-        //        {
-        //            hourlyRate = 150000;
-        //        }
-        //        else
-        //        {
-        //            throw new Exception($"Jam sewa diluar jam operasional");
-        //        }
+            for (int i = 0; i < total_hours; i++)
+            {
+                decimal hourlyRate = 0;
+                if (currentHour >= TimeSpan.FromHours(8) && currentHour < TimeSpan.FromHours(17))
+                {
+                    hourlyRate = 100000;
+                }
+                else if (currentHour >= TimeSpan.FromHours(17) && currentHour < TimeSpan.FromHours(22))
+                {
+                    hourlyRate = 150000;
+                }
+                else
+                {
+                    throw new Exception($"Jam sewa diluar jam operasional");
+                }
 
-        //        if (isWeekend)
-        //        {
-        //            hourlyRate += hourlyRate * 0.20m;
-        //        }
+                if (isWeekend)
+                {
+                    hourlyRate += hourlyRate * 0.20m;
+                }
 
-        //        baseAmount += hourlyRate;
-        //        currentHour = currentHour.Add(TimeSpan.FromHours(1));
-        //    }
+                baseAmount += hourlyRate;
+                currentHour = currentHour.Add(TimeSpan.FromHours(1));
+            }
 
-        //    if(total_hours > 3)
-        //    {
-        //        baseAmount -= 50000;
+            if (total_hours > 3)
+            {
+                baseAmount -= 50000;
 
-        //        if(baseAmount < 0) baseAmount = 0;
-        //    }
+                if (baseAmount < 0) baseAmount = 0;
+            }
 
-        //    decimal totalAmount = baseAmount;
+            decimal totalAmount = baseAmount;
 
-        //    // Generate KODE BOOKING
-        //    string bookingCode = "BK-" + Guid.NewGuid().ToString().Substring(0,8).ToUpper();
+            // Generate KODE BOOKING
+            string bookingCode = "BK-" + Guid.NewGuid().ToString().Substring(0, 8).ToUpper();
 
-        //    var booking = new Bookings
-        //    {
-        //        AdminId = adminId,
-        //        CourtsId = request.CourtsId,
-        //        CustomerName = request.CustomerName,
-        //        BookingDate = request.BookingDate,
-        //        StartTime = request.StartTime,
-        //        EndTime = request.EndTime,
-        //        BookingCode = bookingCode,
-        //        TotalHours = total_hours,
-        //        BaseAmount = baseAmount,
-        //        TotalAmount = baseAmount,
-        //        Status = "UNPAID",
-        //        CreatedAt = DateTime.UtcNow
-        //    };
+            var booking = new Bookings
+            {
+                AdminId = adminId,
+                CourtId = request.CourtId,
+                CustomerName = request.CustomerName,
+                BookingDate = request.BookingDate,
+                StartTime = request.StartTime,
+                EndTime = request.EndTime,
+                BookingCode = bookingCode,
+                TotalHours = total_hours,
+                BaseAmount = baseAmount,
+                TotalAmount = baseAmount,
+                Status = BookingStatus.ACTIVE,
+                CreatedAt = DateTime.UtcNow
+            };
 
-        //    await _bookingRepository.AddAsync(booking);
-        //    await _bookingRepository.SaveChangesAsync();
+            await _bookingRepository.AddAsync(booking);
+            await _bookingRepository.SaveChangesAsync();
 
-        //    if(request.AddOns != null & request.AddOns.Any())
-        //    {
-        //        foreach(var addOnReq in request.AddOns)
-        //        {
-        //            var equipment = await _equipmentRepository.GetByIdAsync(addOnReq.EquipmentAddOnsId);
-        //            if(equipment == null)
-        //            {
-        //                throw new Exception($"Item perlengkapan dengan ID {addOnReq.EquipmentAddOnsId} tidak ditemukan");
-        //            }
-        //            if (equipment.Stock < addOnReq.Quantity)
-        //            {
-        //                throw new Exception($"Stoke item {equipment.ItemName} tidak mencukupi");
-        //            }
+            if (request.AddOns != null & request.AddOns.Any())
+            {
+                foreach (var addOnReq in request.AddOns)
+                {
+                    var equipment = await _equipmentRepository.GetByIdAsync(addOnReq.EquipmentAddOnsId);
+                    if (equipment == null)
+                    {
+                        throw new Exception($"Item perlengkapan dengan ID {addOnReq.EquipmentAddOnsId} tidak ditemukan");
+                    }
+                    if (equipment.Stock < addOnReq.Quantity)
+                    {
+                        throw new Exception($"Stoke item {equipment.ItemName} tidak mencukupi");
+                    }
 
-        //            equipment.Stock -= addOnReq.Quantity;
-        //            _equipmentRepository.Update(equipment);
+                    equipment.Stock -= addOnReq.Quantity;
+                    _equipmentRepository.Update(equipment);
 
-        //            decimal subTotal = equipment.RentalFee * equipment.qua
-        //        }
-        //    }
- 
+                    decimal subTotal = equipment.RentalFee * addOnReq.Quantity;
+                    totalAmount += subTotal;
 
-        //}
+                    var bookingAddOn = new BookingAddOns
+                    {
+                        BookingId = booking.Id,
+                        EquipmentId = equipment.Id,
+                        Quantity = addOnReq.Quantity,
+                        UnitPrice = equipment.RentalFee,
+                        SubTotal = subTotal
+                    };
 
-        
-       public BookingDetailResponse ToDetailResponse(Bookings bookings)
+                    await _bookingAddOnsRepository.AddAsync(bookingAddOn);
+                }
+            }
+
+            booking.TotalAmount = totalAmount;
+            _bookingRepository.Update(booking);
+            await _bookingRepository.SaveChangesAsync();
+
+            return new BookingDetailResponse
+            {
+                Id = booking.Id,
+                AdminId = booking.AdminId,
+                CourtId = booking.CourtId,
+                CustomerName = booking.CustomerName,
+                BookingCode = bookingCode,
+                BookingDate = booking.BookingDate,
+                StartTime = booking.StartTime,
+                EndTime = booking.EndTime,
+                TotalHours = booking.TotalHours,
+                BaseAmount = booking.BaseAmount,
+                TotalAmount = booking.TotalAmount,
+                Status = booking.Status,
+                CreatedAt = booking.CreatedAt
+            };
+        }
+
+        public async Task<bool> CancelAsync(long id)
+        {
+            var booking = await _bookingRepository.GetByIdAsync(id);
+            if (booking == null) return false;
+
+            booking.Status = BookingStatus.CANCELLED;
+            _bookingRepository.Update(booking);
+            await _bookingRepository.SaveChangesAsync();
+
+            return true;
+        }
+
+        public BookingDetailResponse ToDetailResponse(Bookings bookings)
         {
             return new BookingDetailResponse
             {
                 Id = bookings.Id,
+                BookingCode = bookings.BookingCode,
                 AdminId = bookings.AdminId,
-                CourtId = bookings.CourtsId,
+                CourtId = bookings.CourtId,
                 CustomerName = bookings.CustomerName,
                 BookingDate = bookings.BookingDate,
                 StartTime = bookings.StartTime,
@@ -153,7 +196,7 @@ namespace CourtifyBE.Services
                 TotalHours = bookings.TotalHours,
                 BaseAmount = bookings.BaseAmount,
                 TotalAmount = bookings.TotalAmount,
-                Status = bookings.Status,
+                Status = BookingStatus.ACTIVE,
                 CreatedAt = bookings.CreatedAt
 
             };

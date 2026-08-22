@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CourtifyBE.Migrations
 {
     [DbContext(typeof(CourtifyDbContext))]
-    [Migration("20260820030612_InitialCreate")]
+    [Migration("20260821225634_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -138,12 +138,12 @@ namespace CourtifyBE.Migrations
                         .HasColumnType("text")
                         .HasColumnName("CUSTOMER_NAME");
 
-                    b.Property<TimeOnly>("EndTime")
-                        .HasColumnType("time without time zone")
+                    b.Property<TimeSpan>("EndTime")
+                        .HasColumnType("interval")
                         .HasColumnName("END_TIME");
 
-                    b.Property<TimeOnly>("StartTime")
-                        .HasColumnType("time without time zone")
+                    b.Property<TimeSpan>("StartTime")
+                        .HasColumnType("interval")
                         .HasColumnName("START_TIME");
 
                     b.Property<string>("Status")
@@ -209,7 +209,7 @@ namespace CourtifyBE.Migrations
                         .HasColumnType("text")
                         .HasColumnName("COURT_NAME");
 
-                    b.Property<decimal>("HolyRate")
+                    b.Property<decimal>("HourlyRate")
                         .HasColumnType("numeric")
                         .HasColumnName("HOURLY_RATE");
 
