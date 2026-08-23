@@ -14,10 +14,10 @@ export class AuthService {
   // WAITING FOR AN API
   login(payload: LoginRequestType) {
     return this.http.post<LoginResponseType>(
-      `${environtment.apiUrl}/api/login`,
-      {
-        payload,
-      },
+      `${environtment.apiUrl}/api/auth/login`,
+      
+        payload
+      
     );
   }
 
