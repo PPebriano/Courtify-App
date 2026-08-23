@@ -22,7 +22,7 @@ namespace CourtifyBE.Controllers
             try
             {
                 var bookings = await _bookingService.GetAllAsync(status, date);
-                var response = bookings.Select(_bookingService.ToDetailResponse).ToList();
+                var response = bookings.Select(_bookingService.ToListResponse).ToList();
 
                 return Ok(response);
             }
@@ -80,9 +80,55 @@ namespace CourtifyBE.Controllers
         [HttpDelete("{id:long}")]
         public async Task<IActionResult> CancelBooking(long id)
         {
-            var success = await _bookingService.CancelAsync(id);
-            if (!success) return NotFound();
-            return NoContent();
+            try
+            {
+                var success = await _bookingService.CancelAsync(id);
+
+                if (!success)
+                {
+                    return NotFound(new
+                    {
+                        status = "error",
+                        message = $"Data booking dengan ID {id} tidak ditemukan"
+                    });
+                }
+
+                return Ok(new
+                {
+                    status = "success",
+                    message = $"Booking dengan ID {id} berhasil dibatalkan",
+                    data = new { id = id, status = "CANCELLED" }
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    status = "error",
+                    message = "Gagal membatalkan booking",
+                    error = ex.Message
+                });
+            }
+        }
+
+        [Authorize]
+        [HttpPut("{id:long}/status")]
+        public async Task<IActionResult> UpdateBookingStatus(long id, [FromBody] UpdateBookingStatusRequest request)
+        {
+            try
+            {
+                var result = await _bookingService.UpdateStatusAsync(id, request.Status);
+                if (result == null)
+                {
+                    return NotFound(new { message = $"Data booking dengan ID {id} tidak ditemukan" });
+                }
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Gagal memperbarui status booking", error = ex.Message });
+            }
         }
     }
 }

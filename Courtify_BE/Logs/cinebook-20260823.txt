@@ -1,0 +1,1430 @@
+2026-08-23 09:19:41 [INF] User profile is available. Using 'C:\Users\HP\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-08-23 09:19:42 [INF] Now listening on: http://localhost:5146
+2026-08-23 09:19:43 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-23 09:19:43 [INF] Hosting environment: Development
+2026-08-23 09:19:43 [INF] Content root path: C:\Users\HP\source\repos\Project AdIns\Courtify-App\Courtify_BE
+2026-08-23 09:19:49 [INF] Request starting HTTP/1.1 GET http://localhost:5146/swagger/index.html - null null
+2026-08-23 09:19:50 [INF] Request finished HTTP/1.1 GET http://localhost:5146/swagger/index.html - 200 null text/html;charset=utf-8 1032.2905ms
+2026-08-23 09:19:50 [INF] Request starting HTTP/1.1 GET http://localhost:5146/_vs/browserLink - null null
+2026-08-23 09:19:50 [INF] Request starting HTTP/1.1 GET http://localhost:5146/_framework/aspnetcore-browser-refresh.js - null null
+2026-08-23 09:19:50 [INF] Request finished HTTP/1.1 GET http://localhost:5146/_framework/aspnetcore-browser-refresh.js - 200 14925 application/javascript; charset=utf-8 26.8523ms
+2026-08-23 09:19:50 [INF] Request finished HTTP/1.1 GET http://localhost:5146/_vs/browserLink - 200 null text/javascript; charset=UTF-8 233.3643ms
+2026-08-23 09:19:50 [INF] Request starting HTTP/1.1 GET http://localhost:5146/swagger/v1/swagger.json - null null
+2026-08-23 09:19:50 [INF] Request finished HTTP/1.1 GET http://localhost:5146/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 69.3926ms
+2026-08-23 09:20:03 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/bookings - null null
+2026-08-23 09:20:03 [WRN] Failed to determine the https port for redirect.
+2026-08-23 09:20:03 [INF] Executing endpoint 'CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE)'
+2026-08-23 09:20:03 [INF] Route matched with {action = "GetBookings", controller = "Booking"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetBookings(System.String, System.Nullable`1[System.DateTime]) on controller CourtifyBE.Controllers.BookingController (CourtifyBE).
+2026-08-23 09:20:08 [INF] Executed DbCommand (85ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT b."ID", b."ADMIN_ID", b."BASE_AMOUNT", b."BOOKING_CODE", b."BOOKING_DATE", b."COURTS_ID", b."CREATED_AT", b."CUSTOMER_NAME", b."END_TIME", b."START_TIME", b."STATUS", b."TOTAL_AMOUNT", b."TOTAL_HOURS"
+FROM "Bookings" AS b
+2026-08-23 09:20:09 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[CourtifyBE.DTOs.BookingDetailResponse, CourtifyBE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-23 09:20:09 [INF] Executed action CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE) in 5437.9173ms
+2026-08-23 09:20:09 [INF] Executed endpoint 'CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE)'
+2026-08-23 09:20:09 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/bookings - 200 null application/json; charset=utf-8 5763.6119ms
+2026-08-23 09:22:14 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/bookings/1 - null null
+2026-08-23 09:22:14 [INF] Executing endpoint 'CourtifyBE.Controllers.BookingController.GetBooking (CourtifyBE)'
+2026-08-23 09:22:14 [INF] Route matched with {action = "GetBooking", controller = "Booking"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetBooking(Int64) on controller CourtifyBE.Controllers.BookingController (CourtifyBE).
+2026-08-23 09:22:15 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-08-23 09:22:15 [INF] Executed DbCommand (76ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t."ID", t."ADMIN_ID", t."BASE_AMOUNT", t."BOOKING_CODE", t."BOOKING_DATE", t."COURTS_ID", t."CREATED_AT", t."CUSTOMER_NAME", t."END_TIME", t."START_TIME", t."STATUS", t."TOTAL_AMOUNT", t."TOTAL_HOURS", t."ID0", t."COURT_CATEGORY_ID", t."COURT_NAME", t."HOURLY_RATE", t."IS_AVAILABLE", t."VENUE_ID", t0."ID", t0."BOOKING_ID", t0."EQUIPMENT_ID", t0."QUANTITY", t0."SUB_TOTAL", t0."UNIT_PRICE", t0."ID0", t0."ITEM_NAME", t0."RENTAL_FEE", t0."STOCK", p."ID", p."BOOKING_ID", p."PAYMENT_METHOD", p."RECEIPT_NUMBER", p."STATUS"
+FROM (
+    SELECT b."ID", b."ADMIN_ID", b."BASE_AMOUNT", b."BOOKING_CODE", b."BOOKING_DATE", b."COURTS_ID", b."CREATED_AT", b."CUSTOMER_NAME", b."END_TIME", b."START_TIME", b."STATUS", b."TOTAL_AMOUNT", b."TOTAL_HOURS", c."ID" AS "ID0", c."COURT_CATEGORY_ID", c."COURT_NAME", c."HOURLY_RATE", c."IS_AVAILABLE", c."VENUE_ID"
+    FROM "Bookings" AS b
+    INNER JOIN "Courts" AS c ON b."COURTS_ID" = c."ID"
+    WHERE b."ID" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN (
+    SELECT b0."ID", b0."BOOKING_ID", b0."EQUIPMENT_ID", b0."QUANTITY", b0."SUB_TOTAL", b0."UNIT_PRICE", e."ID" AS "ID0", e."ITEM_NAME", e."RENTAL_FEE", e."STOCK"
+    FROM "BookingAddOns" AS b0
+    INNER JOIN "Equipments" AS e ON b0."EQUIPMENT_ID" = e."ID"
+) AS t0 ON t."ID" = t0."BOOKING_ID"
+LEFT JOIN "PaymentReceipts" AS p ON t."ID" = p."BOOKING_ID"
+ORDER BY t."ID", t."ID0", t0."ID", t0."ID0"
+2026-08-23 09:22:15 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.BookingDetailResponse'.
+2026-08-23 09:22:15 [INF] Executed action CourtifyBE.Controllers.BookingController.GetBooking (CourtifyBE) in 923.7271ms
+2026-08-23 09:22:15 [INF] Executed endpoint 'CourtifyBE.Controllers.BookingController.GetBooking (CourtifyBE)'
+2026-08-23 09:22:15 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/bookings/1 - 200 null application/json; charset=utf-8 968.9966ms
+2026-08-23 09:22:25 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/equipment-add-ons?page=1&limit=10 - null null
+2026-08-23 09:22:25 [INF] Executing endpoint 'CourtifyBE.Controllers.EquipmentController.GetEquipment (CourtifyBE)'
+2026-08-23 09:22:25 [INF] Route matched with {action = "GetEquipment", controller = "Equipment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetEquipment(System.String, Int32, Int32) on controller CourtifyBE.Controllers.EquipmentController (CourtifyBE).
+2026-08-23 09:22:25 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT e."ID", e."ITEM_NAME", e."RENTAL_FEE", e."STOCK"
+FROM "Equipments" AS e
+2026-08-23 09:22:25 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[CourtifyBE.DTOs.EquimentAddOnsResponse, CourtifyBE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-23 09:22:25 [INF] Executed action CourtifyBE.Controllers.EquipmentController.GetEquipment (CourtifyBE) in 134.3863ms
+2026-08-23 09:22:25 [INF] Executed endpoint 'CourtifyBE.Controllers.EquipmentController.GetEquipment (CourtifyBE)'
+2026-08-23 09:22:25 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/equipment-add-ons?page=1&limit=10 - 200 null application/json; charset=utf-8 202.347ms
+2026-08-23 09:22:32 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/venues?page=1&limit=10 - null null
+2026-08-23 09:22:33 [INF] Executing endpoint 'CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE)'
+2026-08-23 09:22:33 [INF] Route matched with {action = "GetVenues", controller = "Venue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetVenues(System.String, Int32, Int32) on controller CourtifyBE.Controllers.VenueController (CourtifyBE).
+2026-08-23 09:22:33 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT v."ID", v."ADDRESS", v."IS_ACTIVE", v."NAME_VENUE", v."PHONE_NUMBER"
+FROM "Venues" AS v
+2026-08-23 09:22:33 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[CourtifyBE.DTOs.VenueResponse, CourtifyBE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-23 09:22:33 [INF] Executed action CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE) in 65.4986ms
+2026-08-23 09:22:33 [INF] Executed endpoint 'CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE)'
+2026-08-23 09:22:33 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/venues?page=1&limit=10 - 200 null application/json; charset=utf-8 108.3302ms
+2026-08-23 09:22:43 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/venues/1 - null null
+2026-08-23 09:22:43 [INF] Executing endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 09:22:44 [INF] Route matched with {action = "GetVenue", controller = "Venue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetVenue(Int64) on controller CourtifyBE.Controllers.VenueController (CourtifyBE).
+2026-08-23 09:22:44 [INF] Executed DbCommand (8ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t."ID", t."ADDRESS", t."IS_ACTIVE", t."NAME_VENUE", t."PHONE_NUMBER", t0."ID", t0."COURT_CATEGORY_ID", t0."COURT_NAME", t0."HOURLY_RATE", t0."IS_AVAILABLE", t0."VENUE_ID", t0."ID0", t0."CATEGORY", t0."DESCRIPTION"
+FROM (
+    SELECT v."ID", v."ADDRESS", v."IS_ACTIVE", v."NAME_VENUE", v."PHONE_NUMBER"
+    FROM "Venues" AS v
+    WHERE v."ID" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN (
+    SELECT c."ID", c."COURT_CATEGORY_ID", c."COURT_NAME", c."HOURLY_RATE", c."IS_AVAILABLE", c."VENUE_ID", c0."ID" AS "ID0", c0."CATEGORY", c0."DESCRIPTION"
+    FROM "Courts" AS c
+    INNER JOIN "CourtCategories" AS c0 ON c."COURT_CATEGORY_ID" = c0."ID"
+) AS t0 ON t."ID" = t0."VENUE_ID"
+ORDER BY t."ID", t0."ID"
+2026-08-23 09:22:44 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.VenueDetailResponse'.
+2026-08-23 09:22:44 [INF] Executed action CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE) in 93.6906ms
+2026-08-23 09:22:44 [INF] Executed endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 09:22:44 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/venues/1 - 200 null application/json; charset=utf-8 144.1087ms
+2026-08-23 09:23:05 [INF] Request starting HTTP/1.1 POST http://localhost:5146/api/auth/login - application/json 56
+2026-08-23 09:23:05 [INF] CORS policy execution failed.
+2026-08-23 09:23:05 [INF] Request origin http://localhost:5146 does not have permission to access the resource.
+2026-08-23 09:23:05 [INF] Executing endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 09:23:05 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(CourtifyBE.DTOs.LoginRequest) on controller CourtifyBE.Controllers.AuthController (CourtifyBE).
+2026-08-23 09:23:05 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."ID", a."CREATED_AT", a."NAME", a."PASSWORD", a."USERNAME"
+FROM "Admins" AS a
+2026-08-23 09:23:05 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.LoginResponse'.
+2026-08-23 09:23:05 [INF] Executed action CourtifyBE.Controllers.AuthController.Login (CourtifyBE) in 195.053ms
+2026-08-23 09:23:05 [INF] Executed endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 09:23:05 [INF] Request finished HTTP/1.1 POST http://localhost:5146/api/auth/login - 200 null application/json; charset=utf-8 255.7167ms
+2026-08-23 09:31:58 [INF] User profile is available. Using 'C:\Users\HP\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-08-23 09:31:59 [INF] Now listening on: http://localhost:5146
+2026-08-23 09:31:59 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-23 09:31:59 [INF] Hosting environment: Development
+2026-08-23 09:31:59 [INF] Content root path: C:\Users\HP\source\repos\Project AdIns\Courtify-App\Courtify_BE
+2026-08-23 09:31:59 [INF] Request starting HTTP/1.1 GET http://localhost:5146/swagger/index.html - null null
+2026-08-23 09:32:00 [INF] Request starting HTTP/1.1 GET http://localhost:5146/_vs/browserLink - null null
+2026-08-23 09:32:00 [INF] Request finished HTTP/1.1 GET http://localhost:5146/swagger/index.html - 200 null text/html;charset=utf-8 843.6164ms
+2026-08-23 09:32:00 [INF] Request starting HTTP/1.1 GET http://localhost:5146/_framework/aspnetcore-browser-refresh.js - null null
+2026-08-23 09:32:00 [INF] Request finished HTTP/1.1 GET http://localhost:5146/_framework/aspnetcore-browser-refresh.js - 200 14925 application/javascript; charset=utf-8 22.3054ms
+2026-08-23 09:32:00 [INF] Request finished HTTP/1.1 GET http://localhost:5146/_vs/browserLink - 200 null text/javascript; charset=UTF-8 107.4552ms
+2026-08-23 09:32:00 [INF] Request starting HTTP/1.1 GET http://localhost:5146/swagger/v1/swagger.json - null null
+2026-08-23 09:32:00 [INF] Request finished HTTP/1.1 GET http://localhost:5146/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 45.911ms
+2026-08-23 09:32:18 [INF] Request starting HTTP/1.1 POST http://localhost:5146/api/auth/login - application/json 56
+2026-08-23 09:32:18 [INF] CORS policy execution failed.
+2026-08-23 09:32:18 [INF] Request origin http://localhost:5146 does not have permission to access the resource.
+2026-08-23 09:32:18 [WRN] Failed to determine the https port for redirect.
+2026-08-23 09:32:18 [INF] Executing endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 09:32:18 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(CourtifyBE.DTOs.LoginRequest) on controller CourtifyBE.Controllers.AuthController (CourtifyBE).
+2026-08-23 09:32:22 [INF] Executed DbCommand (99ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."ID", a."CREATED_AT", a."NAME", a."PASSWORD", a."USERNAME"
+FROM "Admins" AS a
+2026-08-23 09:32:23 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.LoginResponse'.
+2026-08-23 09:32:23 [INF] Executed action CourtifyBE.Controllers.AuthController.Login (CourtifyBE) in 4757.7271ms
+2026-08-23 09:32:23 [INF] Executed endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 09:32:23 [INF] Request finished HTTP/1.1 POST http://localhost:5146/api/auth/login - 200 null application/json; charset=utf-8 5103.7642ms
+2026-08-23 09:33:06 [INF] Request starting HTTP/1.1 POST http://localhost:5146/api/bookings - application/json 328
+2026-08-23 09:33:06 [INF] Executing endpoint 'CourtifyBE.Controllers.BookingController.CreateBooking (CourtifyBE)'
+2026-08-23 09:33:06 [INF] Route matched with {action = "CreateBooking", controller = "Booking"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] CreateBooking(CourtifyBE.DTOs.CreateBookingRequest) on controller CourtifyBE.Controllers.BookingController (CourtifyBE).
+2026-08-23 09:33:07 [INF] Executed DbCommand (40ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."ID", c."COURT_CATEGORY_ID", c."COURT_NAME", c."HOURLY_RATE", c."IS_AVAILABLE", c."VENUE_ID"
+FROM "Courts" AS c
+WHERE c."ID" = @__id_0
+LIMIT 1
+2026-08-23 09:33:07 [INF] Executing BadRequestObjectResult, writing value of type '<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-08-23 09:33:07 [INF] Executed action CourtifyBE.Controllers.BookingController.CreateBooking (CourtifyBE) in 656.8754ms
+2026-08-23 09:33:07 [INF] Executed endpoint 'CourtifyBE.Controllers.BookingController.CreateBooking (CourtifyBE)'
+2026-08-23 09:33:07 [INF] Request finished HTTP/1.1 POST http://localhost:5146/api/bookings - 400 null application/json; charset=utf-8 869.9439ms
+2026-08-23 09:33:36 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/venues/1 - null null
+2026-08-23 09:33:36 [INF] Executing endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 09:33:36 [INF] Route matched with {action = "GetVenue", controller = "Venue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetVenue(Int64) on controller CourtifyBE.Controllers.VenueController (CourtifyBE).
+2026-08-23 09:33:36 [INF] Executed DbCommand (24ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t."ID", t."ADDRESS", t."IS_ACTIVE", t."NAME_VENUE", t."PHONE_NUMBER", t0."ID", t0."COURT_CATEGORY_ID", t0."COURT_NAME", t0."HOURLY_RATE", t0."IS_AVAILABLE", t0."VENUE_ID", t0."ID0", t0."CATEGORY", t0."DESCRIPTION"
+FROM (
+    SELECT v."ID", v."ADDRESS", v."IS_ACTIVE", v."NAME_VENUE", v."PHONE_NUMBER"
+    FROM "Venues" AS v
+    WHERE v."ID" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN (
+    SELECT c."ID", c."COURT_CATEGORY_ID", c."COURT_NAME", c."HOURLY_RATE", c."IS_AVAILABLE", c."VENUE_ID", c0."ID" AS "ID0", c0."CATEGORY", c0."DESCRIPTION"
+    FROM "Courts" AS c
+    INNER JOIN "CourtCategories" AS c0 ON c."COURT_CATEGORY_ID" = c0."ID"
+) AS t0 ON t."ID" = t0."VENUE_ID"
+ORDER BY t."ID", t0."ID"
+2026-08-23 09:33:36 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.VenueDetailResponse'.
+2026-08-23 09:33:36 [INF] Executed action CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE) in 503.4549ms
+2026-08-23 09:33:37 [INF] Executed endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 09:33:37 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/venues/1 - 200 null application/json; charset=utf-8 561.8631ms
+2026-08-23 09:34:00 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/venues/2 - null null
+2026-08-23 09:34:00 [INF] Executing endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 09:34:00 [INF] Route matched with {action = "GetVenue", controller = "Venue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetVenue(Int64) on controller CourtifyBE.Controllers.VenueController (CourtifyBE).
+2026-08-23 09:34:00 [INF] Executed DbCommand (6ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t."ID", t."ADDRESS", t."IS_ACTIVE", t."NAME_VENUE", t."PHONE_NUMBER", t0."ID", t0."COURT_CATEGORY_ID", t0."COURT_NAME", t0."HOURLY_RATE", t0."IS_AVAILABLE", t0."VENUE_ID", t0."ID0", t0."CATEGORY", t0."DESCRIPTION"
+FROM (
+    SELECT v."ID", v."ADDRESS", v."IS_ACTIVE", v."NAME_VENUE", v."PHONE_NUMBER"
+    FROM "Venues" AS v
+    WHERE v."ID" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN (
+    SELECT c."ID", c."COURT_CATEGORY_ID", c."COURT_NAME", c."HOURLY_RATE", c."IS_AVAILABLE", c."VENUE_ID", c0."ID" AS "ID0", c0."CATEGORY", c0."DESCRIPTION"
+    FROM "Courts" AS c
+    INNER JOIN "CourtCategories" AS c0 ON c."COURT_CATEGORY_ID" = c0."ID"
+) AS t0 ON t."ID" = t0."VENUE_ID"
+ORDER BY t."ID", t0."ID"
+2026-08-23 09:34:00 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.VenueDetailResponse'.
+2026-08-23 09:34:00 [INF] Executed action CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE) in 41.9721ms
+2026-08-23 09:34:00 [INF] Executed endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 09:34:00 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/venues/2 - 200 null application/json; charset=utf-8 60.8939ms
+2026-08-23 09:35:07 [INF] Request starting HTTP/1.1 POST http://localhost:5146/api/bookings - application/json 327
+2026-08-23 09:35:07 [INF] Executing endpoint 'CourtifyBE.Controllers.BookingController.CreateBooking (CourtifyBE)'
+2026-08-23 09:35:07 [INF] Route matched with {action = "CreateBooking", controller = "Booking"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] CreateBooking(CourtifyBE.DTOs.CreateBookingRequest) on controller CourtifyBE.Controllers.BookingController (CourtifyBE).
+2026-08-23 09:35:07 [INF] Executed DbCommand (7ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."ID", c."COURT_CATEGORY_ID", c."COURT_NAME", c."HOURLY_RATE", c."IS_AVAILABLE", c."VENUE_ID"
+FROM "Courts" AS c
+WHERE c."ID" = @__id_0
+LIMIT 1
+2026-08-23 09:35:08 [INF] Executed DbCommand (77ms) [Parameters=[@p0='?' (DbType = Int64), @p1='?' (DbType = Decimal), @p2='?', @p3='?' (DbType = DateTime), @p4='?' (DbType = Int64), @p5='?' (DbType = DateTime), @p6='?', @p7='?' (DbType = Object), @p8='?' (DbType = Object), @p9='?', @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Bookings" ("ADMIN_ID", "BASE_AMOUNT", "BOOKING_CODE", "BOOKING_DATE", "COURTS_ID", "CREATED_AT", "CUSTOMER_NAME", "END_TIME", "START_TIME", "STATUS", "TOTAL_AMOUNT", "TOTAL_HOURS")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11)
+RETURNING "ID";
+2026-08-23 09:35:08 [INF] Executed DbCommand (8ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT e."ID", e."ITEM_NAME", e."RENTAL_FEE", e."STOCK"
+FROM "Equipments" AS e
+WHERE e."ID" = @__id_0
+LIMIT 1
+2026-08-23 09:35:08 [INF] Executed DbCommand (3ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT e."ID", e."ITEM_NAME", e."RENTAL_FEE", e."STOCK"
+FROM "Equipments" AS e
+WHERE e."ID" = @__id_0
+LIMIT 1
+2026-08-23 09:35:08 [INF] Executed DbCommand (15ms) [Parameters=[@p0='?' (DbType = Int64), @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = Decimal), @p4='?' (DbType = Decimal), @p5='?' (DbType = Int64), @p6='?' (DbType = Int64), @p7='?' (DbType = Int32), @p8='?' (DbType = Decimal), @p9='?' (DbType = Decimal), @p22='?' (DbType = Int64), @p10='?' (DbType = Int64), @p11='?' (DbType = Decimal), @p12='?', @p13='?' (DbType = DateTime), @p14='?' (DbType = Int64), @p15='?' (DbType = DateTime), @p16='?', @p17='?' (DbType = Object), @p18='?' (DbType = Object), @p19='?', @p20='?' (DbType = Decimal), @p21='?' (DbType = Int32), @p26='?' (DbType = Int64), @p23='?', @p24='?' (DbType = Decimal), @p25='?' (DbType = Int32), @p30='?' (DbType = Int64), @p27='?', @p28='?' (DbType = Decimal), @p29='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "BookingAddOns" ("BOOKING_ID", "EQUIPMENT_ID", "QUANTITY", "SUB_TOTAL", "UNIT_PRICE")
+VALUES (@p0, @p1, @p2, @p3, @p4)
+RETURNING "ID";
+INSERT INTO "BookingAddOns" ("BOOKING_ID", "EQUIPMENT_ID", "QUANTITY", "SUB_TOTAL", "UNIT_PRICE")
+VALUES (@p5, @p6, @p7, @p8, @p9)
+RETURNING "ID";
+UPDATE "Bookings" SET "ADMIN_ID" = @p10, "BASE_AMOUNT" = @p11, "BOOKING_CODE" = @p12, "BOOKING_DATE" = @p13, "COURTS_ID" = @p14, "CREATED_AT" = @p15, "CUSTOMER_NAME" = @p16, "END_TIME" = @p17, "START_TIME" = @p18, "STATUS" = @p19, "TOTAL_AMOUNT" = @p20, "TOTAL_HOURS" = @p21
+WHERE "ID" = @p22;
+UPDATE "Equipments" SET "ITEM_NAME" = @p23, "RENTAL_FEE" = @p24, "STOCK" = @p25
+WHERE "ID" = @p26;
+UPDATE "Equipments" SET "ITEM_NAME" = @p27, "RENTAL_FEE" = @p28, "STOCK" = @p29
+WHERE "ID" = @p30;
+2026-08-23 09:35:08 [INF] Executing CreatedAtActionResult, writing value of type '<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-08-23 09:35:08 [INF] Executed action CourtifyBE.Controllers.BookingController.CreateBooking (CourtifyBE) in 1195.4852ms
+2026-08-23 09:35:08 [INF] Executed endpoint 'CourtifyBE.Controllers.BookingController.CreateBooking (CourtifyBE)'
+2026-08-23 09:35:08 [INF] Request finished HTTP/1.1 POST http://localhost:5146/api/bookings - 201 null application/json; charset=utf-8 1282.7557ms
+2026-08-23 09:35:25 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/bookings - null null
+2026-08-23 09:35:25 [INF] Executing endpoint 'CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE)'
+2026-08-23 09:35:25 [INF] Route matched with {action = "GetBookings", controller = "Booking"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetBookings(System.String, System.Nullable`1[System.DateTime]) on controller CourtifyBE.Controllers.BookingController (CourtifyBE).
+2026-08-23 09:35:25 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT b."ID", b."ADMIN_ID", b."BASE_AMOUNT", b."BOOKING_CODE", b."BOOKING_DATE", b."COURTS_ID", b."CREATED_AT", b."CUSTOMER_NAME", b."END_TIME", b."START_TIME", b."STATUS", b."TOTAL_AMOUNT", b."TOTAL_HOURS"
+FROM "Bookings" AS b
+2026-08-23 09:35:25 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[CourtifyBE.DTOs.BookingDetailResponse, CourtifyBE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-23 09:35:25 [INF] Executed action CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE) in 182.6194ms
+2026-08-23 09:35:25 [INF] Executed endpoint 'CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE)'
+2026-08-23 09:35:25 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/bookings - 200 null application/json; charset=utf-8 243.5795ms
+2026-08-23 09:35:44 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/venues/1 - null null
+2026-08-23 09:35:44 [INF] Executing endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 09:35:44 [INF] Route matched with {action = "GetVenue", controller = "Venue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetVenue(Int64) on controller CourtifyBE.Controllers.VenueController (CourtifyBE).
+2026-08-23 09:35:44 [INF] Executed DbCommand (4ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t."ID", t."ADDRESS", t."IS_ACTIVE", t."NAME_VENUE", t."PHONE_NUMBER", t0."ID", t0."COURT_CATEGORY_ID", t0."COURT_NAME", t0."HOURLY_RATE", t0."IS_AVAILABLE", t0."VENUE_ID", t0."ID0", t0."CATEGORY", t0."DESCRIPTION"
+FROM (
+    SELECT v."ID", v."ADDRESS", v."IS_ACTIVE", v."NAME_VENUE", v."PHONE_NUMBER"
+    FROM "Venues" AS v
+    WHERE v."ID" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN (
+    SELECT c."ID", c."COURT_CATEGORY_ID", c."COURT_NAME", c."HOURLY_RATE", c."IS_AVAILABLE", c."VENUE_ID", c0."ID" AS "ID0", c0."CATEGORY", c0."DESCRIPTION"
+    FROM "Courts" AS c
+    INNER JOIN "CourtCategories" AS c0 ON c."COURT_CATEGORY_ID" = c0."ID"
+) AS t0 ON t."ID" = t0."VENUE_ID"
+ORDER BY t."ID", t0."ID"
+2026-08-23 09:35:44 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.VenueDetailResponse'.
+2026-08-23 09:35:44 [INF] Executed action CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE) in 45.1499ms
+2026-08-23 09:35:44 [INF] Executed endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 09:35:44 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/venues/1 - 200 null application/json; charset=utf-8 83.6707ms
+2026-08-23 09:44:59 [INF] User profile is available. Using 'C:\Users\HP\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-08-23 09:45:00 [INF] Now listening on: http://localhost:5146
+2026-08-23 09:45:01 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-23 09:45:01 [INF] Hosting environment: Development
+2026-08-23 09:45:01 [INF] Content root path: C:\Users\HP\source\repos\Project AdIns\Courtify-App\Courtify_BE
+2026-08-23 09:45:01 [INF] Request starting HTTP/1.1 GET http://localhost:5146/swagger/index.html - null null
+2026-08-23 09:45:02 [INF] Request finished HTTP/1.1 GET http://localhost:5146/swagger/index.html - 200 null text/html;charset=utf-8 908.2328ms
+2026-08-23 09:45:02 [INF] Request starting HTTP/1.1 GET http://localhost:5146/_vs/browserLink - null null
+2026-08-23 09:45:02 [INF] Request starting HTTP/1.1 GET http://localhost:5146/_framework/aspnetcore-browser-refresh.js - null null
+2026-08-23 09:45:02 [INF] Request finished HTTP/1.1 GET http://localhost:5146/_framework/aspnetcore-browser-refresh.js - 200 14925 application/javascript; charset=utf-8 39.5324ms
+2026-08-23 09:45:03 [INF] Request finished HTTP/1.1 GET http://localhost:5146/_vs/browserLink - 200 null text/javascript; charset=UTF-8 239.1462ms
+2026-08-23 09:45:03 [INF] Request starting HTTP/1.1 GET http://localhost:5146/swagger/v1/swagger.json - null null
+2026-08-23 09:45:03 [INF] Request finished HTTP/1.1 GET http://localhost:5146/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 57.6879ms
+2026-08-23 09:45:22 [INF] Request starting HTTP/1.1 POST http://localhost:5146/api/auth/login - application/json 56
+2026-08-23 09:45:22 [INF] CORS policy execution failed.
+2026-08-23 09:45:22 [INF] Request origin http://localhost:5146 does not have permission to access the resource.
+2026-08-23 09:45:22 [WRN] Failed to determine the https port for redirect.
+2026-08-23 09:45:22 [INF] Executing endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 09:45:22 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(CourtifyBE.DTOs.LoginRequest) on controller CourtifyBE.Controllers.AuthController (CourtifyBE).
+2026-08-23 09:45:26 [INF] Executed DbCommand (83ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."ID", a."CREATED_AT", a."NAME", a."PASSWORD", a."USERNAME"
+FROM "Admins" AS a
+2026-08-23 09:45:26 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.LoginResponse'.
+2026-08-23 09:45:26 [INF] Executed action CourtifyBE.Controllers.AuthController.Login (CourtifyBE) in 4583.7964ms
+2026-08-23 09:45:26 [INF] Executed endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 09:45:26 [INF] Request finished HTTP/1.1 POST http://localhost:5146/api/auth/login - 200 null application/json; charset=utf-8 4947.0672ms
+2026-08-23 09:45:53 [INF] Request starting HTTP/1.1 POST http://localhost:5146/api/bookings - application/json 325
+2026-08-23 09:45:53 [INF] Executing endpoint 'CourtifyBE.Controllers.BookingController.CreateBooking (CourtifyBE)'
+2026-08-23 09:45:53 [INF] Route matched with {action = "CreateBooking", controller = "Booking"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] CreateBooking(CourtifyBE.DTOs.CreateBookingRequest) on controller CourtifyBE.Controllers.BookingController (CourtifyBE).
+2026-08-23 09:45:53 [INF] Executed DbCommand (34ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."ID", c."COURT_CATEGORY_ID", c."COURT_NAME", c."HOURLY_RATE", c."IS_AVAILABLE", c."VENUE_ID"
+FROM "Courts" AS c
+WHERE c."ID" = @__id_0
+LIMIT 1
+2026-08-23 09:45:54 [INF] Executed DbCommand (46ms) [Parameters=[@p0='?' (DbType = Int64), @p1='?' (DbType = Decimal), @p2='?', @p3='?' (DbType = DateTime), @p4='?' (DbType = Int64), @p5='?' (DbType = DateTime), @p6='?', @p7='?' (DbType = Object), @p8='?' (DbType = Object), @p9='?', @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Bookings" ("ADMIN_ID", "BASE_AMOUNT", "BOOKING_CODE", "BOOKING_DATE", "COURTS_ID", "CREATED_AT", "CUSTOMER_NAME", "END_TIME", "START_TIME", "STATUS", "TOTAL_AMOUNT", "TOTAL_HOURS")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11)
+RETURNING "ID";
+2026-08-23 09:45:54 [INF] Executed DbCommand (7ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT e."ID", e."ITEM_NAME", e."RENTAL_FEE", e."STOCK"
+FROM "Equipments" AS e
+WHERE e."ID" = @__id_0
+LIMIT 1
+2026-08-23 09:45:54 [INF] Executed DbCommand (4ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT e."ID", e."ITEM_NAME", e."RENTAL_FEE", e."STOCK"
+FROM "Equipments" AS e
+WHERE e."ID" = @__id_0
+LIMIT 1
+2026-08-23 09:45:55 [INF] Executed DbCommand (20ms) [Parameters=[@p0='?' (DbType = Int64), @p1='?' (DbType = Int64), @p2='?' (DbType = Int32), @p3='?' (DbType = Decimal), @p4='?' (DbType = Decimal), @p5='?' (DbType = Int64), @p6='?' (DbType = Int64), @p7='?' (DbType = Int32), @p8='?' (DbType = Decimal), @p9='?' (DbType = Decimal), @p22='?' (DbType = Int64), @p10='?' (DbType = Int64), @p11='?' (DbType = Decimal), @p12='?', @p13='?' (DbType = DateTime), @p14='?' (DbType = Int64), @p15='?' (DbType = DateTime), @p16='?', @p17='?' (DbType = Object), @p18='?' (DbType = Object), @p19='?', @p20='?' (DbType = Decimal), @p21='?' (DbType = Int32), @p26='?' (DbType = Int64), @p23='?', @p24='?' (DbType = Decimal), @p25='?' (DbType = Int32), @p30='?' (DbType = Int64), @p27='?', @p28='?' (DbType = Decimal), @p29='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "BookingAddOns" ("BOOKING_ID", "EQUIPMENT_ID", "QUANTITY", "SUB_TOTAL", "UNIT_PRICE")
+VALUES (@p0, @p1, @p2, @p3, @p4)
+RETURNING "ID";
+INSERT INTO "BookingAddOns" ("BOOKING_ID", "EQUIPMENT_ID", "QUANTITY", "SUB_TOTAL", "UNIT_PRICE")
+VALUES (@p5, @p6, @p7, @p8, @p9)
+RETURNING "ID";
+UPDATE "Bookings" SET "ADMIN_ID" = @p10, "BASE_AMOUNT" = @p11, "BOOKING_CODE" = @p12, "BOOKING_DATE" = @p13, "COURTS_ID" = @p14, "CREATED_AT" = @p15, "CUSTOMER_NAME" = @p16, "END_TIME" = @p17, "START_TIME" = @p18, "STATUS" = @p19, "TOTAL_AMOUNT" = @p20, "TOTAL_HOURS" = @p21
+WHERE "ID" = @p22;
+UPDATE "Equipments" SET "ITEM_NAME" = @p23, "RENTAL_FEE" = @p24, "STOCK" = @p25
+WHERE "ID" = @p26;
+UPDATE "Equipments" SET "ITEM_NAME" = @p27, "RENTAL_FEE" = @p28, "STOCK" = @p29
+WHERE "ID" = @p30;
+2026-08-23 09:45:55 [INF] Executing CreatedAtActionResult, writing value of type '<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-08-23 09:45:55 [INF] Executed action CourtifyBE.Controllers.BookingController.CreateBooking (CourtifyBE) in 1572.4756ms
+2026-08-23 09:45:55 [INF] Executed endpoint 'CourtifyBE.Controllers.BookingController.CreateBooking (CourtifyBE)'
+2026-08-23 09:45:55 [INF] Request finished HTTP/1.1 POST http://localhost:5146/api/bookings - 201 null application/json; charset=utf-8 1770.8644ms
+2026-08-23 09:46:04 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/bookings - null null
+2026-08-23 09:46:04 [INF] Executing endpoint 'CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE)'
+2026-08-23 09:46:04 [INF] Route matched with {action = "GetBookings", controller = "Booking"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetBookings(System.String, System.Nullable`1[System.DateTime]) on controller CourtifyBE.Controllers.BookingController (CourtifyBE).
+2026-08-23 09:46:04 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT b."ID", b."ADMIN_ID", b."BASE_AMOUNT", b."BOOKING_CODE", b."BOOKING_DATE", b."COURTS_ID", b."CREATED_AT", b."CUSTOMER_NAME", b."END_TIME", b."START_TIME", b."STATUS", b."TOTAL_AMOUNT", b."TOTAL_HOURS"
+FROM "Bookings" AS b
+2026-08-23 09:46:04 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[CourtifyBE.DTOs.BookingDetailResponse, CourtifyBE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-23 09:46:04 [INF] Executed action CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE) in 128.9048ms
+2026-08-23 09:46:04 [INF] Executed endpoint 'CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE)'
+2026-08-23 09:46:04 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/bookings - 200 null application/json; charset=utf-8 177.9523ms
+2026-08-23 09:46:20 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/venues/1 - null null
+2026-08-23 09:46:20 [INF] Executing endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 09:46:20 [INF] Route matched with {action = "GetVenue", controller = "Venue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetVenue(Int64) on controller CourtifyBE.Controllers.VenueController (CourtifyBE).
+2026-08-23 09:46:21 [INF] Executed DbCommand (20ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t."ID", t."ADDRESS", t."IS_ACTIVE", t."NAME_VENUE", t."PHONE_NUMBER", t0."ID", t0."COURT_CATEGORY_ID", t0."COURT_NAME", t0."HOURLY_RATE", t0."IS_AVAILABLE", t0."VENUE_ID", t0."ID0", t0."CATEGORY", t0."DESCRIPTION"
+FROM (
+    SELECT v."ID", v."ADDRESS", v."IS_ACTIVE", v."NAME_VENUE", v."PHONE_NUMBER"
+    FROM "Venues" AS v
+    WHERE v."ID" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN (
+    SELECT c."ID", c."COURT_CATEGORY_ID", c."COURT_NAME", c."HOURLY_RATE", c."IS_AVAILABLE", c."VENUE_ID", c0."ID" AS "ID0", c0."CATEGORY", c0."DESCRIPTION"
+    FROM "Courts" AS c
+    INNER JOIN "CourtCategories" AS c0 ON c."COURT_CATEGORY_ID" = c0."ID"
+) AS t0 ON t."ID" = t0."VENUE_ID"
+ORDER BY t."ID", t0."ID"
+2026-08-23 09:46:21 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.VenueDetailResponse'.
+2026-08-23 09:46:21 [INF] Executed action CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE) in 351.9052ms
+2026-08-23 09:46:21 [INF] Executed endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 09:46:21 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/venues/1 - 200 null application/json; charset=utf-8 386.9432ms
+2026-08-23 09:47:01 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/equipment-add-ons?page=1&limit=10 - null null
+2026-08-23 09:47:01 [INF] Executing endpoint 'CourtifyBE.Controllers.EquipmentController.GetEquipment (CourtifyBE)'
+2026-08-23 09:47:01 [INF] Route matched with {action = "GetEquipment", controller = "Equipment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetEquipment(System.String, Int32, Int32) on controller CourtifyBE.Controllers.EquipmentController (CourtifyBE).
+2026-08-23 09:47:02 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT e."ID", e."ITEM_NAME", e."RENTAL_FEE", e."STOCK"
+FROM "Equipments" AS e
+2026-08-23 09:47:02 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[CourtifyBE.DTOs.EquimentAddOnsResponse, CourtifyBE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-23 09:47:02 [INF] Executed action CourtifyBE.Controllers.EquipmentController.GetEquipment (CourtifyBE) in 58.4507ms
+2026-08-23 09:47:02 [INF] Executed endpoint 'CourtifyBE.Controllers.EquipmentController.GetEquipment (CourtifyBE)'
+2026-08-23 09:47:02 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/equipment-add-ons?page=1&limit=10 - 200 null application/json; charset=utf-8 113.576ms
+2026-08-23 10:06:08 [INF] User profile is available. Using 'C:\Users\HP\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-08-23 10:06:09 [INF] Now listening on: http://localhost:5146
+2026-08-23 10:06:09 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-23 10:06:09 [INF] Hosting environment: Development
+2026-08-23 10:06:09 [INF] Content root path: C:\Users\HP\source\repos\Project AdIns\Courtify-App\Courtify_BE
+2026-08-23 10:06:10 [INF] Request starting HTTP/1.1 GET http://localhost:5146/swagger/index.html - null null
+2026-08-23 10:06:11 [INF] Request finished HTTP/1.1 GET http://localhost:5146/swagger/index.html - 200 null text/html;charset=utf-8 616.5251ms
+2026-08-23 10:06:11 [INF] Request starting HTTP/1.1 GET http://localhost:5146/_vs/browserLink - null null
+2026-08-23 10:06:11 [INF] Request starting HTTP/1.1 GET http://localhost:5146/_framework/aspnetcore-browser-refresh.js - null null
+2026-08-23 10:06:11 [INF] Request finished HTTP/1.1 GET http://localhost:5146/_framework/aspnetcore-browser-refresh.js - 200 14925 application/javascript; charset=utf-8 16.807ms
+2026-08-23 10:06:11 [INF] Request finished HTTP/1.1 GET http://localhost:5146/_vs/browserLink - 200 null text/javascript; charset=UTF-8 111.8774ms
+2026-08-23 10:06:11 [INF] Request starting HTTP/1.1 GET http://localhost:5146/swagger/v1/swagger.json - null null
+2026-08-23 10:06:11 [INF] Request finished HTTP/1.1 GET http://localhost:5146/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 51.2499ms
+2026-08-23 10:06:26 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/bookings/4 - null null
+2026-08-23 10:06:26 [WRN] Failed to determine the https port for redirect.
+2026-08-23 10:06:27 [INF] Executing endpoint 'CourtifyBE.Controllers.BookingController.GetBooking (CourtifyBE)'
+2026-08-23 10:06:27 [INF] Route matched with {action = "GetBooking", controller = "Booking"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetBooking(Int64) on controller CourtifyBE.Controllers.BookingController (CourtifyBE).
+2026-08-23 10:06:30 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-08-23 10:06:30 [INF] Executed DbCommand (165ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t."ID", t."ADMIN_ID", t."BASE_AMOUNT", t."BOOKING_CODE", t."BOOKING_DATE", t."COURTS_ID", t."CREATED_AT", t."CUSTOMER_NAME", t."END_TIME", t."START_TIME", t."STATUS", t."TOTAL_AMOUNT", t."TOTAL_HOURS", t."ID0", t."COURT_CATEGORY_ID", t."COURT_NAME", t."HOURLY_RATE", t."IS_AVAILABLE", t."VENUE_ID", t0."ID", t0."BOOKING_ID", t0."EQUIPMENT_ID", t0."QUANTITY", t0."SUB_TOTAL", t0."UNIT_PRICE", t0."ID0", t0."ITEM_NAME", t0."RENTAL_FEE", t0."STOCK", p."ID", p."BOOKING_ID", p."PAYMENT_METHOD", p."RECEIPT_NUMBER", p."STATUS"
+FROM (
+    SELECT b."ID", b."ADMIN_ID", b."BASE_AMOUNT", b."BOOKING_CODE", b."BOOKING_DATE", b."COURTS_ID", b."CREATED_AT", b."CUSTOMER_NAME", b."END_TIME", b."START_TIME", b."STATUS", b."TOTAL_AMOUNT", b."TOTAL_HOURS", c."ID" AS "ID0", c."COURT_CATEGORY_ID", c."COURT_NAME", c."HOURLY_RATE", c."IS_AVAILABLE", c."VENUE_ID"
+    FROM "Bookings" AS b
+    INNER JOIN "Courts" AS c ON b."COURTS_ID" = c."ID"
+    WHERE b."ID" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN (
+    SELECT b0."ID", b0."BOOKING_ID", b0."EQUIPMENT_ID", b0."QUANTITY", b0."SUB_TOTAL", b0."UNIT_PRICE", e."ID" AS "ID0", e."ITEM_NAME", e."RENTAL_FEE", e."STOCK"
+    FROM "BookingAddOns" AS b0
+    INNER JOIN "Equipments" AS e ON b0."EQUIPMENT_ID" = e."ID"
+) AS t0 ON t."ID" = t0."BOOKING_ID"
+LEFT JOIN "PaymentReceipts" AS p ON t."ID" = p."BOOKING_ID"
+ORDER BY t."ID", t."ID0", t0."ID", t0."ID0"
+2026-08-23 10:06:31 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.BookingDetailResponse'.
+2026-08-23 10:06:31 [INF] Executed action CourtifyBE.Controllers.BookingController.GetBooking (CourtifyBE) in 4091.2281ms
+2026-08-23 10:06:31 [INF] Executed endpoint 'CourtifyBE.Controllers.BookingController.GetBooking (CourtifyBE)'
+2026-08-23 10:06:31 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/bookings/4 - 200 null application/json; charset=utf-8 4510.7321ms
+2026-08-23 10:06:51 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/bookings - null null
+2026-08-23 10:06:52 [INF] Executing endpoint 'CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE)'
+2026-08-23 10:06:52 [INF] Route matched with {action = "GetBookings", controller = "Booking"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetBookings(System.String, System.Nullable`1[System.DateTime]) on controller CourtifyBE.Controllers.BookingController (CourtifyBE).
+2026-08-23 10:06:52 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT b."ID", b."ADMIN_ID", b."BASE_AMOUNT", b."BOOKING_CODE", b."BOOKING_DATE", b."COURTS_ID", b."CREATED_AT", b."CUSTOMER_NAME", b."END_TIME", b."START_TIME", b."STATUS", b."TOTAL_AMOUNT", b."TOTAL_HOURS"
+FROM "Bookings" AS b
+2026-08-23 10:06:52 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[CourtifyBE.DTOs.BookingDetailResponse, CourtifyBE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-23 10:06:52 [INF] Executed action CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE) in 161.3809ms
+2026-08-23 10:06:52 [INF] Executed endpoint 'CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE)'
+2026-08-23 10:06:52 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/bookings - 200 null application/json; charset=utf-8 213.8168ms
+2026-08-23 10:41:45 [INF] User profile is available. Using 'C:\Users\HP\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-08-23 10:41:46 [INF] Now listening on: http://localhost:5146
+2026-08-23 10:41:46 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-23 10:41:46 [INF] Hosting environment: Development
+2026-08-23 10:41:46 [INF] Content root path: C:\Users\HP\source\repos\Project AdIns\Courtify-App\Courtify_BE
+2026-08-23 10:41:48 [INF] Request starting HTTP/1.1 GET http://localhost:5146/swagger/index.html - null null
+2026-08-23 10:41:49 [INF] Request finished HTTP/1.1 GET http://localhost:5146/swagger/index.html - 200 null text/html;charset=utf-8 789.8779ms
+2026-08-23 10:41:49 [INF] Request starting HTTP/1.1 GET http://localhost:5146/_framework/aspnetcore-browser-refresh.js - null null
+2026-08-23 10:41:49 [INF] Request starting HTTP/1.1 GET http://localhost:5146/_vs/browserLink - null null
+2026-08-23 10:41:49 [INF] Request finished HTTP/1.1 GET http://localhost:5146/_framework/aspnetcore-browser-refresh.js - 200 14925 application/javascript; charset=utf-8 31.1928ms
+2026-08-23 10:41:49 [INF] Request finished HTTP/1.1 GET http://localhost:5146/_vs/browserLink - 200 null text/javascript; charset=UTF-8 149.2828ms
+2026-08-23 10:41:49 [INF] Request starting HTTP/1.1 GET http://localhost:5146/swagger/v1/swagger.json - null null
+2026-08-23 10:41:49 [INF] Request finished HTTP/1.1 GET http://localhost:5146/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 47.3252ms
+2026-08-23 10:41:56 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/bookings - null null
+2026-08-23 10:41:56 [WRN] Failed to determine the https port for redirect.
+2026-08-23 10:41:57 [INF] Executing endpoint 'CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE)'
+2026-08-23 10:41:57 [INF] Route matched with {action = "GetBookings", controller = "Booking"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetBookings(System.String, System.Nullable`1[System.DateTime]) on controller CourtifyBE.Controllers.BookingController (CourtifyBE).
+2026-08-23 10:42:01 [INF] Executed DbCommand (67ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT b."ID", b."ADMIN_ID", b."BASE_AMOUNT", b."BOOKING_CODE", b."BOOKING_DATE", b."COURTS_ID", b."CREATED_AT", b."CUSTOMER_NAME", b."END_TIME", b."START_TIME", b."STATUS", b."TOTAL_AMOUNT", b."TOTAL_HOURS"
+FROM "Bookings" AS b
+2026-08-23 10:42:02 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[CourtifyBE.DTOs.BookingDetailResponse, CourtifyBE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-23 10:42:02 [INF] Executed action CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE) in 4931.3661ms
+2026-08-23 10:42:02 [INF] Executed endpoint 'CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE)'
+2026-08-23 10:42:02 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/bookings - 200 null application/json; charset=utf-8 5301.0114ms
+2026-08-23 10:43:29 [INF] User profile is available. Using 'C:\Users\HP\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-08-23 10:43:30 [INF] Now listening on: http://localhost:5146
+2026-08-23 10:43:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-23 10:43:30 [INF] Hosting environment: Development
+2026-08-23 10:43:30 [INF] Content root path: C:\Users\HP\source\repos\Project AdIns\Courtify-App\Courtify_BE
+2026-08-23 10:43:31 [INF] Request starting HTTP/1.1 GET http://localhost:5146/swagger/index.html - null null
+2026-08-23 10:43:31 [INF] Request starting HTTP/1.1 GET http://localhost:5146/_framework/aspnetcore-browser-refresh.js - null null
+2026-08-23 10:43:31 [INF] Request finished HTTP/1.1 GET http://localhost:5146/swagger/index.html - 200 null text/html;charset=utf-8 589.5172ms
+2026-08-23 10:43:31 [INF] Request finished HTTP/1.1 GET http://localhost:5146/_framework/aspnetcore-browser-refresh.js - 200 14925 application/javascript; charset=utf-8 21.0749ms
+2026-08-23 10:43:31 [INF] Request starting HTTP/1.1 GET http://localhost:5146/_vs/browserLink - null null
+2026-08-23 10:43:31 [INF] Request finished HTTP/1.1 GET http://localhost:5146/_vs/browserLink - 200 null text/javascript; charset=UTF-8 95.2178ms
+2026-08-23 10:43:31 [INF] Request starting HTTP/1.1 GET http://localhost:5146/swagger/v1/swagger.json - null null
+2026-08-23 10:43:31 [INF] Request finished HTTP/1.1 GET http://localhost:5146/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 54.0253ms
+2026-08-23 10:43:47 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/bookings - null null
+2026-08-23 10:43:47 [WRN] Failed to determine the https port for redirect.
+2026-08-23 10:43:47 [INF] Executing endpoint 'CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE)'
+2026-08-23 10:43:47 [INF] Route matched with {action = "GetBookings", controller = "Booking"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetBookings(System.String, System.Nullable`1[System.DateTime]) on controller CourtifyBE.Controllers.BookingController (CourtifyBE).
+2026-08-23 10:43:50 [INF] Executed DbCommand (59ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT b."ID", b."ADMIN_ID", b."BASE_AMOUNT", b."BOOKING_CODE", b."BOOKING_DATE", b."COURTS_ID", b."CREATED_AT", b."CUSTOMER_NAME", b."END_TIME", b."START_TIME", b."STATUS", b."TOTAL_AMOUNT", b."TOTAL_HOURS"
+FROM "Bookings" AS b
+2026-08-23 10:43:51 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[CourtifyBE.DTOs.BookingDetailResponse, CourtifyBE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-23 10:43:51 [INF] Executed action CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE) in 3647.5501ms
+2026-08-23 10:43:51 [INF] Executed endpoint 'CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE)'
+2026-08-23 10:43:51 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/bookings - 200 null application/json; charset=utf-8 3911.8115ms
+2026-08-23 10:45:01 [INF] User profile is available. Using 'C:\Users\HP\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-08-23 10:45:01 [INF] Now listening on: http://localhost:5146
+2026-08-23 10:45:01 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-23 10:45:01 [INF] Hosting environment: Development
+2026-08-23 10:45:01 [INF] Content root path: C:\Users\HP\source\repos\Project AdIns\Courtify-App\Courtify_BE
+2026-08-23 10:45:02 [INF] Request starting HTTP/1.1 GET http://localhost:5146/swagger/index.html - null null
+2026-08-23 10:45:02 [INF] Request starting HTTP/1.1 GET http://localhost:5146/_framework/aspnetcore-browser-refresh.js - null null
+2026-08-23 10:45:02 [INF] Request finished HTTP/1.1 GET http://localhost:5146/swagger/index.html - 200 null text/html;charset=utf-8 576.6189ms
+2026-08-23 10:45:02 [INF] Request finished HTTP/1.1 GET http://localhost:5146/_framework/aspnetcore-browser-refresh.js - 200 14925 application/javascript; charset=utf-8 30.7047ms
+2026-08-23 10:45:02 [INF] Request starting HTTP/1.1 GET http://localhost:5146/_vs/browserLink - null null
+2026-08-23 10:45:02 [INF] Request finished HTTP/1.1 GET http://localhost:5146/_vs/browserLink - 200 null text/javascript; charset=UTF-8 98.6524ms
+2026-08-23 10:45:02 [INF] Request starting HTTP/1.1 GET http://localhost:5146/swagger/v1/swagger.json - null null
+2026-08-23 10:45:02 [INF] Request finished HTTP/1.1 GET http://localhost:5146/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 38.7858ms
+2026-08-23 10:45:36 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/bookings - null null
+2026-08-23 10:45:36 [WRN] Failed to determine the https port for redirect.
+2026-08-23 10:45:36 [INF] Executing endpoint 'CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE)'
+2026-08-23 10:45:36 [INF] Route matched with {action = "GetBookings", controller = "Booking"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetBookings(System.String, System.Nullable`1[System.DateTime]) on controller CourtifyBE.Controllers.BookingController (CourtifyBE).
+2026-08-23 10:45:40 [INF] Executed DbCommand (62ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT b."ID", b."ADMIN_ID", b."BASE_AMOUNT", b."BOOKING_CODE", b."BOOKING_DATE", b."COURTS_ID", b."CREATED_AT", b."CUSTOMER_NAME", b."END_TIME", b."START_TIME", b."STATUS", b."TOTAL_AMOUNT", b."TOTAL_HOURS"
+FROM "Bookings" AS b
+2026-08-23 10:45:40 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[CourtifyBE.DTOs.BookingListResponse, CourtifyBE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-23 10:45:40 [INF] Executed action CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE) in 3684.2455ms
+2026-08-23 10:45:40 [INF] Executed endpoint 'CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE)'
+2026-08-23 10:45:40 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/bookings - 200 null application/json; charset=utf-8 3992.558ms
+2026-08-23 10:45:50 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/bookings/4 - null null
+2026-08-23 10:45:50 [INF] Executing endpoint 'CourtifyBE.Controllers.BookingController.GetBooking (CourtifyBE)'
+2026-08-23 10:45:50 [INF] Route matched with {action = "GetBooking", controller = "Booking"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetBooking(Int64) on controller CourtifyBE.Controllers.BookingController (CourtifyBE).
+2026-08-23 10:45:51 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-08-23 10:45:51 [INF] Executed DbCommand (65ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t."ID", t."ADMIN_ID", t."BASE_AMOUNT", t."BOOKING_CODE", t."BOOKING_DATE", t."COURTS_ID", t."CREATED_AT", t."CUSTOMER_NAME", t."END_TIME", t."START_TIME", t."STATUS", t."TOTAL_AMOUNT", t."TOTAL_HOURS", t."ID0", t."COURT_CATEGORY_ID", t."COURT_NAME", t."HOURLY_RATE", t."IS_AVAILABLE", t."VENUE_ID", t0."ID", t0."BOOKING_ID", t0."EQUIPMENT_ID", t0."QUANTITY", t0."SUB_TOTAL", t0."UNIT_PRICE", t0."ID0", t0."ITEM_NAME", t0."RENTAL_FEE", t0."STOCK", p."ID", p."BOOKING_ID", p."PAYMENT_METHOD", p."RECEIPT_NUMBER", p."STATUS"
+FROM (
+    SELECT b."ID", b."ADMIN_ID", b."BASE_AMOUNT", b."BOOKING_CODE", b."BOOKING_DATE", b."COURTS_ID", b."CREATED_AT", b."CUSTOMER_NAME", b."END_TIME", b."START_TIME", b."STATUS", b."TOTAL_AMOUNT", b."TOTAL_HOURS", c."ID" AS "ID0", c."COURT_CATEGORY_ID", c."COURT_NAME", c."HOURLY_RATE", c."IS_AVAILABLE", c."VENUE_ID"
+    FROM "Bookings" AS b
+    INNER JOIN "Courts" AS c ON b."COURTS_ID" = c."ID"
+    WHERE b."ID" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN (
+    SELECT b0."ID", b0."BOOKING_ID", b0."EQUIPMENT_ID", b0."QUANTITY", b0."SUB_TOTAL", b0."UNIT_PRICE", e."ID" AS "ID0", e."ITEM_NAME", e."RENTAL_FEE", e."STOCK"
+    FROM "BookingAddOns" AS b0
+    INNER JOIN "Equipments" AS e ON b0."EQUIPMENT_ID" = e."ID"
+) AS t0 ON t."ID" = t0."BOOKING_ID"
+LEFT JOIN "PaymentReceipts" AS p ON t."ID" = p."BOOKING_ID"
+ORDER BY t."ID", t."ID0", t0."ID", t0."ID0"
+2026-08-23 10:45:51 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.BookingDetailResponse'.
+2026-08-23 10:45:51 [INF] Executed action CourtifyBE.Controllers.BookingController.GetBooking (CourtifyBE) in 896.0631ms
+2026-08-23 10:45:51 [INF] Executed endpoint 'CourtifyBE.Controllers.BookingController.GetBooking (CourtifyBE)'
+2026-08-23 10:45:51 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/bookings/4 - 200 null application/json; charset=utf-8 962.6321ms
+2026-08-23 10:46:41 [INF] Request starting HTTP/1.1 POST http://localhost:5146/api/auth/login - application/json 56
+2026-08-23 10:46:41 [INF] CORS policy execution failed.
+2026-08-23 10:46:42 [INF] Request origin http://localhost:5146 does not have permission to access the resource.
+2026-08-23 10:46:42 [INF] Executing endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 10:46:42 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(CourtifyBE.DTOs.LoginRequest) on controller CourtifyBE.Controllers.AuthController (CourtifyBE).
+2026-08-23 10:46:42 [INF] Executed DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."ID", a."CREATED_AT", a."NAME", a."PASSWORD", a."USERNAME"
+FROM "Admins" AS a
+2026-08-23 10:46:42 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.LoginResponse'.
+2026-08-23 10:46:42 [INF] Executed action CourtifyBE.Controllers.AuthController.Login (CourtifyBE) in 251.7141ms
+2026-08-23 10:46:42 [INF] Executed endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 10:46:42 [INF] Request finished HTTP/1.1 POST http://localhost:5146/api/auth/login - 200 null application/json; charset=utf-8 322.9341ms
+2026-08-23 12:02:09 [INF] User profile is available. Using 'C:\Users\HP\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-08-23 12:02:10 [INF] Now listening on: http://localhost:5146
+2026-08-23 12:02:10 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-23 12:02:10 [INF] Hosting environment: Development
+2026-08-23 12:02:10 [INF] Content root path: C:\Users\HP\source\repos\Project AdIns\Courtify-App\Courtify_BE
+2026-08-23 12:02:11 [INF] Request starting HTTP/1.1 GET http://localhost:5146/swagger/index.html - null null
+2026-08-23 12:02:12 [INF] Request finished HTTP/1.1 GET http://localhost:5146/swagger/index.html - 200 null text/html;charset=utf-8 567.6248ms
+2026-08-23 12:02:12 [INF] Request starting HTTP/1.1 GET http://localhost:5146/_vs/browserLink - null null
+2026-08-23 12:02:12 [INF] Request starting HTTP/1.1 GET http://localhost:5146/_framework/aspnetcore-browser-refresh.js - null null
+2026-08-23 12:02:12 [INF] Request finished HTTP/1.1 GET http://localhost:5146/_framework/aspnetcore-browser-refresh.js - 200 14925 application/javascript; charset=utf-8 13.3562ms
+2026-08-23 12:02:12 [INF] Request finished HTTP/1.1 GET http://localhost:5146/_vs/browserLink - 200 null text/javascript; charset=UTF-8 107.309ms
+2026-08-23 12:02:12 [INF] Request starting HTTP/1.1 GET http://localhost:5146/swagger/v1/swagger.json - null null
+2026-08-23 12:02:12 [INF] Request finished HTTP/1.1 GET http://localhost:5146/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 53.7249ms
+2026-08-23 12:02:26 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/bookings - null null
+2026-08-23 12:02:26 [WRN] Failed to determine the https port for redirect.
+2026-08-23 12:02:26 [INF] Executing endpoint 'CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE)'
+2026-08-23 12:02:26 [INF] Route matched with {action = "GetBookings", controller = "Booking"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetBookings(System.String, System.Nullable`1[System.DateTime]) on controller CourtifyBE.Controllers.BookingController (CourtifyBE).
+2026-08-23 12:02:29 [INF] Executed DbCommand (56ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT b."ID", b."ADMIN_ID", b."BASE_AMOUNT", b."BOOKING_CODE", b."BOOKING_DATE", b."COURTS_ID", b."CREATED_AT", b."CUSTOMER_NAME", b."END_TIME", b."START_TIME", b."STATUS", b."TOTAL_AMOUNT", b."TOTAL_HOURS"
+FROM "Bookings" AS b
+2026-08-23 12:02:29 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[CourtifyBE.DTOs.BookingListResponse, CourtifyBE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-23 12:02:29 [INF] Executed action CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE) in 3378.3938ms
+2026-08-23 12:02:29 [INF] Executed endpoint 'CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE)'
+2026-08-23 12:02:29 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/bookings - 200 null application/json; charset=utf-8 3709.847ms
+2026-08-23 12:02:45 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/bookings/1 - null null
+2026-08-23 12:02:45 [INF] Executing endpoint 'CourtifyBE.Controllers.BookingController.GetBooking (CourtifyBE)'
+2026-08-23 12:02:45 [INF] Route matched with {action = "GetBooking", controller = "Booking"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetBooking(Int64) on controller CourtifyBE.Controllers.BookingController (CourtifyBE).
+2026-08-23 12:02:45 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-08-23 12:02:46 [INF] Executed DbCommand (54ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t."ID", t."ADMIN_ID", t."BASE_AMOUNT", t."BOOKING_CODE", t."BOOKING_DATE", t."COURTS_ID", t."CREATED_AT", t."CUSTOMER_NAME", t."END_TIME", t."START_TIME", t."STATUS", t."TOTAL_AMOUNT", t."TOTAL_HOURS", t."ID0", t."COURT_CATEGORY_ID", t."COURT_NAME", t."HOURLY_RATE", t."IS_AVAILABLE", t."VENUE_ID", t0."ID", t0."BOOKING_ID", t0."EQUIPMENT_ID", t0."QUANTITY", t0."SUB_TOTAL", t0."UNIT_PRICE", t0."ID0", t0."ITEM_NAME", t0."RENTAL_FEE", t0."STOCK", p."ID", p."BOOKING_ID", p."PAYMENT_METHOD", p."RECEIPT_NUMBER", p."STATUS"
+FROM (
+    SELECT b."ID", b."ADMIN_ID", b."BASE_AMOUNT", b."BOOKING_CODE", b."BOOKING_DATE", b."COURTS_ID", b."CREATED_AT", b."CUSTOMER_NAME", b."END_TIME", b."START_TIME", b."STATUS", b."TOTAL_AMOUNT", b."TOTAL_HOURS", c."ID" AS "ID0", c."COURT_CATEGORY_ID", c."COURT_NAME", c."HOURLY_RATE", c."IS_AVAILABLE", c."VENUE_ID"
+    FROM "Bookings" AS b
+    INNER JOIN "Courts" AS c ON b."COURTS_ID" = c."ID"
+    WHERE b."ID" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN (
+    SELECT b0."ID", b0."BOOKING_ID", b0."EQUIPMENT_ID", b0."QUANTITY", b0."SUB_TOTAL", b0."UNIT_PRICE", e."ID" AS "ID0", e."ITEM_NAME", e."RENTAL_FEE", e."STOCK"
+    FROM "BookingAddOns" AS b0
+    INNER JOIN "Equipments" AS e ON b0."EQUIPMENT_ID" = e."ID"
+) AS t0 ON t."ID" = t0."BOOKING_ID"
+LEFT JOIN "PaymentReceipts" AS p ON t."ID" = p."BOOKING_ID"
+ORDER BY t."ID", t."ID0", t0."ID", t0."ID0"
+2026-08-23 12:02:46 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.BookingDetailResponse'.
+2026-08-23 12:02:46 [INF] Executed action CourtifyBE.Controllers.BookingController.GetBooking (CourtifyBE) in 783.8123ms
+2026-08-23 12:02:46 [INF] Executed endpoint 'CourtifyBE.Controllers.BookingController.GetBooking (CourtifyBE)'
+2026-08-23 12:02:46 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/bookings/1 - 200 null application/json; charset=utf-8 845.0502ms
+2026-08-23 12:03:10 [INF] Request starting HTTP/1.1 PUT http://localhost:5146/api/bookings/1/status - application/json 22
+2026-08-23 12:03:10 [INF] CORS policy execution failed.
+2026-08-23 12:03:10 [INF] Request origin http://localhost:5146 does not have permission to access the resource.
+2026-08-23 12:03:10 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-08-23 12:03:10 [INF] AuthenticationScheme: Bearer was challenged.
+2026-08-23 12:03:10 [INF] Request finished HTTP/1.1 PUT http://localhost:5146/api/bookings/1/status - 401 0 null 75.845ms
+2026-08-23 12:06:18 [INF] Request starting HTTP/1.1 POST http://localhost:5146/api/auth/login - application/json 56
+2026-08-23 12:06:18 [INF] CORS policy execution failed.
+2026-08-23 12:06:18 [INF] Request origin http://localhost:5146 does not have permission to access the resource.
+2026-08-23 12:06:18 [INF] Executing endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 12:06:18 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(CourtifyBE.DTOs.LoginRequest) on controller CourtifyBE.Controllers.AuthController (CourtifyBE).
+2026-08-23 12:06:18 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."ID", a."CREATED_AT", a."NAME", a."PASSWORD", a."USERNAME"
+FROM "Admins" AS a
+2026-08-23 12:06:18 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.LoginResponse'.
+2026-08-23 12:06:18 [INF] Executed action CourtifyBE.Controllers.AuthController.Login (CourtifyBE) in 337.4542ms
+2026-08-23 12:06:18 [INF] Executed endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 12:06:18 [INF] Request finished HTTP/1.1 POST http://localhost:5146/api/auth/login - 200 null application/json; charset=utf-8 385.1692ms
+2026-08-23 12:06:26 [INF] Request starting HTTP/1.1 PUT http://localhost:5146/api/bookings/1/status - application/json 22
+2026-08-23 12:06:26 [INF] CORS policy execution failed.
+2026-08-23 12:06:26 [INF] Request origin http://localhost:5146 does not have permission to access the resource.
+2026-08-23 12:06:26 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-08-23 12:06:26 [INF] AuthenticationScheme: Bearer was challenged.
+2026-08-23 12:06:26 [INF] Request finished HTTP/1.1 PUT http://localhost:5146/api/bookings/1/status - 401 0 null 19.646ms
+2026-08-23 12:06:34 [INF] Request starting HTTP/1.1 PUT http://localhost:5146/api/bookings/1/status - application/json 17
+2026-08-23 12:06:34 [INF] CORS policy execution failed.
+2026-08-23 12:06:34 [INF] Request origin http://localhost:5146 does not have permission to access the resource.
+2026-08-23 12:06:34 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-08-23 12:06:34 [INF] AuthenticationScheme: Bearer was challenged.
+2026-08-23 12:06:34 [INF] Request finished HTTP/1.1 PUT http://localhost:5146/api/bookings/1/status - 401 0 null 21.2228ms
+2026-08-23 12:06:43 [INF] Request starting HTTP/1.1 PUT http://localhost:5146/api/bookings/1/status - application/json 17
+2026-08-23 12:06:43 [INF] CORS policy execution failed.
+2026-08-23 12:06:43 [INF] Request origin http://localhost:5146 does not have permission to access the resource.
+2026-08-23 12:06:43 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-08-23 12:06:43 [INF] AuthenticationScheme: Bearer was challenged.
+2026-08-23 12:06:43 [INF] Request finished HTTP/1.1 PUT http://localhost:5146/api/bookings/1/status - 401 0 null 34.0831ms
+2026-08-23 12:06:50 [INF] Request starting HTTP/1.1 PUT http://localhost:5146/api/bookings/2/status - application/json 17
+2026-08-23 12:06:50 [INF] CORS policy execution failed.
+2026-08-23 12:06:50 [INF] Request origin http://localhost:5146 does not have permission to access the resource.
+2026-08-23 12:06:50 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-08-23 12:06:50 [INF] AuthenticationScheme: Bearer was challenged.
+2026-08-23 12:06:50 [INF] Request finished HTTP/1.1 PUT http://localhost:5146/api/bookings/2/status - 401 0 null 21.7163ms
+2026-08-23 12:13:28 [INF] Request starting HTTP/1.1 POST http://localhost:5146/api/bookings/status - application/json 24
+2026-08-23 12:13:28 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2026-08-23 12:13:28 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2026-08-23 12:13:28 [INF] Request finished HTTP/1.1 POST http://localhost:5146/api/bookings/status - 405 0 null 639.8781ms
+2026-08-23 12:14:48 [INF] Request starting HTTP/1.1 PATCH http://localhost:5146/api/bookings/status - application/json 24
+2026-08-23 12:14:48 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2026-08-23 12:14:48 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2026-08-23 12:14:48 [INF] Request finished HTTP/1.1 PATCH http://localhost:5146/api/bookings/status - 405 0 null 35.342ms
+2026-08-23 12:15:19 [INF] Request starting HTTP/1.1 PUT http://localhost:5146/api/bookings/{id}/status - application/json 24
+2026-08-23 12:15:19 [INF] Request finished HTTP/1.1 PUT http://localhost:5146/api/bookings/{id}/status - 404 0 null 67.2952ms
+2026-08-23 12:15:19 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: PUT http://localhost:5146/api/bookings/%7Bid%7D/status, Response status code: 404
+2026-08-23 12:15:42 [INF] Request starting HTTP/1.1 PUT http://localhost:5146/api/bookings/1/status - application/json 24
+2026-08-23 12:15:42 [INF] Executing endpoint 'CourtifyBE.Controllers.BookingController.UpdateBookingStatus (CourtifyBE)'
+2026-08-23 12:15:42 [INF] Route matched with {action = "UpdateBookingStatus", controller = "Booking"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UpdateBookingStatus(Int64, CourtifyBE.DTOs.UpdateBookingStatusRequest) on controller CourtifyBE.Controllers.BookingController (CourtifyBE).
+2026-08-23 12:15:43 [INF] Executed DbCommand (105ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT b."ID", b."ADMIN_ID", b."BASE_AMOUNT", b."BOOKING_CODE", b."BOOKING_DATE", b."COURTS_ID", b."CREATED_AT", b."CUSTOMER_NAME", b."END_TIME", b."START_TIME", b."STATUS", b."TOTAL_AMOUNT", b."TOTAL_HOURS"
+FROM "Bookings" AS b
+WHERE b."ID" = @__id_0
+LIMIT 1
+2026-08-23 12:15:44 [INF] Executed DbCommand (77ms) [Parameters=[@p12='?' (DbType = Int64), @p0='?' (DbType = Int64), @p1='?' (DbType = Decimal), @p2='?', @p3='?' (DbType = DateTime), @p4='?' (DbType = Int64), @p5='?' (DbType = DateTime), @p6='?', @p7='?' (DbType = Object), @p8='?' (DbType = Object), @p9='?', @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Bookings" SET "ADMIN_ID" = @p0, "BASE_AMOUNT" = @p1, "BOOKING_CODE" = @p2, "BOOKING_DATE" = @p3, "COURTS_ID" = @p4, "CREATED_AT" = @p5, "CUSTOMER_NAME" = @p6, "END_TIME" = @p7, "START_TIME" = @p8, "STATUS" = @p9, "TOTAL_AMOUNT" = @p10, "TOTAL_HOURS" = @p11
+WHERE "ID" = @p12;
+2026-08-23 12:15:44 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.UpdateBookingStatusResponse'.
+2026-08-23 12:15:44 [INF] Executed action CourtifyBE.Controllers.BookingController.UpdateBookingStatus (CourtifyBE) in 1472.3722ms
+2026-08-23 12:15:44 [INF] Executed endpoint 'CourtifyBE.Controllers.BookingController.UpdateBookingStatus (CourtifyBE)'
+2026-08-23 12:15:44 [INF] Request finished HTTP/1.1 PUT http://localhost:5146/api/bookings/1/status - 200 null application/json; charset=utf-8 1683.6091ms
+2026-08-23 15:16:20 [INF] User profile is available. Using 'C:\Users\HP\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-08-23 15:16:21 [INF] Now listening on: http://localhost:5146
+2026-08-23 15:16:21 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-23 15:16:21 [INF] Hosting environment: Development
+2026-08-23 15:16:21 [INF] Content root path: C:\Users\HP\source\repos\Project AdIns\Courtify-App\Courtify_BE
+2026-08-23 15:16:22 [INF] Request starting HTTP/1.1 GET http://localhost:5146/swagger/index.html - null null
+2026-08-23 15:16:23 [INF] Request finished HTTP/1.1 GET http://localhost:5146/swagger/index.html - 200 null text/html;charset=utf-8 870.445ms
+2026-08-23 15:16:23 [INF] Request starting HTTP/1.1 GET http://localhost:5146/_vs/browserLink - null null
+2026-08-23 15:16:23 [INF] Request starting HTTP/1.1 GET http://localhost:5146/_framework/aspnetcore-browser-refresh.js - null null
+2026-08-23 15:16:23 [INF] Request finished HTTP/1.1 GET http://localhost:5146/_framework/aspnetcore-browser-refresh.js - 200 14925 application/javascript; charset=utf-8 34.7581ms
+2026-08-23 15:16:23 [INF] Request finished HTTP/1.1 GET http://localhost:5146/_vs/browserLink - 200 null text/javascript; charset=UTF-8 258.032ms
+2026-08-23 15:16:23 [INF] Request starting HTTP/1.1 GET http://localhost:5146/swagger/v1/swagger.json - null null
+2026-08-23 15:16:24 [INF] Request finished HTTP/1.1 GET http://localhost:5146/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 60.8592ms
+2026-08-23 15:17:30 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/bookings - null null
+2026-08-23 15:17:30 [WRN] Failed to determine the https port for redirect.
+2026-08-23 15:17:30 [INF] Executing endpoint 'CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE)'
+2026-08-23 15:17:31 [INF] Route matched with {action = "GetBookings", controller = "Booking"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetBookings(System.String, System.Nullable`1[System.DateTime]) on controller CourtifyBE.Controllers.BookingController (CourtifyBE).
+2026-08-23 15:17:36 [INF] Executed DbCommand (89ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT b."ID", b."ADMIN_ID", b."BASE_AMOUNT", b."BOOKING_CODE", b."BOOKING_DATE", b."COURTS_ID", b."CREATED_AT", b."CUSTOMER_NAME", b."END_TIME", b."START_TIME", b."STATUS", b."TOTAL_AMOUNT", b."TOTAL_HOURS"
+FROM "Bookings" AS b
+2026-08-23 15:17:36 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[CourtifyBE.DTOs.BookingListResponse, CourtifyBE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-23 15:17:36 [INF] Executed action CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE) in 5804.4066ms
+2026-08-23 15:17:36 [INF] Executed endpoint 'CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE)'
+2026-08-23 15:17:36 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/bookings - 200 null application/json; charset=utf-8 6123.9433ms
+2026-08-23 15:29:46 [INF] User profile is available. Using 'C:\Users\HP\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-08-23 15:29:46 [INF] Now listening on: http://localhost:5146
+2026-08-23 15:29:46 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-23 15:29:46 [INF] Hosting environment: Development
+2026-08-23 15:29:47 [INF] Content root path: C:\Users\HP\source\repos\Project AdIns\Courtify-App\Courtify_BE
+2026-08-23 15:29:47 [INF] Request starting HTTP/1.1 GET http://localhost:5146/swagger/index.html - null null
+2026-08-23 15:29:48 [INF] Request starting HTTP/1.1 GET http://localhost:5146/_framework/aspnetcore-browser-refresh.js - null null
+2026-08-23 15:29:48 [INF] Request finished HTTP/1.1 GET http://localhost:5146/swagger/index.html - 200 null text/html;charset=utf-8 847.0099ms
+2026-08-23 15:29:48 [INF] Request finished HTTP/1.1 GET http://localhost:5146/_framework/aspnetcore-browser-refresh.js - 200 14925 application/javascript; charset=utf-8 16.2328ms
+2026-08-23 15:29:48 [INF] Request starting HTTP/1.1 GET http://localhost:5146/_vs/browserLink - null null
+2026-08-23 15:29:48 [INF] Request finished HTTP/1.1 GET http://localhost:5146/_vs/browserLink - 200 null text/javascript; charset=UTF-8 109.2976ms
+2026-08-23 15:29:48 [INF] Request starting HTTP/1.1 GET http://localhost:5146/swagger/v1/swagger.json - null null
+2026-08-23 15:29:48 [INF] Request finished HTTP/1.1 GET http://localhost:5146/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 54.0657ms
+2026-08-23 15:30:01 [INF] Request starting HTTP/1.1 DELETE http://localhost:5146/api/bookings/2 - null null
+2026-08-23 15:30:01 [INF] CORS policy execution failed.
+2026-08-23 15:30:01 [INF] Request origin http://localhost:5146 does not have permission to access the resource.
+2026-08-23 15:30:01 [WRN] Failed to determine the https port for redirect.
+2026-08-23 15:30:02 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-08-23 15:30:02 [INF] AuthenticationScheme: Bearer was challenged.
+2026-08-23 15:30:02 [INF] Request finished HTTP/1.1 DELETE http://localhost:5146/api/bookings/2 - 401 0 null 228.3445ms
+2026-08-23 15:30:25 [INF] Request starting HTTP/1.1 POST http://localhost:5146/api/auth/login - application/json 56
+2026-08-23 15:30:26 [INF] CORS policy execution failed.
+2026-08-23 15:30:26 [INF] Request origin http://localhost:5146 does not have permission to access the resource.
+2026-08-23 15:30:26 [INF] Executing endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 15:30:26 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(CourtifyBE.DTOs.LoginRequest) on controller CourtifyBE.Controllers.AuthController (CourtifyBE).
+2026-08-23 15:30:29 [INF] Executed DbCommand (85ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."ID", a."CREATED_AT", a."NAME", a."PASSWORD", a."USERNAME"
+FROM "Admins" AS a
+2026-08-23 15:30:30 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.LoginResponse'.
+2026-08-23 15:30:30 [INF] Executed action CourtifyBE.Controllers.AuthController.Login (CourtifyBE) in 4266.1105ms
+2026-08-23 15:30:30 [INF] Executed endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 15:30:30 [INF] Request finished HTTP/1.1 POST http://localhost:5146/api/auth/login - 200 null application/json; charset=utf-8 4472.825ms
+2026-08-23 15:33:25 [INF] Request starting HTTP/1.1 DELETE http://localhost:5146/api/bookings/2 - null null
+2026-08-23 15:33:25 [INF] Executing endpoint 'CourtifyBE.Controllers.BookingController.CancelBooking (CourtifyBE)'
+2026-08-23 15:33:25 [INF] Route matched with {action = "CancelBooking", controller = "Booking"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] CancelBooking(Int64) on controller CourtifyBE.Controllers.BookingController (CourtifyBE).
+2026-08-23 15:33:25 [INF] Executed DbCommand (44ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT b."ID", b."ADMIN_ID", b."BASE_AMOUNT", b."BOOKING_CODE", b."BOOKING_DATE", b."COURTS_ID", b."CREATED_AT", b."CUSTOMER_NAME", b."END_TIME", b."START_TIME", b."STATUS", b."TOTAL_AMOUNT", b."TOTAL_HOURS"
+FROM "Bookings" AS b
+WHERE b."ID" = @__id_0
+LIMIT 1
+2026-08-23 15:33:26 [INF] Executed DbCommand (53ms) [Parameters=[@p12='?' (DbType = Int64), @p0='?' (DbType = Int64), @p1='?' (DbType = Decimal), @p2='?', @p3='?' (DbType = DateTime), @p4='?' (DbType = Int64), @p5='?' (DbType = DateTime), @p6='?', @p7='?' (DbType = Object), @p8='?' (DbType = Object), @p9='?', @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Bookings" SET "ADMIN_ID" = @p0, "BASE_AMOUNT" = @p1, "BOOKING_CODE" = @p2, "BOOKING_DATE" = @p3, "COURTS_ID" = @p4, "CREATED_AT" = @p5, "CUSTOMER_NAME" = @p6, "END_TIME" = @p7, "START_TIME" = @p8, "STATUS" = @p9, "TOTAL_AMOUNT" = @p10, "TOTAL_HOURS" = @p11
+WHERE "ID" = @p12;
+2026-08-23 15:33:26 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-23 15:33:26 [INF] Executed action CourtifyBE.Controllers.BookingController.CancelBooking (CourtifyBE) in 816.9841ms
+2026-08-23 15:33:26 [INF] Executed endpoint 'CourtifyBE.Controllers.BookingController.CancelBooking (CourtifyBE)'
+2026-08-23 15:33:26 [INF] Request finished HTTP/1.1 DELETE http://localhost:5146/api/bookings/2 - 204 null null 1022.8208ms
+2026-08-23 15:38:00 [INF] User profile is available. Using 'C:\Users\HP\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-08-23 15:38:01 [INF] Now listening on: http://localhost:5146
+2026-08-23 15:38:01 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-23 15:38:01 [INF] Hosting environment: Development
+2026-08-23 15:38:01 [INF] Content root path: C:\Users\HP\source\repos\Project AdIns\Courtify-App\Courtify_BE
+2026-08-23 15:38:02 [INF] Request starting HTTP/1.1 GET http://localhost:5146/swagger/index.html - null null
+2026-08-23 15:38:02 [INF] Request finished HTTP/1.1 GET http://localhost:5146/swagger/index.html - 200 null text/html;charset=utf-8 816.4349ms
+2026-08-23 15:38:03 [INF] Request starting HTTP/1.1 GET http://localhost:5146/_vs/browserLink - null null
+2026-08-23 15:38:03 [INF] Request starting HTTP/1.1 GET http://localhost:5146/_framework/aspnetcore-browser-refresh.js - null null
+2026-08-23 15:38:03 [INF] Request finished HTTP/1.1 GET http://localhost:5146/_framework/aspnetcore-browser-refresh.js - 200 14925 application/javascript; charset=utf-8 21.5431ms
+2026-08-23 15:38:03 [INF] Request finished HTTP/1.1 GET http://localhost:5146/_vs/browserLink - 200 null text/javascript; charset=UTF-8 131.6418ms
+2026-08-23 15:38:03 [INF] Request starting HTTP/1.1 GET http://localhost:5146/swagger/v1/swagger.json - null null
+2026-08-23 15:38:03 [INF] Request finished HTTP/1.1 GET http://localhost:5146/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 63.0308ms
+2026-08-23 15:38:15 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/bookings - null null
+2026-08-23 15:38:15 [WRN] Failed to determine the https port for redirect.
+2026-08-23 15:38:15 [INF] Executing endpoint 'CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE)'
+2026-08-23 15:38:16 [INF] Route matched with {action = "GetBookings", controller = "Booking"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetBookings(System.String, System.Nullable`1[System.DateTime]) on controller CourtifyBE.Controllers.BookingController (CourtifyBE).
+2026-08-23 15:38:19 [INF] Executed DbCommand (74ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT b."ID", b."ADMIN_ID", b."BASE_AMOUNT", b."BOOKING_CODE", b."BOOKING_DATE", b."COURTS_ID", b."CREATED_AT", b."CUSTOMER_NAME", b."END_TIME", b."START_TIME", b."STATUS", b."TOTAL_AMOUNT", b."TOTAL_HOURS"
+FROM "Bookings" AS b
+2026-08-23 15:38:20 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[CourtifyBE.DTOs.BookingListResponse, CourtifyBE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-23 15:38:20 [INF] Executed action CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE) in 4447.7309ms
+2026-08-23 15:38:20 [INF] Executed endpoint 'CourtifyBE.Controllers.BookingController.GetBookings (CourtifyBE)'
+2026-08-23 15:38:20 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/bookings - 200 null application/json; charset=utf-8 4840.001ms
+2026-08-23 15:43:38 [INF] Request starting HTTP/1.1 POST http://localhost:5146/api/auth/login - application/json 56
+2026-08-23 15:43:39 [INF] CORS policy execution failed.
+2026-08-23 15:43:39 [INF] Request origin http://localhost:5146 does not have permission to access the resource.
+2026-08-23 15:43:39 [INF] Executing endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 15:43:39 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(CourtifyBE.DTOs.LoginRequest) on controller CourtifyBE.Controllers.AuthController (CourtifyBE).
+2026-08-23 15:43:39 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."ID", a."CREATED_AT", a."NAME", a."PASSWORD", a."USERNAME"
+FROM "Admins" AS a
+2026-08-23 15:43:39 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.LoginResponse'.
+2026-08-23 15:43:39 [INF] Executed action CourtifyBE.Controllers.AuthController.Login (CourtifyBE) in 412.1328ms
+2026-08-23 15:43:39 [INF] Executed endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 15:43:39 [INF] Request finished HTTP/1.1 POST http://localhost:5146/api/auth/login - 200 null application/json; charset=utf-8 477.4557ms
+2026-08-23 15:43:43 [INF] Request starting HTTP/1.1 POST http://localhost:5146/api/auth/login - application/json 56
+2026-08-23 15:43:43 [INF] CORS policy execution failed.
+2026-08-23 15:43:43 [INF] Request origin http://localhost:5146 does not have permission to access the resource.
+2026-08-23 15:43:43 [INF] Executing endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 15:43:43 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(CourtifyBE.DTOs.LoginRequest) on controller CourtifyBE.Controllers.AuthController (CourtifyBE).
+2026-08-23 15:43:43 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."ID", a."CREATED_AT", a."NAME", a."PASSWORD", a."USERNAME"
+FROM "Admins" AS a
+2026-08-23 15:43:43 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.LoginResponse'.
+2026-08-23 15:43:43 [INF] Executed action CourtifyBE.Controllers.AuthController.Login (CourtifyBE) in 58.3463ms
+2026-08-23 15:43:43 [INF] Executed endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 15:43:43 [INF] Request finished HTTP/1.1 POST http://localhost:5146/api/auth/login - 200 null application/json; charset=utf-8 104.449ms
+2026-08-23 15:44:18 [INF] Request starting HTTP/1.1 DELETE http://localhost:5146/api/bookings/3 - null null
+2026-08-23 15:44:18 [INF] Executing endpoint 'CourtifyBE.Controllers.BookingController.CancelBooking (CourtifyBE)'
+2026-08-23 15:44:18 [INF] Route matched with {action = "CancelBooking", controller = "Booking"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] CancelBooking(Int64) on controller CourtifyBE.Controllers.BookingController (CourtifyBE).
+2026-08-23 15:44:19 [INF] Executed DbCommand (33ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT b."ID", b."ADMIN_ID", b."BASE_AMOUNT", b."BOOKING_CODE", b."BOOKING_DATE", b."COURTS_ID", b."CREATED_AT", b."CUSTOMER_NAME", b."END_TIME", b."START_TIME", b."STATUS", b."TOTAL_AMOUNT", b."TOTAL_HOURS"
+FROM "Bookings" AS b
+WHERE b."ID" = @__id_0
+LIMIT 1
+2026-08-23 15:44:19 [INF] Executed DbCommand (48ms) [Parameters=[@p12='?' (DbType = Int64), @p0='?' (DbType = Int64), @p1='?' (DbType = Decimal), @p2='?', @p3='?' (DbType = DateTime), @p4='?' (DbType = Int64), @p5='?' (DbType = DateTime), @p6='?', @p7='?' (DbType = Object), @p8='?' (DbType = Object), @p9='?', @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Bookings" SET "ADMIN_ID" = @p0, "BASE_AMOUNT" = @p1, "BOOKING_CODE" = @p2, "BOOKING_DATE" = @p3, "COURTS_ID" = @p4, "CREATED_AT" = @p5, "CUSTOMER_NAME" = @p6, "END_TIME" = @p7, "START_TIME" = @p8, "STATUS" = @p9, "TOTAL_AMOUNT" = @p10, "TOTAL_HOURS" = @p11
+WHERE "ID" = @p12;
+2026-08-23 15:44:19 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType4`3[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[<>f__AnonymousType5`2[[System.Int64, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], CourtifyBE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-23 15:44:19 [INF] Executed action CourtifyBE.Controllers.BookingController.CancelBooking (CourtifyBE) in 850.9054ms
+2026-08-23 15:44:19 [INF] Executed endpoint 'CourtifyBE.Controllers.BookingController.CancelBooking (CourtifyBE)'
+2026-08-23 15:44:19 [INF] Request finished HTTP/1.1 DELETE http://localhost:5146/api/bookings/3 - 200 null application/json; charset=utf-8 1172.3862ms
+2026-08-23 15:54:55 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5146/api/auth/login - null null
+2026-08-23 15:54:55 [INF] CORS policy execution successful.
+2026-08-23 15:54:55 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5146/api/auth/login - 204 null null 200.3884ms
+2026-08-23 15:54:55 [INF] Request starting HTTP/1.1 POST http://localhost:5146/api/auth/login - application/json 48
+2026-08-23 15:54:55 [INF] CORS policy execution successful.
+2026-08-23 15:54:55 [INF] Executing endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 15:54:55 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(CourtifyBE.DTOs.LoginRequest) on controller CourtifyBE.Controllers.AuthController (CourtifyBE).
+2026-08-23 15:54:55 [INF] Executed DbCommand (28ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."ID", a."CREATED_AT", a."NAME", a."PASSWORD", a."USERNAME"
+FROM "Admins" AS a
+2026-08-23 15:54:55 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-08-23 15:54:56 [INF] Executed action CourtifyBE.Controllers.AuthController.Login (CourtifyBE) in 395.9605ms
+2026-08-23 15:54:56 [INF] Executed endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 15:54:56 [INF] Request finished HTTP/1.1 POST http://localhost:5146/api/auth/login - 401 null application/json; charset=utf-8 562.8637ms
+2026-08-23 15:54:56 [INF] Request starting HTTP/1.1 POST http://localhost:5146/api/auth/login - application/json 48
+2026-08-23 15:54:56 [INF] CORS policy execution successful.
+2026-08-23 15:54:56 [INF] Executing endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 15:54:56 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(CourtifyBE.DTOs.LoginRequest) on controller CourtifyBE.Controllers.AuthController (CourtifyBE).
+2026-08-23 15:54:57 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."ID", a."CREATED_AT", a."NAME", a."PASSWORD", a."USERNAME"
+FROM "Admins" AS a
+2026-08-23 15:54:57 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-08-23 15:54:57 [INF] Executed action CourtifyBE.Controllers.AuthController.Login (CourtifyBE) in 25.8384ms
+2026-08-23 15:54:57 [INF] Executed endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 15:54:57 [INF] Request finished HTTP/1.1 POST http://localhost:5146/api/auth/login - 401 null application/json; charset=utf-8 52.0891ms
+2026-08-23 15:55:34 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5146/api/auth/login - null null
+2026-08-23 15:55:35 [INF] CORS policy execution successful.
+2026-08-23 15:55:35 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5146/api/auth/login - 204 null null 12.4605ms
+2026-08-23 15:55:35 [INF] Request starting HTTP/1.1 POST http://localhost:5146/api/auth/login - application/json 47
+2026-08-23 15:55:35 [INF] CORS policy execution successful.
+2026-08-23 15:55:35 [INF] Executing endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 15:55:35 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(CourtifyBE.DTOs.LoginRequest) on controller CourtifyBE.Controllers.AuthController (CourtifyBE).
+2026-08-23 15:55:35 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."ID", a."CREATED_AT", a."NAME", a."PASSWORD", a."USERNAME"
+FROM "Admins" AS a
+2026-08-23 15:55:35 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.LoginResponse'.
+2026-08-23 15:55:35 [INF] Executed action CourtifyBE.Controllers.AuthController.Login (CourtifyBE) in 47.5807ms
+2026-08-23 15:55:35 [INF] Executed endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 15:55:35 [INF] Request finished HTTP/1.1 POST http://localhost:5146/api/auth/login - 200 null application/json; charset=utf-8 74.4754ms
+2026-08-23 15:55:35 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5146/api/venues - null null
+2026-08-23 15:55:35 [INF] CORS policy execution successful.
+2026-08-23 15:55:35 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5146/api/venues - 204 null null 12.6263ms
+2026-08-23 15:55:35 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/venues - null null
+2026-08-23 15:55:35 [INF] CORS policy execution successful.
+2026-08-23 15:55:35 [INF] Executing endpoint 'CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE)'
+2026-08-23 15:55:35 [INF] Route matched with {action = "GetVenues", controller = "Venue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetVenues(System.String, Int32, Int32) on controller CourtifyBE.Controllers.VenueController (CourtifyBE).
+2026-08-23 15:55:35 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT v."ID", v."ADDRESS", v."IS_ACTIVE", v."NAME_VENUE", v."PHONE_NUMBER"
+FROM "Venues" AS v
+2026-08-23 15:55:35 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[CourtifyBE.DTOs.VenueResponse, CourtifyBE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-23 15:55:35 [INF] Executed action CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE) in 308.9432ms
+2026-08-23 15:55:35 [INF] Executed endpoint 'CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE)'
+2026-08-23 15:55:35 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/venues - 200 null application/json; charset=utf-8 415.5805ms
+2026-08-23 15:56:03 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5146/api/venues/1 - null null
+2026-08-23 15:56:03 [INF] CORS policy execution successful.
+2026-08-23 15:56:03 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5146/api/venues/1 - 204 null null 11.2839ms
+2026-08-23 15:56:03 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/venues/1 - null null
+2026-08-23 15:56:03 [INF] CORS policy execution successful.
+2026-08-23 15:56:03 [INF] Executing endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 15:56:03 [INF] Route matched with {action = "GetVenue", controller = "Venue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetVenue(Int64) on controller CourtifyBE.Controllers.VenueController (CourtifyBE).
+2026-08-23 15:56:04 [INF] Executed DbCommand (48ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t."ID", t."ADDRESS", t."IS_ACTIVE", t."NAME_VENUE", t."PHONE_NUMBER", t0."ID", t0."COURT_CATEGORY_ID", t0."COURT_NAME", t0."HOURLY_RATE", t0."IS_AVAILABLE", t0."VENUE_ID", t0."ID0", t0."CATEGORY", t0."DESCRIPTION"
+FROM (
+    SELECT v."ID", v."ADDRESS", v."IS_ACTIVE", v."NAME_VENUE", v."PHONE_NUMBER"
+    FROM "Venues" AS v
+    WHERE v."ID" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN (
+    SELECT c."ID", c."COURT_CATEGORY_ID", c."COURT_NAME", c."HOURLY_RATE", c."IS_AVAILABLE", c."VENUE_ID", c0."ID" AS "ID0", c0."CATEGORY", c0."DESCRIPTION"
+    FROM "Courts" AS c
+    INNER JOIN "CourtCategories" AS c0 ON c."COURT_CATEGORY_ID" = c0."ID"
+) AS t0 ON t."ID" = t0."VENUE_ID"
+ORDER BY t."ID", t0."ID"
+2026-08-23 15:56:04 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.VenueDetailResponse'.
+2026-08-23 15:56:04 [INF] Executed action CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE) in 577.3932ms
+2026-08-23 15:56:04 [INF] Executed endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 15:56:04 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/venues/1 - 200 null application/json; charset=utf-8 614.9224ms
+2026-08-23 16:02:49 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/bookings/4 - null null
+2026-08-23 16:02:49 [INF] Executing endpoint 'CourtifyBE.Controllers.BookingController.GetBooking (CourtifyBE)'
+2026-08-23 16:02:49 [INF] Route matched with {action = "GetBooking", controller = "Booking"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetBooking(Int64) on controller CourtifyBE.Controllers.BookingController (CourtifyBE).
+2026-08-23 16:02:50 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-08-23 16:02:50 [INF] Executed DbCommand (79ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t."ID", t."ADMIN_ID", t."BASE_AMOUNT", t."BOOKING_CODE", t."BOOKING_DATE", t."COURTS_ID", t."CREATED_AT", t."CUSTOMER_NAME", t."END_TIME", t."START_TIME", t."STATUS", t."TOTAL_AMOUNT", t."TOTAL_HOURS", t."ID0", t."COURT_CATEGORY_ID", t."COURT_NAME", t."HOURLY_RATE", t."IS_AVAILABLE", t."VENUE_ID", t0."ID", t0."BOOKING_ID", t0."EQUIPMENT_ID", t0."QUANTITY", t0."SUB_TOTAL", t0."UNIT_PRICE", t0."ID0", t0."ITEM_NAME", t0."RENTAL_FEE", t0."STOCK", p."ID", p."BOOKING_ID", p."PAYMENT_METHOD", p."RECEIPT_NUMBER", p."STATUS"
+FROM (
+    SELECT b."ID", b."ADMIN_ID", b."BASE_AMOUNT", b."BOOKING_CODE", b."BOOKING_DATE", b."COURTS_ID", b."CREATED_AT", b."CUSTOMER_NAME", b."END_TIME", b."START_TIME", b."STATUS", b."TOTAL_AMOUNT", b."TOTAL_HOURS", c."ID" AS "ID0", c."COURT_CATEGORY_ID", c."COURT_NAME", c."HOURLY_RATE", c."IS_AVAILABLE", c."VENUE_ID"
+    FROM "Bookings" AS b
+    INNER JOIN "Courts" AS c ON b."COURTS_ID" = c."ID"
+    WHERE b."ID" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN (
+    SELECT b0."ID", b0."BOOKING_ID", b0."EQUIPMENT_ID", b0."QUANTITY", b0."SUB_TOTAL", b0."UNIT_PRICE", e."ID" AS "ID0", e."ITEM_NAME", e."RENTAL_FEE", e."STOCK"
+    FROM "BookingAddOns" AS b0
+    INNER JOIN "Equipments" AS e ON b0."EQUIPMENT_ID" = e."ID"
+) AS t0 ON t."ID" = t0."BOOKING_ID"
+LEFT JOIN "PaymentReceipts" AS p ON t."ID" = p."BOOKING_ID"
+ORDER BY t."ID", t."ID0", t0."ID", t0."ID0"
+2026-08-23 16:02:50 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.BookingDetailResponse'.
+2026-08-23 16:02:50 [INF] Executed action CourtifyBE.Controllers.BookingController.GetBooking (CourtifyBE) in 807.4055ms
+2026-08-23 16:02:50 [INF] Executed endpoint 'CourtifyBE.Controllers.BookingController.GetBooking (CourtifyBE)'
+2026-08-23 16:02:50 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/bookings/4 - 200 null application/json; charset=utf-8 1012.2684ms
+2026-08-23 16:09:04 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/venues?page=1&limit=10 - null null
+2026-08-23 16:09:04 [INF] Executing endpoint 'CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE)'
+2026-08-23 16:09:04 [INF] Route matched with {action = "GetVenues", controller = "Venue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetVenues(System.String, Int32, Int32) on controller CourtifyBE.Controllers.VenueController (CourtifyBE).
+2026-08-23 16:09:04 [INF] Executed DbCommand (24ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT v."ID", v."ADDRESS", v."IS_ACTIVE", v."NAME_VENUE", v."PHONE_NUMBER"
+FROM "Venues" AS v
+2026-08-23 16:09:04 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[CourtifyBE.DTOs.VenueResponse, CourtifyBE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-23 16:09:04 [INF] Executed action CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE) in 450.4151ms
+2026-08-23 16:09:04 [INF] Executed endpoint 'CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE)'
+2026-08-23 16:09:04 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/venues?page=1&limit=10 - 200 null application/json; charset=utf-8 599.4328ms
+2026-08-23 16:09:27 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/venues/1 - null null
+2026-08-23 16:09:27 [INF] Executing endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 16:09:27 [INF] Route matched with {action = "GetVenue", controller = "Venue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetVenue(Int64) on controller CourtifyBE.Controllers.VenueController (CourtifyBE).
+2026-08-23 16:09:27 [INF] Executed DbCommand (28ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t."ID", t."ADDRESS", t."IS_ACTIVE", t."NAME_VENUE", t."PHONE_NUMBER", t0."ID", t0."COURT_CATEGORY_ID", t0."COURT_NAME", t0."HOURLY_RATE", t0."IS_AVAILABLE", t0."VENUE_ID", t0."ID0", t0."CATEGORY", t0."DESCRIPTION"
+FROM (
+    SELECT v."ID", v."ADDRESS", v."IS_ACTIVE", v."NAME_VENUE", v."PHONE_NUMBER"
+    FROM "Venues" AS v
+    WHERE v."ID" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN (
+    SELECT c."ID", c."COURT_CATEGORY_ID", c."COURT_NAME", c."HOURLY_RATE", c."IS_AVAILABLE", c."VENUE_ID", c0."ID" AS "ID0", c0."CATEGORY", c0."DESCRIPTION"
+    FROM "Courts" AS c
+    INNER JOIN "CourtCategories" AS c0 ON c."COURT_CATEGORY_ID" = c0."ID"
+) AS t0 ON t."ID" = t0."VENUE_ID"
+ORDER BY t."ID", t0."ID"
+2026-08-23 16:09:27 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.VenueDetailResponse'.
+2026-08-23 16:09:27 [INF] Executed action CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE) in 120.7305ms
+2026-08-23 16:09:27 [INF] Executed endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 16:09:27 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/venues/1 - 200 null application/json; charset=utf-8 189.8259ms
+2026-08-23 16:10:26 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5146/api/venues/1 - null null
+2026-08-23 16:10:26 [INF] CORS policy execution successful.
+2026-08-23 16:10:26 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5146/api/venues/1 - 204 null null 26.9034ms
+2026-08-23 16:10:26 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/venues/1 - null null
+2026-08-23 16:10:26 [INF] CORS policy execution successful.
+2026-08-23 16:10:26 [INF] Executing endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 16:10:26 [INF] Route matched with {action = "GetVenue", controller = "Venue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetVenue(Int64) on controller CourtifyBE.Controllers.VenueController (CourtifyBE).
+2026-08-23 16:10:26 [INF] Executed DbCommand (3ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t."ID", t."ADDRESS", t."IS_ACTIVE", t."NAME_VENUE", t."PHONE_NUMBER", t0."ID", t0."COURT_CATEGORY_ID", t0."COURT_NAME", t0."HOURLY_RATE", t0."IS_AVAILABLE", t0."VENUE_ID", t0."ID0", t0."CATEGORY", t0."DESCRIPTION"
+FROM (
+    SELECT v."ID", v."ADDRESS", v."IS_ACTIVE", v."NAME_VENUE", v."PHONE_NUMBER"
+    FROM "Venues" AS v
+    WHERE v."ID" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN (
+    SELECT c."ID", c."COURT_CATEGORY_ID", c."COURT_NAME", c."HOURLY_RATE", c."IS_AVAILABLE", c."VENUE_ID", c0."ID" AS "ID0", c0."CATEGORY", c0."DESCRIPTION"
+    FROM "Courts" AS c
+    INNER JOIN "CourtCategories" AS c0 ON c."COURT_CATEGORY_ID" = c0."ID"
+) AS t0 ON t."ID" = t0."VENUE_ID"
+ORDER BY t."ID", t0."ID"
+2026-08-23 16:10:26 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.VenueDetailResponse'.
+2026-08-23 16:10:26 [INF] Executed action CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE) in 29.5657ms
+2026-08-23 16:10:26 [INF] Executed endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 16:10:26 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/venues/1 - 200 null application/json; charset=utf-8 57.1264ms
+2026-08-23 16:10:39 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/equipment-add-ons?page=1&limit=10 - null null
+2026-08-23 16:10:39 [INF] Executing endpoint 'CourtifyBE.Controllers.EquipmentController.GetEquipment (CourtifyBE)'
+2026-08-23 16:10:39 [INF] Route matched with {action = "GetEquipment", controller = "Equipment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetEquipment(System.String, Int32, Int32) on controller CourtifyBE.Controllers.EquipmentController (CourtifyBE).
+2026-08-23 16:10:39 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT e."ID", e."ITEM_NAME", e."RENTAL_FEE", e."STOCK"
+FROM "Equipments" AS e
+2026-08-23 16:10:40 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[CourtifyBE.DTOs.EquimentAddOnsResponse, CourtifyBE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-23 16:10:40 [INF] Executed action CourtifyBE.Controllers.EquipmentController.GetEquipment (CourtifyBE) in 135.8959ms
+2026-08-23 16:10:40 [INF] Executed endpoint 'CourtifyBE.Controllers.EquipmentController.GetEquipment (CourtifyBE)'
+2026-08-23 16:10:40 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/equipment-add-ons?page=1&limit=10 - 200 null application/json; charset=utf-8 261.375ms
+2026-08-23 16:11:25 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5146/api/venues/1 - null null
+2026-08-23 16:11:25 [INF] CORS policy execution successful.
+2026-08-23 16:11:25 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5146/api/venues/1 - 204 null null 17.8776ms
+2026-08-23 16:11:25 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/venues/1 - null null
+2026-08-23 16:11:25 [INF] CORS policy execution successful.
+2026-08-23 16:11:25 [INF] Executing endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 16:11:25 [INF] Route matched with {action = "GetVenue", controller = "Venue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetVenue(Int64) on controller CourtifyBE.Controllers.VenueController (CourtifyBE).
+2026-08-23 16:11:25 [INF] Executed DbCommand (7ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t."ID", t."ADDRESS", t."IS_ACTIVE", t."NAME_VENUE", t."PHONE_NUMBER", t0."ID", t0."COURT_CATEGORY_ID", t0."COURT_NAME", t0."HOURLY_RATE", t0."IS_AVAILABLE", t0."VENUE_ID", t0."ID0", t0."CATEGORY", t0."DESCRIPTION"
+FROM (
+    SELECT v."ID", v."ADDRESS", v."IS_ACTIVE", v."NAME_VENUE", v."PHONE_NUMBER"
+    FROM "Venues" AS v
+    WHERE v."ID" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN (
+    SELECT c."ID", c."COURT_CATEGORY_ID", c."COURT_NAME", c."HOURLY_RATE", c."IS_AVAILABLE", c."VENUE_ID", c0."ID" AS "ID0", c0."CATEGORY", c0."DESCRIPTION"
+    FROM "Courts" AS c
+    INNER JOIN "CourtCategories" AS c0 ON c."COURT_CATEGORY_ID" = c0."ID"
+) AS t0 ON t."ID" = t0."VENUE_ID"
+ORDER BY t."ID", t0."ID"
+2026-08-23 16:11:25 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.VenueDetailResponse'.
+2026-08-23 16:11:25 [INF] Executed action CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE) in 40.0979ms
+2026-08-23 16:11:25 [INF] Executed endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 16:11:25 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/venues/1 - 200 null application/json; charset=utf-8 83.273ms
+2026-08-23 16:12:25 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5146/api/venues/1 - null null
+2026-08-23 16:12:25 [INF] CORS policy execution successful.
+2026-08-23 16:12:25 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5146/api/venues/1 - 204 null null 20.8629ms
+2026-08-23 16:12:25 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/venues/1 - null null
+2026-08-23 16:12:25 [INF] CORS policy execution successful.
+2026-08-23 16:12:25 [INF] Executing endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 16:12:25 [INF] Route matched with {action = "GetVenue", controller = "Venue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetVenue(Int64) on controller CourtifyBE.Controllers.VenueController (CourtifyBE).
+2026-08-23 16:12:25 [INF] Executed DbCommand (8ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t."ID", t."ADDRESS", t."IS_ACTIVE", t."NAME_VENUE", t."PHONE_NUMBER", t0."ID", t0."COURT_CATEGORY_ID", t0."COURT_NAME", t0."HOURLY_RATE", t0."IS_AVAILABLE", t0."VENUE_ID", t0."ID0", t0."CATEGORY", t0."DESCRIPTION"
+FROM (
+    SELECT v."ID", v."ADDRESS", v."IS_ACTIVE", v."NAME_VENUE", v."PHONE_NUMBER"
+    FROM "Venues" AS v
+    WHERE v."ID" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN (
+    SELECT c."ID", c."COURT_CATEGORY_ID", c."COURT_NAME", c."HOURLY_RATE", c."IS_AVAILABLE", c."VENUE_ID", c0."ID" AS "ID0", c0."CATEGORY", c0."DESCRIPTION"
+    FROM "Courts" AS c
+    INNER JOIN "CourtCategories" AS c0 ON c."COURT_CATEGORY_ID" = c0."ID"
+) AS t0 ON t."ID" = t0."VENUE_ID"
+ORDER BY t."ID", t0."ID"
+2026-08-23 16:12:25 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.VenueDetailResponse'.
+2026-08-23 16:12:25 [INF] Executed action CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE) in 39.8214ms
+2026-08-23 16:12:25 [INF] Executed endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 16:12:25 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/venues/1 - 200 null application/json; charset=utf-8 92.4749ms
+2026-08-23 16:12:35 [INF] Request starting HTTP/1.1 PUT http://localhost:5146/api/bookings/1/status - application/json 26
+2026-08-23 16:12:35 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '23/08/2026 06:06:18', Current time (UTC): '23/08/2026 09:12:35'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-08-23 16:12:35 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '23/08/2026 06:06:18', Current time (UTC): '23/08/2026 09:12:35'.
+2026-08-23 16:12:35 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-08-23 16:12:35 [INF] AuthenticationScheme: Bearer was challenged.
+2026-08-23 16:12:35 [INF] Request finished HTTP/1.1 PUT http://localhost:5146/api/bookings/1/status - 401 0 null 666.0536ms
+2026-08-23 16:12:52 [INF] Request starting HTTP/1.1 PUT http://localhost:5146/api/bookings/4/status - application/json 24
+2026-08-23 16:12:52 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '23/08/2026 06:06:18', Current time (UTC): '23/08/2026 09:12:52'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-08-23 16:12:52 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '23/08/2026 06:06:18', Current time (UTC): '23/08/2026 09:12:52'.
+2026-08-23 16:12:52 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-08-23 16:12:52 [INF] AuthenticationScheme: Bearer was challenged.
+2026-08-23 16:12:52 [INF] Request finished HTTP/1.1 PUT http://localhost:5146/api/bookings/4/status - 401 0 null 24.034ms
+2026-08-23 16:13:00 [INF] Request starting HTTP/1.1 POST http://localhost:5146/api/auth/login - application/json 56
+2026-08-23 16:13:00 [INF] CORS policy execution failed.
+2026-08-23 16:13:00 [INF] Request origin http://localhost:5146 does not have permission to access the resource.
+2026-08-23 16:13:00 [INF] Executing endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 16:13:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(CourtifyBE.DTOs.LoginRequest) on controller CourtifyBE.Controllers.AuthController (CourtifyBE).
+2026-08-23 16:13:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."ID", a."CREATED_AT", a."NAME", a."PASSWORD", a."USERNAME"
+FROM "Admins" AS a
+2026-08-23 16:13:00 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.LoginResponse'.
+2026-08-23 16:13:01 [INF] Executed action CourtifyBE.Controllers.AuthController.Login (CourtifyBE) in 55.0365ms
+2026-08-23 16:13:01 [INF] Executed endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 16:13:01 [INF] Request finished HTTP/1.1 POST http://localhost:5146/api/auth/login - 200 null application/json; charset=utf-8 88.7421ms
+2026-08-23 16:13:25 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5146/api/venues/1 - null null
+2026-08-23 16:13:25 [INF] CORS policy execution successful.
+2026-08-23 16:13:25 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5146/api/venues/1 - 204 null null 18.8716ms
+2026-08-23 16:13:25 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/venues/1 - null null
+2026-08-23 16:13:25 [INF] CORS policy execution successful.
+2026-08-23 16:13:25 [INF] Executing endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 16:13:25 [INF] Route matched with {action = "GetVenue", controller = "Venue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetVenue(Int64) on controller CourtifyBE.Controllers.VenueController (CourtifyBE).
+2026-08-23 16:13:25 [INF] Executed DbCommand (4ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t."ID", t."ADDRESS", t."IS_ACTIVE", t."NAME_VENUE", t."PHONE_NUMBER", t0."ID", t0."COURT_CATEGORY_ID", t0."COURT_NAME", t0."HOURLY_RATE", t0."IS_AVAILABLE", t0."VENUE_ID", t0."ID0", t0."CATEGORY", t0."DESCRIPTION"
+FROM (
+    SELECT v."ID", v."ADDRESS", v."IS_ACTIVE", v."NAME_VENUE", v."PHONE_NUMBER"
+    FROM "Venues" AS v
+    WHERE v."ID" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN (
+    SELECT c."ID", c."COURT_CATEGORY_ID", c."COURT_NAME", c."HOURLY_RATE", c."IS_AVAILABLE", c."VENUE_ID", c0."ID" AS "ID0", c0."CATEGORY", c0."DESCRIPTION"
+    FROM "Courts" AS c
+    INNER JOIN "CourtCategories" AS c0 ON c."COURT_CATEGORY_ID" = c0."ID"
+) AS t0 ON t."ID" = t0."VENUE_ID"
+ORDER BY t."ID", t0."ID"
+2026-08-23 16:13:25 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.VenueDetailResponse'.
+2026-08-23 16:13:25 [INF] Executed action CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE) in 19.7142ms
+2026-08-23 16:13:25 [INF] Executed endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 16:13:25 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/venues/1 - 200 null application/json; charset=utf-8 44.3641ms
+2026-08-23 16:13:44 [INF] Request starting HTTP/1.1 PUT http://localhost:5146/api/bookings/4/status - application/json 24
+2026-08-23 16:13:44 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '23/08/2026 06:06:18', Current time (UTC): '23/08/2026 09:13:44'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-08-23 16:13:44 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '23/08/2026 06:06:18', Current time (UTC): '23/08/2026 09:13:44'.
+2026-08-23 16:13:44 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-08-23 16:13:44 [INF] AuthenticationScheme: Bearer was challenged.
+2026-08-23 16:13:44 [INF] Request finished HTTP/1.1 PUT http://localhost:5146/api/bookings/4/status - 401 0 null 27.1774ms
+2026-08-23 16:14:25 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5146/api/venues/1 - null null
+2026-08-23 16:14:25 [INF] CORS policy execution successful.
+2026-08-23 16:14:25 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5146/api/venues/1 - 204 null null 39.518ms
+2026-08-23 16:14:25 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/venues/1 - null null
+2026-08-23 16:14:26 [INF] CORS policy execution successful.
+2026-08-23 16:14:26 [INF] Executing endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 16:14:26 [INF] Route matched with {action = "GetVenue", controller = "Venue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetVenue(Int64) on controller CourtifyBE.Controllers.VenueController (CourtifyBE).
+2026-08-23 16:14:26 [INF] Executed DbCommand (32ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t."ID", t."ADDRESS", t."IS_ACTIVE", t."NAME_VENUE", t."PHONE_NUMBER", t0."ID", t0."COURT_CATEGORY_ID", t0."COURT_NAME", t0."HOURLY_RATE", t0."IS_AVAILABLE", t0."VENUE_ID", t0."ID0", t0."CATEGORY", t0."DESCRIPTION"
+FROM (
+    SELECT v."ID", v."ADDRESS", v."IS_ACTIVE", v."NAME_VENUE", v."PHONE_NUMBER"
+    FROM "Venues" AS v
+    WHERE v."ID" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN (
+    SELECT c."ID", c."COURT_CATEGORY_ID", c."COURT_NAME", c."HOURLY_RATE", c."IS_AVAILABLE", c."VENUE_ID", c0."ID" AS "ID0", c0."CATEGORY", c0."DESCRIPTION"
+    FROM "Courts" AS c
+    INNER JOIN "CourtCategories" AS c0 ON c."COURT_CATEGORY_ID" = c0."ID"
+) AS t0 ON t."ID" = t0."VENUE_ID"
+ORDER BY t."ID", t0."ID"
+2026-08-23 16:14:26 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.VenueDetailResponse'.
+2026-08-23 16:14:26 [INF] Executed action CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE) in 221.9758ms
+2026-08-23 16:14:26 [INF] Executed endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 16:14:26 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/venues/1 - 200 null application/json; charset=utf-8 261.9273ms
+2026-08-23 16:15:25 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5146/api/venues/1 - null null
+2026-08-23 16:15:25 [INF] CORS policy execution successful.
+2026-08-23 16:15:25 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5146/api/venues/1 - 204 null null 49.2321ms
+2026-08-23 16:15:25 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/venues/1 - null null
+2026-08-23 16:15:25 [INF] CORS policy execution successful.
+2026-08-23 16:15:25 [INF] Executing endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 16:15:25 [INF] Route matched with {action = "GetVenue", controller = "Venue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetVenue(Int64) on controller CourtifyBE.Controllers.VenueController (CourtifyBE).
+2026-08-23 16:15:25 [INF] Executed DbCommand (12ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t."ID", t."ADDRESS", t."IS_ACTIVE", t."NAME_VENUE", t."PHONE_NUMBER", t0."ID", t0."COURT_CATEGORY_ID", t0."COURT_NAME", t0."HOURLY_RATE", t0."IS_AVAILABLE", t0."VENUE_ID", t0."ID0", t0."CATEGORY", t0."DESCRIPTION"
+FROM (
+    SELECT v."ID", v."ADDRESS", v."IS_ACTIVE", v."NAME_VENUE", v."PHONE_NUMBER"
+    FROM "Venues" AS v
+    WHERE v."ID" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN (
+    SELECT c."ID", c."COURT_CATEGORY_ID", c."COURT_NAME", c."HOURLY_RATE", c."IS_AVAILABLE", c."VENUE_ID", c0."ID" AS "ID0", c0."CATEGORY", c0."DESCRIPTION"
+    FROM "Courts" AS c
+    INNER JOIN "CourtCategories" AS c0 ON c."COURT_CATEGORY_ID" = c0."ID"
+) AS t0 ON t."ID" = t0."VENUE_ID"
+ORDER BY t."ID", t0."ID"
+2026-08-23 16:15:25 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.VenueDetailResponse'.
+2026-08-23 16:15:25 [INF] Executed action CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE) in 38.1409ms
+2026-08-23 16:15:25 [INF] Executed endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 16:15:25 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/venues/1 - 200 null application/json; charset=utf-8 71.1896ms
+2026-08-23 16:15:57 [INF] Request starting HTTP/1.1 POST http://localhost:5146/api/auth/login - application/json 56
+2026-08-23 16:15:57 [INF] CORS policy execution failed.
+2026-08-23 16:15:57 [INF] Request origin http://localhost:5146 does not have permission to access the resource.
+2026-08-23 16:15:57 [INF] Executing endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 16:15:57 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(CourtifyBE.DTOs.LoginRequest) on controller CourtifyBE.Controllers.AuthController (CourtifyBE).
+2026-08-23 16:15:57 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."ID", a."CREATED_AT", a."NAME", a."PASSWORD", a."USERNAME"
+FROM "Admins" AS a
+2026-08-23 16:15:57 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.LoginResponse'.
+2026-08-23 16:15:57 [INF] Executed action CourtifyBE.Controllers.AuthController.Login (CourtifyBE) in 61.0194ms
+2026-08-23 16:15:57 [INF] Executed endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 16:15:57 [INF] Request finished HTTP/1.1 POST http://localhost:5146/api/auth/login - 200 null application/json; charset=utf-8 123.7901ms
+2026-08-23 16:16:13 [INF] Request starting HTTP/1.1 PUT http://localhost:5146/api/bookings/4/status - application/json 24
+2026-08-23 16:16:13 [INF] Executing endpoint 'CourtifyBE.Controllers.BookingController.UpdateBookingStatus (CourtifyBE)'
+2026-08-23 16:16:13 [INF] Route matched with {action = "UpdateBookingStatus", controller = "Booking"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UpdateBookingStatus(Int64, CourtifyBE.DTOs.UpdateBookingStatusRequest) on controller CourtifyBE.Controllers.BookingController (CourtifyBE).
+2026-08-23 16:16:13 [INF] Executed DbCommand (10ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT b."ID", b."ADMIN_ID", b."BASE_AMOUNT", b."BOOKING_CODE", b."BOOKING_DATE", b."COURTS_ID", b."CREATED_AT", b."CUSTOMER_NAME", b."END_TIME", b."START_TIME", b."STATUS", b."TOTAL_AMOUNT", b."TOTAL_HOURS"
+FROM "Bookings" AS b
+WHERE b."ID" = @__id_0
+LIMIT 1
+2026-08-23 16:16:13 [INF] Executed DbCommand (23ms) [Parameters=[@p12='?' (DbType = Int64), @p0='?' (DbType = Int64), @p1='?' (DbType = Decimal), @p2='?', @p3='?' (DbType = DateTime), @p4='?' (DbType = Int64), @p5='?' (DbType = DateTime), @p6='?', @p7='?' (DbType = Object), @p8='?' (DbType = Object), @p9='?', @p10='?' (DbType = Decimal), @p11='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Bookings" SET "ADMIN_ID" = @p0, "BASE_AMOUNT" = @p1, "BOOKING_CODE" = @p2, "BOOKING_DATE" = @p3, "COURTS_ID" = @p4, "CREATED_AT" = @p5, "CUSTOMER_NAME" = @p6, "END_TIME" = @p7, "START_TIME" = @p8, "STATUS" = @p9, "TOTAL_AMOUNT" = @p10, "TOTAL_HOURS" = @p11
+WHERE "ID" = @p12;
+2026-08-23 16:16:13 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.UpdateBookingStatusResponse'.
+2026-08-23 16:16:13 [INF] Executed action CourtifyBE.Controllers.BookingController.UpdateBookingStatus (CourtifyBE) in 307.9565ms
+2026-08-23 16:16:13 [INF] Executed endpoint 'CourtifyBE.Controllers.BookingController.UpdateBookingStatus (CourtifyBE)'
+2026-08-23 16:16:13 [INF] Request finished HTTP/1.1 PUT http://localhost:5146/api/bookings/4/status - 200 null application/json; charset=utf-8 477.9112ms
+2026-08-23 16:16:37 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5146/api/venues/1 - null null
+2026-08-23 16:16:37 [INF] CORS policy execution successful.
+2026-08-23 16:16:37 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5146/api/venues/1 - 204 null null 10.7171ms
+2026-08-23 16:16:37 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/venues/1 - null null
+2026-08-23 16:16:37 [INF] CORS policy execution successful.
+2026-08-23 16:16:37 [INF] Executing endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 16:16:37 [INF] Route matched with {action = "GetVenue", controller = "Venue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetVenue(Int64) on controller CourtifyBE.Controllers.VenueController (CourtifyBE).
+2026-08-23 16:16:37 [INF] Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t."ID", t."ADDRESS", t."IS_ACTIVE", t."NAME_VENUE", t."PHONE_NUMBER", t0."ID", t0."COURT_CATEGORY_ID", t0."COURT_NAME", t0."HOURLY_RATE", t0."IS_AVAILABLE", t0."VENUE_ID", t0."ID0", t0."CATEGORY", t0."DESCRIPTION"
+FROM (
+    SELECT v."ID", v."ADDRESS", v."IS_ACTIVE", v."NAME_VENUE", v."PHONE_NUMBER"
+    FROM "Venues" AS v
+    WHERE v."ID" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN (
+    SELECT c."ID", c."COURT_CATEGORY_ID", c."COURT_NAME", c."HOURLY_RATE", c."IS_AVAILABLE", c."VENUE_ID", c0."ID" AS "ID0", c0."CATEGORY", c0."DESCRIPTION"
+    FROM "Courts" AS c
+    INNER JOIN "CourtCategories" AS c0 ON c."COURT_CATEGORY_ID" = c0."ID"
+) AS t0 ON t."ID" = t0."VENUE_ID"
+ORDER BY t."ID", t0."ID"
+2026-08-23 16:16:37 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.VenueDetailResponse'.
+2026-08-23 16:16:37 [INF] Executed action CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE) in 14.0267ms
+2026-08-23 16:16:37 [INF] Executed endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 16:16:37 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/venues/1 - 200 null application/json; charset=utf-8 33.8399ms
+2026-08-23 16:16:50 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5146/api/venues - null null
+2026-08-23 16:16:50 [INF] CORS policy execution successful.
+2026-08-23 16:16:50 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5146/api/venues - 204 null null 15.2185ms
+2026-08-23 16:16:50 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/venues - null null
+2026-08-23 16:16:50 [INF] CORS policy execution successful.
+2026-08-23 16:16:50 [INF] Executing endpoint 'CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE)'
+2026-08-23 16:16:50 [INF] Route matched with {action = "GetVenues", controller = "Venue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetVenues(System.String, Int32, Int32) on controller CourtifyBE.Controllers.VenueController (CourtifyBE).
+2026-08-23 16:16:50 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT v."ID", v."ADDRESS", v."IS_ACTIVE", v."NAME_VENUE", v."PHONE_NUMBER"
+FROM "Venues" AS v
+2026-08-23 16:16:50 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[CourtifyBE.DTOs.VenueResponse, CourtifyBE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-23 16:16:50 [INF] Executed action CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE) in 39.3336ms
+2026-08-23 16:16:50 [INF] Executed endpoint 'CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE)'
+2026-08-23 16:16:50 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/venues - 200 null application/json; charset=utf-8 79.9135ms
+2026-08-23 16:16:59 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5146/api/venues - null null
+2026-08-23 16:17:00 [INF] CORS policy execution successful.
+2026-08-23 16:17:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5146/api/venues - 204 null null 33.7257ms
+2026-08-23 16:17:00 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/venues - null null
+2026-08-23 16:17:00 [INF] CORS policy execution successful.
+2026-08-23 16:17:00 [INF] Executing endpoint 'CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE)'
+2026-08-23 16:17:00 [INF] Route matched with {action = "GetVenues", controller = "Venue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetVenues(System.String, Int32, Int32) on controller CourtifyBE.Controllers.VenueController (CourtifyBE).
+2026-08-23 16:17:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT v."ID", v."ADDRESS", v."IS_ACTIVE", v."NAME_VENUE", v."PHONE_NUMBER"
+FROM "Venues" AS v
+2026-08-23 16:17:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[CourtifyBE.DTOs.VenueResponse, CourtifyBE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-23 16:17:00 [INF] Executed action CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE) in 39.3632ms
+2026-08-23 16:17:00 [INF] Executed endpoint 'CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE)'
+2026-08-23 16:17:00 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/venues - 200 null application/json; charset=utf-8 85.6171ms
+2026-08-23 16:20:36 [INF] User profile is available. Using 'C:\Users\HP\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-08-23 16:20:37 [INF] Now listening on: http://localhost:5146
+2026-08-23 16:20:37 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-23 16:20:37 [INF] Hosting environment: Development
+2026-08-23 16:20:37 [INF] Content root path: C:\Users\HP\source\repos\Project AdIns\Courtify-App\Courtify_BE
+2026-08-23 16:20:38 [INF] Request starting HTTP/1.1 GET http://localhost:5146/swagger/index.html - null null
+2026-08-23 16:20:39 [INF] Request finished HTTP/1.1 GET http://localhost:5146/swagger/index.html - 200 null text/html;charset=utf-8 605.8376ms
+2026-08-23 16:20:39 [INF] Request starting HTTP/1.1 GET http://localhost:5146/_vs/browserLink - null null
+2026-08-23 16:20:39 [INF] Request starting HTTP/1.1 GET http://localhost:5146/_framework/aspnetcore-browser-refresh.js - null null
+2026-08-23 16:20:39 [INF] Request finished HTTP/1.1 GET http://localhost:5146/_framework/aspnetcore-browser-refresh.js - 200 14925 application/javascript; charset=utf-8 15.4961ms
+2026-08-23 16:20:39 [INF] Request finished HTTP/1.1 GET http://localhost:5146/_vs/browserLink - 200 null text/javascript; charset=UTF-8 107.5841ms
+2026-08-23 16:20:39 [INF] Request starting HTTP/1.1 GET http://localhost:5146/swagger/v1/swagger.json - null null
+2026-08-23 16:20:39 [INF] Request finished HTTP/1.1 GET http://localhost:5146/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 38.4862ms
+2026-08-23 16:20:43 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5146/api/auth/login - null null
+2026-08-23 16:20:43 [INF] CORS policy execution successful.
+2026-08-23 16:20:43 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5146/api/auth/login - 204 null null 22.3003ms
+2026-08-23 16:20:43 [INF] Request starting HTTP/1.1 POST http://localhost:5146/api/auth/login - application/json 47
+2026-08-23 16:20:43 [INF] CORS policy execution successful.
+2026-08-23 16:20:43 [WRN] Failed to determine the https port for redirect.
+2026-08-23 16:20:43 [INF] Executing endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 16:20:43 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(CourtifyBE.DTOs.LoginRequest) on controller CourtifyBE.Controllers.AuthController (CourtifyBE).
+2026-08-23 16:20:49 [INF] Executed DbCommand (91ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."ID", a."CREATED_AT", a."NAME", a."PASSWORD", a."USERNAME"
+FROM "Admins" AS a
+2026-08-23 16:20:49 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.LoginResponse'.
+2026-08-23 16:20:49 [INF] Executed action CourtifyBE.Controllers.AuthController.Login (CourtifyBE) in 6073.3348ms
+2026-08-23 16:20:49 [INF] Executed endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 16:20:49 [INF] Request finished HTTP/1.1 POST http://localhost:5146/api/auth/login - 499 null application/json; charset=utf-8 6397.5071ms
+2026-08-23 16:20:56 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5146/api/auth/login - null null
+2026-08-23 16:20:56 [INF] CORS policy execution successful.
+2026-08-23 16:20:56 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5146/api/auth/login - 204 null null 7.1955ms
+2026-08-23 16:20:56 [INF] Request starting HTTP/1.1 POST http://localhost:5146/api/auth/login - application/json 47
+2026-08-23 16:20:56 [INF] CORS policy execution successful.
+2026-08-23 16:20:56 [INF] Executing endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 16:20:56 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(CourtifyBE.DTOs.LoginRequest) on controller CourtifyBE.Controllers.AuthController (CourtifyBE).
+2026-08-23 16:20:56 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."ID", a."CREATED_AT", a."NAME", a."PASSWORD", a."USERNAME"
+FROM "Admins" AS a
+2026-08-23 16:20:56 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.LoginResponse'.
+2026-08-23 16:20:56 [INF] Executed action CourtifyBE.Controllers.AuthController.Login (CourtifyBE) in 137.9182ms
+2026-08-23 16:20:56 [INF] Executed endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 16:20:56 [INF] Request finished HTTP/1.1 POST http://localhost:5146/api/auth/login - 200 null application/json; charset=utf-8 163.9366ms
+2026-08-23 16:20:56 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5146/api/venues - null null
+2026-08-23 16:20:56 [INF] CORS policy execution successful.
+2026-08-23 16:20:56 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5146/api/venues - 204 null null 10.2569ms
+2026-08-23 16:20:56 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/venues - null null
+2026-08-23 16:20:56 [INF] CORS policy execution successful.
+2026-08-23 16:20:56 [INF] Executing endpoint 'CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE)'
+2026-08-23 16:20:56 [INF] Route matched with {action = "GetVenues", controller = "Venue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetVenues(System.String, Int32, Int32) on controller CourtifyBE.Controllers.VenueController (CourtifyBE).
+2026-08-23 16:20:56 [INF] Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT v."ID", v."ADDRESS", v."IS_ACTIVE", v."NAME_VENUE", v."PHONE_NUMBER"
+FROM "Venues" AS v
+2026-08-23 16:20:56 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[CourtifyBE.DTOs.VenueResponse, CourtifyBE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-23 16:20:57 [INF] Executed action CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE) in 127.9585ms
+2026-08-23 16:20:57 [INF] Executed endpoint 'CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE)'
+2026-08-23 16:20:57 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/venues - 200 null application/json; charset=utf-8 181.7269ms
+2026-08-23 16:21:11 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5146/api/venues - null null
+2026-08-23 16:21:11 [INF] CORS policy execution successful.
+2026-08-23 16:21:11 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5146/api/venues - 204 null null 21.2825ms
+2026-08-23 16:21:11 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/venues - null null
+2026-08-23 16:21:11 [INF] CORS policy execution successful.
+2026-08-23 16:21:11 [INF] Executing endpoint 'CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE)'
+2026-08-23 16:21:11 [INF] Route matched with {action = "GetVenues", controller = "Venue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetVenues(System.String, Int32, Int32) on controller CourtifyBE.Controllers.VenueController (CourtifyBE).
+2026-08-23 16:21:11 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT v."ID", v."ADDRESS", v."IS_ACTIVE", v."NAME_VENUE", v."PHONE_NUMBER"
+FROM "Venues" AS v
+2026-08-23 16:21:11 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[CourtifyBE.DTOs.VenueResponse, CourtifyBE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-23 16:21:11 [INF] Executed action CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE) in 18.7013ms
+2026-08-23 16:21:11 [INF] Executed endpoint 'CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE)'
+2026-08-23 16:21:11 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/venues - 200 null application/json; charset=utf-8 40.1504ms
+2026-08-23 16:21:19 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5146/api/venues/1 - null null
+2026-08-23 16:21:19 [INF] CORS policy execution successful.
+2026-08-23 16:21:19 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5146/api/venues/1 - 204 null null 11.5803ms
+2026-08-23 16:21:19 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/venues/1 - null null
+2026-08-23 16:21:19 [INF] CORS policy execution successful.
+2026-08-23 16:21:19 [INF] Executing endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 16:21:19 [INF] Route matched with {action = "GetVenue", controller = "Venue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetVenue(Int64) on controller CourtifyBE.Controllers.VenueController (CourtifyBE).
+2026-08-23 16:21:19 [INF] Executed DbCommand (40ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t."ID", t."ADDRESS", t."IS_ACTIVE", t."NAME_VENUE", t."PHONE_NUMBER", t0."ID", t0."COURT_CATEGORY_ID", t0."COURT_NAME", t0."HOURLY_RATE", t0."IS_AVAILABLE", t0."VENUE_ID", t0."ID0", t0."CATEGORY", t0."DESCRIPTION"
+FROM (
+    SELECT v."ID", v."ADDRESS", v."IS_ACTIVE", v."NAME_VENUE", v."PHONE_NUMBER"
+    FROM "Venues" AS v
+    WHERE v."ID" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN (
+    SELECT c."ID", c."COURT_CATEGORY_ID", c."COURT_NAME", c."HOURLY_RATE", c."IS_AVAILABLE", c."VENUE_ID", c0."ID" AS "ID0", c0."CATEGORY", c0."DESCRIPTION"
+    FROM "Courts" AS c
+    INNER JOIN "CourtCategories" AS c0 ON c."COURT_CATEGORY_ID" = c0."ID"
+) AS t0 ON t."ID" = t0."VENUE_ID"
+ORDER BY t."ID", t0."ID"
+2026-08-23 16:21:20 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.VenueDetailResponse'.
+2026-08-23 16:21:20 [INF] Executed action CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE) in 591.7234ms
+2026-08-23 16:21:20 [INF] Executed endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 16:21:20 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/venues/1 - 200 null application/json; charset=utf-8 634.9376ms
+2026-08-23 16:21:33 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5146/api/venues - null null
+2026-08-23 16:21:33 [INF] CORS policy execution successful.
+2026-08-23 16:21:33 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5146/api/venues - 204 null null 20.0775ms
+2026-08-23 16:21:33 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/venues - null null
+2026-08-23 16:21:33 [INF] CORS policy execution successful.
+2026-08-23 16:21:33 [INF] Executing endpoint 'CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE)'
+2026-08-23 16:21:33 [INF] Route matched with {action = "GetVenues", controller = "Venue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetVenues(System.String, Int32, Int32) on controller CourtifyBE.Controllers.VenueController (CourtifyBE).
+2026-08-23 16:21:33 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT v."ID", v."ADDRESS", v."IS_ACTIVE", v."NAME_VENUE", v."PHONE_NUMBER"
+FROM "Venues" AS v
+2026-08-23 16:21:33 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[CourtifyBE.DTOs.VenueResponse, CourtifyBE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-23 16:21:33 [INF] Executed action CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE) in 12.3049ms
+2026-08-23 16:21:33 [INF] Executed endpoint 'CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE)'
+2026-08-23 16:21:33 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/venues - 200 null application/json; charset=utf-8 27.5937ms
+2026-08-23 16:27:38 [INF] User profile is available. Using 'C:\Users\HP\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-08-23 16:27:39 [INF] Now listening on: http://localhost:5146
+2026-08-23 16:27:39 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-23 16:27:39 [INF] Hosting environment: Development
+2026-08-23 16:27:39 [INF] Content root path: C:\Users\HP\source\repos\Project AdIns\Courtify-App\Courtify_BE
+2026-08-23 16:27:39 [INF] Request starting HTTP/1.1 GET http://localhost:5146/swagger/index.html - null null
+2026-08-23 16:27:40 [INF] Request starting HTTP/1.1 GET http://localhost:5146/_vs/browserLink - null null
+2026-08-23 16:27:40 [INF] Request finished HTTP/1.1 GET http://localhost:5146/swagger/index.html - 200 null text/html;charset=utf-8 661.3081ms
+2026-08-23 16:27:40 [INF] Request starting HTTP/1.1 GET http://localhost:5146/_framework/aspnetcore-browser-refresh.js - null null
+2026-08-23 16:27:40 [INF] Request finished HTTP/1.1 GET http://localhost:5146/_framework/aspnetcore-browser-refresh.js - 200 14925 application/javascript; charset=utf-8 14.1696ms
+2026-08-23 16:27:40 [INF] Request finished HTTP/1.1 GET http://localhost:5146/_vs/browserLink - 200 null text/javascript; charset=UTF-8 89.2623ms
+2026-08-23 16:27:40 [INF] Request starting HTTP/1.1 GET http://localhost:5146/swagger/v1/swagger.json - null null
+2026-08-23 16:27:40 [INF] Request finished HTTP/1.1 GET http://localhost:5146/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 29.386ms
+2026-08-23 16:28:22 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5146/api/auth/login - null null
+2026-08-23 16:28:22 [INF] CORS policy execution successful.
+2026-08-23 16:28:22 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5146/api/auth/login - 204 null null 78.0941ms
+2026-08-23 16:28:22 [INF] Request starting HTTP/1.1 POST http://localhost:5146/api/auth/login - application/json 47
+2026-08-23 16:28:22 [INF] CORS policy execution successful.
+2026-08-23 16:28:22 [WRN] Failed to determine the https port for redirect.
+2026-08-23 16:28:22 [INF] Executing endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 16:28:22 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(CourtifyBE.DTOs.LoginRequest) on controller CourtifyBE.Controllers.AuthController (CourtifyBE).
+2026-08-23 16:28:24 [INF] Request starting HTTP/1.1 POST http://localhost:5146/api/auth/login - application/json 47
+2026-08-23 16:28:24 [INF] CORS policy execution successful.
+2026-08-23 16:28:24 [INF] Executing endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 16:28:24 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(CourtifyBE.DTOs.LoginRequest) on controller CourtifyBE.Controllers.AuthController (CourtifyBE).
+2026-08-23 16:28:26 [INF] Executed DbCommand (58ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."ID", a."CREATED_AT", a."NAME", a."PASSWORD", a."USERNAME"
+FROM "Admins" AS a
+2026-08-23 16:28:26 [INF] Executed DbCommand (57ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."ID", a."CREATED_AT", a."NAME", a."PASSWORD", a."USERNAME"
+FROM "Admins" AS a
+2026-08-23 16:28:26 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.LoginResponse'.
+2026-08-23 16:28:26 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.LoginResponse'.
+2026-08-23 16:28:26 [INF] Executed action CourtifyBE.Controllers.AuthController.Login (CourtifyBE) in 1899.5953ms
+2026-08-23 16:28:26 [INF] Executed action CourtifyBE.Controllers.AuthController.Login (CourtifyBE) in 3756.2152ms
+2026-08-23 16:28:26 [INF] Executed endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 16:28:26 [INF] Executed endpoint 'CourtifyBE.Controllers.AuthController.Login (CourtifyBE)'
+2026-08-23 16:28:26 [INF] Request finished HTTP/1.1 POST http://localhost:5146/api/auth/login - 200 null application/json; charset=utf-8 4173.0282ms
+2026-08-23 16:28:26 [INF] Request finished HTTP/1.1 POST http://localhost:5146/api/auth/login - 200 null application/json; charset=utf-8 1960.5205ms
+2026-08-23 16:28:26 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5146/api/venues - null null
+2026-08-23 16:28:26 [INF] CORS policy execution successful.
+2026-08-23 16:28:26 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5146/api/venues - 204 null null 9.1568ms
+2026-08-23 16:28:26 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/venues - null null
+2026-08-23 16:28:26 [INF] CORS policy execution successful.
+2026-08-23 16:28:26 [INF] Executing endpoint 'CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE)'
+2026-08-23 16:28:26 [INF] Route matched with {action = "GetVenues", controller = "Venue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetVenues(System.String, Int32, Int32) on controller CourtifyBE.Controllers.VenueController (CourtifyBE).
+2026-08-23 16:28:26 [INF] Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT v."ID", v."ADDRESS", v."IS_ACTIVE", v."NAME_VENUE", v."PHONE_NUMBER"
+FROM "Venues" AS v
+2026-08-23 16:28:27 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[CourtifyBE.DTOs.VenueResponse, CourtifyBE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-23 16:28:27 [INF] Executed action CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE) in 254.1961ms
+2026-08-23 16:28:27 [INF] Executed endpoint 'CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE)'
+2026-08-23 16:28:27 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/venues - 200 null application/json; charset=utf-8 306.153ms
+2026-08-23 16:28:35 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5146/api/venues/1 - null null
+2026-08-23 16:28:35 [INF] CORS policy execution successful.
+2026-08-23 16:28:35 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5146/api/venues/1 - 204 null null 25.328ms
+2026-08-23 16:28:35 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/venues/1 - null null
+2026-08-23 16:28:35 [INF] CORS policy execution successful.
+2026-08-23 16:28:35 [INF] Executing endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 16:28:35 [INF] Route matched with {action = "GetVenue", controller = "Venue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetVenue(Int64) on controller CourtifyBE.Controllers.VenueController (CourtifyBE).
+2026-08-23 16:28:35 [INF] Executed DbCommand (49ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t."ID", t."ADDRESS", t."IS_ACTIVE", t."NAME_VENUE", t."PHONE_NUMBER", t0."ID", t0."COURT_CATEGORY_ID", t0."COURT_NAME", t0."HOURLY_RATE", t0."IS_AVAILABLE", t0."VENUE_ID", t0."ID0", t0."CATEGORY", t0."DESCRIPTION"
+FROM (
+    SELECT v."ID", v."ADDRESS", v."IS_ACTIVE", v."NAME_VENUE", v."PHONE_NUMBER"
+    FROM "Venues" AS v
+    WHERE v."ID" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN (
+    SELECT c."ID", c."COURT_CATEGORY_ID", c."COURT_NAME", c."HOURLY_RATE", c."IS_AVAILABLE", c."VENUE_ID", c0."ID" AS "ID0", c0."CATEGORY", c0."DESCRIPTION"
+    FROM "Courts" AS c
+    INNER JOIN "CourtCategories" AS c0 ON c."COURT_CATEGORY_ID" = c0."ID"
+) AS t0 ON t."ID" = t0."VENUE_ID"
+ORDER BY t."ID", t0."ID"
+2026-08-23 16:28:36 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.VenueDetailResponse'.
+2026-08-23 16:28:36 [INF] Executed action CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE) in 653.6159ms
+2026-08-23 16:28:36 [INF] Executed endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 16:28:36 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/venues/1 - 200 null application/json; charset=utf-8 699.033ms
+2026-08-23 16:29:03 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5146/api/venues - null null
+2026-08-23 16:29:03 [INF] CORS policy execution successful.
+2026-08-23 16:29:03 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5146/api/venues - 204 null null 21.0728ms
+2026-08-23 16:29:03 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/venues - null null
+2026-08-23 16:29:03 [INF] CORS policy execution successful.
+2026-08-23 16:29:03 [INF] Executing endpoint 'CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE)'
+2026-08-23 16:29:03 [INF] Route matched with {action = "GetVenues", controller = "Venue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetVenues(System.String, Int32, Int32) on controller CourtifyBE.Controllers.VenueController (CourtifyBE).
+2026-08-23 16:29:03 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT v."ID", v."ADDRESS", v."IS_ACTIVE", v."NAME_VENUE", v."PHONE_NUMBER"
+FROM "Venues" AS v
+2026-08-23 16:29:03 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[CourtifyBE.DTOs.VenueResponse, CourtifyBE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-23 16:29:03 [INF] Executed action CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE) in 27.1939ms
+2026-08-23 16:29:03 [INF] Executed endpoint 'CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE)'
+2026-08-23 16:29:03 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/venues - 200 null application/json; charset=utf-8 61.6888ms
+2026-08-23 16:31:42 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5146/api/venues - null null
+2026-08-23 16:31:42 [INF] CORS policy execution successful.
+2026-08-23 16:31:42 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5146/api/venues - 204 null null 15.5209ms
+2026-08-23 16:31:42 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/venues - null null
+2026-08-23 16:31:42 [INF] CORS policy execution successful.
+2026-08-23 16:31:42 [INF] Executing endpoint 'CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE)'
+2026-08-23 16:31:42 [INF] Route matched with {action = "GetVenues", controller = "Venue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetVenues(System.String, Int32, Int32) on controller CourtifyBE.Controllers.VenueController (CourtifyBE).
+2026-08-23 16:31:42 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT v."ID", v."ADDRESS", v."IS_ACTIVE", v."NAME_VENUE", v."PHONE_NUMBER"
+FROM "Venues" AS v
+2026-08-23 16:31:43 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[CourtifyBE.DTOs.VenueResponse, CourtifyBE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-23 16:31:43 [INF] Executed action CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE) in 56.3478ms
+2026-08-23 16:31:43 [INF] Executed endpoint 'CourtifyBE.Controllers.VenueController.GetVenues (CourtifyBE)'
+2026-08-23 16:31:43 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/venues - 200 null application/json; charset=utf-8 73.372ms
+2026-08-23 16:31:44 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5146/api/venues/1 - null null
+2026-08-23 16:31:44 [INF] CORS policy execution successful.
+2026-08-23 16:31:44 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5146/api/venues/1 - 204 null null 16.9298ms
+2026-08-23 16:31:44 [INF] Request starting HTTP/1.1 GET http://localhost:5146/api/venues/1 - null null
+2026-08-23 16:31:44 [INF] CORS policy execution successful.
+2026-08-23 16:31:44 [INF] Executing endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 16:31:44 [INF] Route matched with {action = "GetVenue", controller = "Venue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetVenue(Int64) on controller CourtifyBE.Controllers.VenueController (CourtifyBE).
+2026-08-23 16:31:44 [INF] Executed DbCommand (19ms) [Parameters=[@__id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t."ID", t."ADDRESS", t."IS_ACTIVE", t."NAME_VENUE", t."PHONE_NUMBER", t0."ID", t0."COURT_CATEGORY_ID", t0."COURT_NAME", t0."HOURLY_RATE", t0."IS_AVAILABLE", t0."VENUE_ID", t0."ID0", t0."CATEGORY", t0."DESCRIPTION"
+FROM (
+    SELECT v."ID", v."ADDRESS", v."IS_ACTIVE", v."NAME_VENUE", v."PHONE_NUMBER"
+    FROM "Venues" AS v
+    WHERE v."ID" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN (
+    SELECT c."ID", c."COURT_CATEGORY_ID", c."COURT_NAME", c."HOURLY_RATE", c."IS_AVAILABLE", c."VENUE_ID", c0."ID" AS "ID0", c0."CATEGORY", c0."DESCRIPTION"
+    FROM "Courts" AS c
+    INNER JOIN "CourtCategories" AS c0 ON c."COURT_CATEGORY_ID" = c0."ID"
+) AS t0 ON t."ID" = t0."VENUE_ID"
+ORDER BY t."ID", t0."ID"
+2026-08-23 16:31:44 [INF] Executing OkObjectResult, writing value of type 'CourtifyBE.DTOs.VenueDetailResponse'.
+2026-08-23 16:31:44 [INF] Executed action CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE) in 47.1974ms
+2026-08-23 16:31:44 [INF] Executed endpoint 'CourtifyBE.Controllers.VenueController.GetVenue (CourtifyBE)'
+2026-08-23 16:31:44 [INF] Request finished HTTP/1.1 GET http://localhost:5146/api/venues/1 - 200 null application/json; charset=utf-8 73.8046ms

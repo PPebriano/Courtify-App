@@ -12,9 +12,9 @@ namespace CourtifyBE.Services
         private readonly IRepository<BookingAddOns> _bookingAddOnsRepository;
 
         public BookingService(
-            IRepository<Bookings> bookingRepository, 
-            IRepository<Courts> courtRepository, 
-            IRepository<EquipmentAddOns> equipmentRepository, 
+            IRepository<Bookings> bookingRepository,
+            IRepository<Courts> courtRepository,
+            IRepository<EquipmentAddOns> equipmentRepository,
             IRepository<BookingAddOns> bookingAddOnsRepository)
         {
             _bookingRepository = bookingRepository;
@@ -42,36 +42,35 @@ namespace CourtifyBE.Services
             return bookings.ToList();
         }
 
-        public async Task<BookingDetailResponse> CreateFullTransactionAsync(CreateBookingRequest request, long adminId)
+        public async Task<BookingListResponse> CreateFullTransactionAsync(CreateBookingRequest request, long currentAdminId)
         {
-            // Validasi 
             var court = await _courtRepository.GetByIdAsync(request.CourtId);
-            if (court == null) throw new Exception("Lapangan tidak ada");
+            if (court == null) throw new Exception("Lapangan tidak ditemukan");
 
             int total_hours = (int)(request.EndTime - request.StartTime).TotalHours;
             if (total_hours <= 0) throw new Exception("Waktu sewa tidak valid");
 
-            // Biaya dasar lapangan
             decimal baseAmount = 0;
             TimeSpan currentHour = request.StartTime;
 
             bool isWeekend = request.BookingDate.DayOfWeek == DayOfWeek.Saturday ||
-                request.BookingDate.DayOfWeek == DayOfWeek.Sunday;
+                             request.BookingDate.DayOfWeek == DayOfWeek.Sunday;
 
             for (int i = 0; i < total_hours; i++)
             {
-                decimal hourlyRate = 0;
+                decimal hourlyRate = court.HourlyRate;
+
                 if (currentHour >= TimeSpan.FromHours(8) && currentHour < TimeSpan.FromHours(17))
                 {
-                    hourlyRate = 100000;
+                    hourlyRate = court.HourlyRate;
                 }
                 else if (currentHour >= TimeSpan.FromHours(17) && currentHour < TimeSpan.FromHours(22))
                 {
-                    hourlyRate = 150000;
+                    hourlyRate = court.HourlyRate + (court.HourlyRate * 0.20m);
                 }
                 else
                 {
-                    throw new Exception($"Jam sewa diluar jam operasional");
+                    throw new Exception("Jam sewa diluar jam operasional");
                 }
 
                 if (isWeekend)
@@ -86,18 +85,15 @@ namespace CourtifyBE.Services
             if (total_hours > 3)
             {
                 baseAmount -= 50000;
-
                 if (baseAmount < 0) baseAmount = 0;
             }
 
             decimal totalAmount = baseAmount;
-
-            // Generate KODE BOOKING
             string bookingCode = "BK-" + Guid.NewGuid().ToString().Substring(0, 8).ToUpper();
 
             var booking = new Bookings
             {
-                AdminId = adminId,
+                AdminId = currentAdminId,
                 CourtId = request.CourtId,
                 CustomerName = request.CustomerName,
                 BookingDate = request.BookingDate,
@@ -114,7 +110,7 @@ namespace CourtifyBE.Services
             await _bookingRepository.AddAsync(booking);
             await _bookingRepository.SaveChangesAsync();
 
-            if (request.AddOns != null & request.AddOns.Any())
+            if (request.AddOns != null && request.AddOns.Any())
             {
                 foreach (var addOnReq in request.AddOns)
                 {
@@ -125,7 +121,7 @@ namespace CourtifyBE.Services
                     }
                     if (equipment.Stock < addOnReq.Quantity)
                     {
-                        throw new Exception($"Stoke item {equipment.ItemName} tidak mencukupi");
+                        throw new Exception($"Stok item {equipment.ItemName} tidak mencukupi");
                     }
 
                     equipment.Stock -= addOnReq.Quantity;
@@ -151,21 +147,22 @@ namespace CourtifyBE.Services
             _bookingRepository.Update(booking);
             await _bookingRepository.SaveChangesAsync();
 
-            return new BookingDetailResponse
+            return ToListResponse(booking);
+        }
+
+        public async Task<UpdateBookingStatusResponse?> UpdateStatusAsync(long id, BookingStatus newStatus)
+        {
+            var booking = await _bookingRepository.GetByIdAsync(id);
+            if (booking == null) return null;
+
+            booking.Status = newStatus;
+            _bookingRepository.Update(booking);
+            await _bookingRepository.SaveChangesAsync();
+
+            return new UpdateBookingStatusResponse
             {
-                Id = booking.Id,
-                AdminId = booking.AdminId,
-                CourtId = booking.CourtId,
-                CustomerName = booking.CustomerName,
-                BookingCode = bookingCode,
-                BookingDate = booking.BookingDate,
-                StartTime = booking.StartTime,
-                EndTime = booking.EndTime,
-                TotalHours = booking.TotalHours,
-                BaseAmount = booking.BaseAmount,
-                TotalAmount = booking.TotalAmount,
-                Status = booking.Status,
-                CreatedAt = booking.CreatedAt
+                BookingId = booking.Id,
+                Status = "Berhasil memperbarui status terkini"
             };
         }
 
@@ -179,6 +176,26 @@ namespace CourtifyBE.Services
             await _bookingRepository.SaveChangesAsync();
 
             return true;
+        }
+
+        public BookingListResponse ToListResponse(Bookings bookings)
+        {
+            return new BookingListResponse
+            {
+                Id = bookings.Id,
+                BookingCode = bookings.BookingCode,
+                AdminId = bookings.AdminId,
+                CourtId = bookings.CourtId,
+                CustomerName = bookings.CustomerName,
+                BookingDate = bookings.BookingDate,
+                StartTime = bookings.StartTime,
+                EndTime = bookings.EndTime,
+                TotalHours = bookings.TotalHours,
+                BaseAmount = bookings.BaseAmount,
+                TotalAmount = bookings.TotalAmount,
+                Status = bookings.Status,
+                CreatedAt = bookings.CreatedAt
+            };
         }
 
         public BookingDetailResponse ToDetailResponse(Bookings bookings)
@@ -196,12 +213,19 @@ namespace CourtifyBE.Services
                 TotalHours = bookings.TotalHours,
                 BaseAmount = bookings.BaseAmount,
                 TotalAmount = bookings.TotalAmount,
-                Status = BookingStatus.ACTIVE,
-                CreatedAt = bookings.CreatedAt
-
+                Status = bookings.Status,
+                CreatedAt = bookings.CreatedAt,
+                BookingAddOns = bookings.BookingAddOns?.Select(ba => new BookingAddOnResponse
+                {
+                    Id = ba.Id,
+                    BookingId = ba.BookingId,
+                    EquipmentAddOnsId = ba.EquipmentId,
+                    Quantity = ba.Quantity,
+                    UnitPrice = ba.UnitPrice,
+                    Subtotal = ba.SubTotal,
+                    EquipmentName = ba.Equipment?.ItemName ?? string.Empty
+                }).ToList() ?? new List<BookingAddOnResponse>()
             };
         }
-
-
     }
 }
