@@ -6,6 +6,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   FormBuilder,
   ReactiveFormsModule,
@@ -24,6 +25,7 @@ import { BookingsService } from '../../../../core/services/bookings.service';
 import { AuthService } from '../../../../core/services/auth.service';
 import { BookingRequestType } from '../../../../core/models/request/booking-request-type';
 import { EquipmentAddOnsRequestType } from '../../../../core/models/request/equipment-add-ons-request-type';
+import { APP_ROUTES } from '../../../../shared/constants/routes';
 
 @Component({
   selector: 'app-booking-dialog',
@@ -37,6 +39,7 @@ export class BookingDialogComponent implements OnInit {
   private addOnsService = inject(AddOnsService);
   private bookingsService = inject(BookingsService);
   private authService = inject(AuthService);
+  private router = inject(Router);
 
   @Input({ required: true }) court!: CourtResponseType;
   @Output() close = new EventEmitter<void>();
@@ -104,14 +107,18 @@ export class BookingDialogComponent implements OnInit {
     const val = this.bookForm.value;
     const adminIdFromAuth = Number(this.authService.getUserId()) || 0;
 
+    const rawDate = val.bookingDate
+      ? new Date(val.bookingDate).toISOString()
+      : '';
+
     return {
       adminId: adminIdFromAuth,
-      courtId: this.court.courtId,
+      courtId: Number(this.court.courtId),
       customerName: val.customerName ?? '',
-      bookingDate: val.bookingDate ?? '',
-      startTime: val.startTime ?? '',
-      endTime: val.endTime ?? '',
-      addons: this.getSelectedAddons(),
+      bookingDate: rawDate,
+      startTime: this.formatTimeWithSeconds(val.startTime ?? ''),
+      endTime: this.formatTimeWithSeconds(val.endTime ?? ''),
+      addOns: this.getSelectedAddons(),
     };
   }
 
@@ -127,7 +134,10 @@ export class BookingDialogComponent implements OnInit {
 
   private sendBookingRequest(payload: BookingRequestType) {
     this.bookingsService.booking(payload).subscribe({
-      next: () => this.handleSuccess(),
+      next: () => {
+        this.handleSuccess();
+        this.router.navigate([APP_ROUTES.BOOK], { replaceUrl: true });
+      },
       error: (err) => this.handleError(err),
     });
   }
@@ -147,5 +157,10 @@ export class BookingDialogComponent implements OnInit {
   private resetMessages() {
     this.errorMessage = null;
     this.successMessage = null;
+  }
+
+  private formatTimeWithSeconds(timeStr: string): string {
+    if (!timeStr) return timeStr;
+    return timeStr.split(':').length === 2 ? `${timeStr}:00` : timeStr;
   }
 }

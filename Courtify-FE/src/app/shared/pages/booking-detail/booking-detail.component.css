@@ -134,36 +134,54 @@
     }
   }
 }
-
 .payment-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
   .price-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 0.9rem;
     color: #94a3b8;
-    margin-bottom: 0.5rem;
+
+    .price-value {
+      color: #e2e8f0;
+      font-weight: 500;
+      font-family: 'Courier New', Courier, monospace;
+    }
 
     &.grand-total {
-      font-size: 1.1rem;
-      font-weight: 700;
+      margin-top: 0.25rem;
+      padding: 0.85rem 1rem;
+      background-color: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 8px;
+      font-size: 1.05rem;
+      font-weight: 600;
       color: #ffffff;
-      margin-bottom: 0;
-      margin-top: 0.5rem;
+
+      .total-label {
+        color: #ffffff;
+        font-weight: 600;
+      }
 
       .total-amount {
         color: #10b981;
+        font-weight: 700;
+        font-size: 1.2rem;
+        font-family: 'Courier New', Courier, monospace;
       }
     }
   }
 
   .divider {
     height: 1px;
-    background-color: rgba(255, 255, 255, 0.1);
-    margin: 0.75rem 0;
+    background-color: rgba(255, 255, 255, 0.08);
+    margin: 0.25rem 0;
   }
 }
-
 .action-footer {
   margin-top: 1rem;
   display: flex;

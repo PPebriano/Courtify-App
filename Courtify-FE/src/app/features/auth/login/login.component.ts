@@ -32,10 +32,8 @@ export class LoginComponent {
     this.authService.login(payload).subscribe({
       next: (response) => {
         console.log(response);
-        this.authService.setTokenAndUserId(
-          response.token,
-          response.admin.adminId,
-        );
+        this.authService.setTokenAndUserId(response.token, response.admin.id);
+        this.authService.isLoggedInSignal.set(true);
         this.router.navigate([APP_ROUTES.VENUES]);
       },
       error: (err) => {

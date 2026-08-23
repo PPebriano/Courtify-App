@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { LoginResponseType } from '../models/response/login-response-type';
 import { LoginRequestType } from '../models/request/login-request-type';
 import { environtment } from '../environments/environment';
@@ -13,9 +13,11 @@ export class AuthService {
   private tokenKey = 'authToken';
   private userId = 'userId';
 
+  isLoggedInSignal = signal<boolean>(this.isLoggedIn());
+
   login(payload: LoginRequestType) {
     return this.http.post<LoginResponseType>(
-      `${environtment.apiUrl}/api/login`,
+      `${environtment.apiUrl}/api/auth/login`,
       payload,
     );
   }
@@ -39,5 +41,6 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem(this.tokenKey);
+    localStorage.removeItem(this.userId);
   }
 }

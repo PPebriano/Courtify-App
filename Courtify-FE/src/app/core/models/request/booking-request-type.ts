@@ -7,5 +7,5 @@ export type BookingRequestType = {
   bookingDate: string;
   startTime: string;
   endTime: string;
-  addons: EquipmentAddOnsRequestType[];
+  addOns: EquipmentAddOnsRequestType[];
 };
