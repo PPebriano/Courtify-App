@@ -20,7 +20,7 @@ namespace CourtifyBE.Models
 
         [ForeignKey(nameof(Courts))]
         [Column("COURTS_ID")]
-        public long CourtsId { get; set; }
+        public long CourtId { get; set; }
         public Courts? Courts { get; set; }
 
         [Required]
@@ -53,7 +53,7 @@ namespace CourtifyBE.Models
 
         [Required]
         [Column("STATUS")]
-        public string Status { get; set; } = string.Empty;
+        public BookingStatus Status { get; set; } = BookingStatus.ACTIVE;
 
         [Required]
         [Column("CREATED_AT")]

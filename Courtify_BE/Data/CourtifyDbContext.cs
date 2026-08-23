@@ -30,6 +30,11 @@ namespace CourtifyBE.Data
                 .Property(pr => pr.Status)
                 .HasConversion<string>();
 
+            // Enum Booking Status
+            modelBuilder.Entity<Bookings>()
+                .Property(b => b.Status)
+                .HasConversion<string>();
+
             modelBuilder.Entity<Bookings>()
                 .HasOne(a => a.Admin)
                 .WithMany(b => b.Bookings)
@@ -48,7 +53,7 @@ namespace CourtifyBE.Data
             modelBuilder.Entity<Bookings>()
                 .HasOne(c => c.Courts)
                 .WithMany(b => b.Bookings)
-                .HasForeignKey(ci => ci.CourtsId)
+                .HasForeignKey(ci => ci.CourtId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<PaymentReceipt>()
