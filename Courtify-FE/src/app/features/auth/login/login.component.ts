@@ -21,6 +21,7 @@ export class LoginComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
 
+  showError: boolean = false;
   loginForm = this.formBuilder.group({
     username: ['', [usernameValidator]],
     password: ['', [passwordValidator]],
@@ -31,8 +32,14 @@ export class LoginComponent {
     this.authService.login(payload).subscribe({
       next: (response) => {
         console.log(response);
-        this.authService.setToken(response.token);
+        this.authService.setTokenAndUserId(
+          response.token,
+          response.admin.adminId,
+        );
         this.router.navigate([APP_ROUTES.VENUES]);
+      },
+      error: (err) => {
+        this.showError = true;
       },
     });
   }

@@ -1,6 +1,6 @@
 export type VenueResponseType = {
   id: number;
-  venueName: string;
+  nameVenue: string;
   address: string;
   phoneNumber: string;
   isActive: boolean;

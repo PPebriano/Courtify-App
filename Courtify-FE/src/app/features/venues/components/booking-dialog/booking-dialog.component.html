@@ -1,0 +1,168 @@
+<div class="modal-overlay" (click)="close.emit()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div>
+        <h2 class="modal-title">Book {{ court.courtName }}</h2>
+        <p class="modal-subtitle">Court reservation and Add Ons Form</p>
+      </div>
+      <button class="btn-close" (click)="close.emit()">✕</button>
+    </div>
+
+    <form [formGroup]="bookForm" (ngSubmit)="onSubmit()" class="modal-body">
+      @if (successMessage) {
+        <div class="alert-success">
+          {{ successMessage }}
+        </div>
+      }
+
+      @if (errorMessage) {
+        <div class="alert-error">
+          {{ errorMessage }}
+        </div>
+      }
+
+      <div class="form-group">
+        <label for="customerName">Customer Name</label>
+        <input
+          id="customerName"
+          type="text"
+          formControlName="customerName"
+          placeholder="Masukkan nama pelanggan"
+          [class.input-error]="
+            bookForm.get('customerName')?.invalid &&
+            bookForm.get('customerName')?.touched
+          "
+        />
+        @if (
+          bookForm.get("customerName")?.hasError("customerNameValidator") &&
+          bookForm.get("customerName")?.touched
+        ) {
+          <small class="error-text">
+            {{
+              bookForm.get("customerName")?.getError("customerNameValidator")
+                ?.message
+            }}
+          </small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="bookingDate">Booking Date</label>
+        <input
+          id="bookingDate"
+          type="date"
+          formControlName="bookingDate"
+          [class.input-error]="
+            bookForm.get('bookingDate')?.invalid &&
+            bookForm.get('bookingDate')?.touched
+          "
+        />
+        @if (
+          bookForm.get("bookingDate")?.hasError("bookingDateValidator") &&
+          bookForm.get("bookingDate")?.touched
+        ) {
+          <small class="error-text">
+            {{
+              bookForm.get("bookingDate")?.getError("bookingDateValidator")
+                ?.message
+            }}
+          </small>
+        }
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="startTime">Start Time</label>
+          <input
+            id="startTime"
+            type="time"
+            formControlName="startTime"
+            [class.input-error]="
+              (bookForm.hasError('timeOperationalError') ||
+                bookForm.hasError('timeSequenceError')) &&
+              (bookForm.get('startTime')?.touched ||
+                bookForm.get('endTime')?.touched)
+            "
+          />
+        </div>
+        <div class="form-group">
+          <label for="endTime">End Time</label>
+          <input
+            id="endTime"
+            type="time"
+            formControlName="endTime"
+            [class.input-error]="
+              (bookForm.hasError('timeOperationalError') ||
+                bookForm.hasError('timeSequenceError')) &&
+              (bookForm.get('startTime')?.touched ||
+                bookForm.get('endTime')?.touched)
+            "
+          />
+        </div>
+      </div>
+
+      @if (
+        bookForm.hasError("timeOperationalError") &&
+        (bookForm.get("startTime")?.touched || bookForm.get("endTime")?.touched)
+      ) {
+        <small class="error-text">
+          {{ bookForm.getError("timeOperationalError")?.message }}
+        </small>
+      }
+
+      @if (
+        bookForm.hasError("timeSequenceError") &&
+        (bookForm.get("startTime")?.touched || bookForm.get("endTime")?.touched)
+      ) {
+        <small class="error-text">
+          {{ bookForm.getError("timeSequenceError")?.message }}
+        </small>
+      }
+
+      <div class="addons-section" formArrayName="addons">
+        <h3 class="addons-title">Equipment Add-Ons</h3>
+        <div class="addons-list">
+          @for (addon of equipmentAddOns; track addon.id; let i = $index) {
+            <div class="addon-card" [formGroupName]="i">
+              <label class="checkbox-container">
+                <input type="checkbox" formControlName="selected" />
+                <span class="addon-name">{{ addon.itemName }}</span>
+                <span class="addon-price">Rp {{ addon.rentalFee }}</span>
+              </label>
+
+              @if (addonsFormArray.at(i).get("selected")?.value) {
+                <div class="qty-wrapper">
+                  <span class="qty-label">Qty:</span>
+                  <input
+                    type="number"
+                    formControlName="quantity"
+                    min="1"
+                    class="qty-input"
+                  />
+                </div>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button
+          type="button"
+          class="btn-cancel"
+          (click)="close.emit()"
+          [disabled]="isSubmitting"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          class="btn-submit"
+          [disabled]="bookForm.invalid || isSubmitting"
+        >
+          {{ isSubmitting ? "Processing..." : "Place Booking" }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

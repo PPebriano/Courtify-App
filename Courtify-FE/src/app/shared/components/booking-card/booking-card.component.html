@@ -1,0 +1,49 @@
+<div class="booking-card" [routerLink]="['/', route, booking.id]">
+  <!-- ILLUSTRATION IMAGE -->
+  <div class="image-wrapper">
+    <img [src]="illustrationImage" alt="illustration" />
+  </div>
+
+  <!-- CONTENT -->
+  <div class="booking-info-container">
+    <!-- HEADER BOOKING CODE AND CUSTOMER NAME -->
+    <div class="booking-header">
+      <span class="booking-code">{{ booking.bookingCode }}</span>
+      <h3 class="customer-name">{{ booking.customerName }}</h3>
+    </div>
+
+    <!-- DETAILS GRID -->
+    <div class="info-grid">
+      <div class="info-item">
+        <span class="info-label">Booking Date</span>
+        <span class="info-value">{{ booking.bookingDate }}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Time & Duration</span>
+        <span class="info-value"
+          >{{ booking.startTime }} - {{ booking.endTime }}
+        </span>
+        <span class="info-label">({{ booking.totalHours }} Hours)</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- PAYMENT DETAILS -->
+    <div class="price-section">
+      <div class="price-row">
+        <span>Base Amount</span>
+        <span class="base-price">Rp {{ booking.baseAmount }}</span>
+      </div>
+      <div class="price-row total">
+        <span>Total Amount</span>
+        <span class="total-price">Rp {{ booking.totalAmount }}</span>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="booking-footer">
+      <span class="created-at">Created at: {{ booking.createdAt }}</span>
+    </div>
+  </div>
+</div>

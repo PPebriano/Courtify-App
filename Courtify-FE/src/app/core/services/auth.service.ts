@@ -8,25 +8,29 @@ import { environtment } from '../environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
-  private tokenKey = 'authToken';
   http = inject(HttpClient);
 
-  // WAITING FOR AN API
+  private tokenKey = 'authToken';
+  private userId = 'userId';
+
   login(payload: LoginRequestType) {
     return this.http.post<LoginResponseType>(
-      `${environtment.apiUrl}/api/auth/login`,
-      
-        payload
-      
+      `${environtment.apiUrl}/api/login`,
+      payload,
     );
   }
 
-  setToken(token: string) {
+  setTokenAndUserId(token: string, userId: number) {
     localStorage.setItem(this.tokenKey, token);
+    localStorage.setItem(this.userId, userId.toString());
   }
 
   getToken() {
     return localStorage.getItem(this.tokenKey);
+  }
+
+  getUserId() {
+    return localStorage.getItem(this.userId);
   }
 
   isLoggedIn() {

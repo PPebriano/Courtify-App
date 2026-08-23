@@ -12,7 +12,7 @@ export const routes: Routes = [
   },
   {
     path: APP_ROUTES.VENUES,
-    // canActivate: [authGuard],
+    canActivate: [authGuard],
     children: [
       {
         path: '',
@@ -32,18 +32,42 @@ export const routes: Routes = [
   },
   {
     path: APP_ROUTES.BOOK,
-    // canActivate: [authGuard],
-    loadComponent: () =>
-      import('./features/booking/pages/booking-feed/booking-feed.component').then(
-        (m) => m.BookingFeedComponent,
-      ),
+    canActivate: [authGuard],
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import('./features/booking/pages/booking-feed/booking-feed.component').then(
+            (m) => m.BookingFeedComponent,
+          ),
+      },
+      {
+        path: ':bookId',
+        loadComponent: () =>
+          import('./shared/pages/booking-detail/booking-detail.component').then(
+            (m) => m.BookingDetailComponent,
+          ),
+      },
+    ],
   },
   {
     path: APP_ROUTES.HISTORY,
-    // canActivate: [authGuard],
-    loadComponent: () =>
-      import('./features/bookings-history/pages/booking-history-feed/booking-history-feed.component').then(
-        (m) => m.BookingHistoryFeedComponent,
-      ),
+    canActivate: [authGuard],
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import('./features/bookings-history/pages/booking-history-feed/booking-history-feed.component').then(
+            (m) => m.BookingHistoryFeedComponent,
+          ),
+      },
+      {
+        path: ':bookId',
+        loadComponent: () =>
+          import('./shared/pages/booking-detail/booking-detail.component').then(
+            (m) => m.BookingDetailComponent,
+          ),
+      },
+    ],
   },
 ];

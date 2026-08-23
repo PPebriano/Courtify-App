@@ -39,7 +39,7 @@
           id="password"
           type="password"
           formControlName="password"
-          placeholder="Msukkan password and"
+          placeholder="Msukkan password anda"
         />
 
         @if (
@@ -58,6 +58,11 @@
       <button type="submit" class="btn-submit" [disabled]="!loginForm.valid">
         Masuk
       </button>
+      @if (showError) {
+        <small class="error-text">
+          Username atau password masih salah input
+        </small>
+      }
     </form>
   </div>
 </div>

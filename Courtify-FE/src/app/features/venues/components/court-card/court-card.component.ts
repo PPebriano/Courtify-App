@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CourtResponseType } from '../../../../core/models/response/court-response-type';
 
 @Component({
@@ -11,4 +11,9 @@ import { CourtResponseType } from '../../../../core/models/response/court-respon
 export class CourtCardComponent {
   @Input({ required: true }) court!: CourtResponseType;
   @Input({ required: true }) illustrationImage?: string;
+  @Output() selectedCourt = new EventEmitter<CourtResponseType>();
+
+  onBookClicked() {
+    this.selectedCourt.emit(this.court);
+  }
 }

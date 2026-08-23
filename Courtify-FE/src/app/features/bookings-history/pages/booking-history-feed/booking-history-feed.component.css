@@ -1,5 +1,23 @@
 .booking-history-container {
   background-color: #0d0f12;
   color: #ffffff;
-  min-height: 100vh;
+}
+
+.booking-history-section {
+  padding: 4rem 2rem;
+
+  .booking-history-title {
+    font-size: 1.5rem;
+    font-weight: 200;
+    color: white;
+    margin-bottom: 1.5rem;
+    letter-spacing: 2px;
+    font-family: "Oswald", "Impact", sans-serif;
+  }
+
+  .booking-history-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
 }
