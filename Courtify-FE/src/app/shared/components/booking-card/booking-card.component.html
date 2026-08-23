@@ -16,14 +16,17 @@
     <div class="info-grid">
       <div class="info-item">
         <span class="info-label">Booking Date</span>
-        <span class="info-value">{{ booking.bookingDate }}</span>
+        <span class="info-value">{{
+          booking.bookingDate | formatDateIndo
+        }}</span>
       </div>
       <div class="info-item">
         <span class="info-label">Time & Duration</span>
         <span class="info-value"
-          >{{ booking.startTime }} - {{ booking.endTime }}
+          >{{ booking.startTime | formatTime }} -
+          {{ booking.endTime | formatTime }}
         </span>
-        <span class="info-label">({{ booking.totalHours }} Hours)</span>
+        <span class="info-label">({{ booking.total_hours }} Hours)</span>
       </div>
     </div>
 
@@ -33,17 +36,19 @@
     <div class="price-section">
       <div class="price-row">
         <span>Base Amount</span>
-        <span class="base-price">Rp {{ booking.baseAmount }}</span>
+        <span class="base-price">Rp {{ booking.base_amount }}</span>
       </div>
       <div class="price-row total">
         <span>Total Amount</span>
-        <span class="total-price">Rp {{ booking.totalAmount }}</span>
+        <span class="total-price">Rp {{ booking.grandTotal }}</span>
       </div>
     </div>
 
     <!-- FOOTER -->
     <div class="booking-footer">
-      <span class="created-at">Created at: {{ booking.createdAt }}</span>
+      <span class="created-at"
+        >Created at: {{ booking.createdAt | formatDateIndo }}</span
+      >
     </div>
   </div>
 </div>

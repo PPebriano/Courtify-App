@@ -1,5 +1,5 @@
 <div class="app-layout">
-  @if (isLoggedIn) {
+  @if (isLoggedIn()) {
     <app-navbar></app-navbar>
   }
 
@@ -7,7 +7,7 @@
     <router-outlet></router-outlet>
   </main>
 
-  @if (isLoggedIn) {
+  @if (isLoggedIn()) {
     <app-footer></app-footer>
   }
 </div>

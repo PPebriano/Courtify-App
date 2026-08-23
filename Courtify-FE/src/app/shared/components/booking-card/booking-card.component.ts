@@ -1,12 +1,15 @@
+import {
+  DateIndoPipe,
+  TimeFormatPipe,
+} from './../../../core/formatter/date-formatter-pipe';
 import { Component, Input } from '@angular/core';
 import { BookingResponseType } from '../../../core/models/response/booking-response-type';
-import { APP_ROUTES } from '../../constants/routes';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-booking-card',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, DateIndoPipe, TimeFormatPipe],
   templateUrl: './booking-card.component.html',
   styleUrl: './booking-card.component.css',
 })

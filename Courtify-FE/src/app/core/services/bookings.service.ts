@@ -13,19 +13,17 @@ export class BookingsService {
   http = inject(HttpClient);
 
   booking(payload: BookingRequestType) {
+    console.log('Booking payload:', payload);
     return this.http.post<BookingRequestType>(
       `${environtment.apiUrl}/api/bookings`,
       payload,
     );
   }
 
-  bookings(status: string = 'ACTIVE') {
-    let params = new HttpParams();
-    params.set('status', status);
-
+  bookings(status: string) {
     return this.http.get<BookingResponseType[]>(
       `${environtment.apiUrl}/api/bookings`,
-      { params },
+      { params: { status } },
     );
   }
 
@@ -36,12 +34,13 @@ export class BookingsService {
   }
 
   bookingStatus(id: number, status: string) {
-    return this.http.patch<BookingStatusResponseType>(
-      `${environtment.apiUrl}/api/${id}/status`,
-      status,
+    return this.http.put<BookingStatusResponseType>(
+      `${environtment.apiUrl}/api/bookings/${id}/status`,
+      { status },
     );
   }
 
-  cancelBooking(id: number) {}
-  
+  cancelBooking(id: number) {
+    return this.http.delete(`${environtment.apiUrl}/api/bookings/${id}`);
+  }
 }

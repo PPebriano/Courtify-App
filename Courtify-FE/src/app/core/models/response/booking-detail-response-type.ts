@@ -9,8 +9,8 @@ export type BookingDetailResponseType = {
   bookingDate: string;
   startTime: string;
   endTime: string;
-  totalHours: number;
-  baseAmount: number;
+  total_hours: number;
+  base_amount: number;
   grandTotal: number;
   status: string;
   createdAt: string;

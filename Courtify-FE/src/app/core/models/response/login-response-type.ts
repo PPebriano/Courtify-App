@@ -2,7 +2,7 @@ export type LoginResponseType = {
   status: string;
   token: string;
   admin: {
-    adminId: number;
+    id: number;
     name: string;
   };
 };

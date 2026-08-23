@@ -15,21 +15,26 @@
       <div class="info-grid">
         <div class="info-item">
           <span class="label">Date</span>
-          <span class="value">{{ bookingDetail?.bookingDate }}</span>
+          <span class="value">{{
+            bookingDetail?.bookingDate | formatDateIndo
+          }}</span>
         </div>
         <div class="info-item">
           <span class="label">Time Slot</span>
           <span class="value"
-            >{{ bookingDetail?.startTime }} - {{ bookingDetail?.endTime }}</span
+            >{{ bookingDetail?.startTime | formatTime }} -
+            {{ bookingDetail?.endTime | formatTime }}</span
           >
         </div>
         <div class="info-item">
           <span class="label">Duration</span>
-          <span class="value">{{ bookingDetail?.totalHours }} Hours</span>
+          <span class="value">{{ bookingDetail?.total_hours }} Hours</span>
         </div>
         <div class="info-item">
           <span class="label">Created At</span>
-          <span class="value">{{ bookingDetail?.createdAt }}</span>
+          <span class="value">{{
+            bookingDetail?.createdAt | formatDateIndo
+          }}</span>
         </div>
       </div>
     </div>
@@ -58,11 +63,7 @@
       <h3 class="section-title">Payment Summary</h3>
       <div class="price-row">
         <span>Court Base Price</span>
-        <span>Rp {{ bookingDetail?.baseAmount }}</span>
-      </div>
-      <div class="price-row">
-        <span>Add-ons Total</span>
-        <span>Rp {{ bookingDetail?.grandTotal }}</span>
+        <span>Rp {{ bookingDetail?.base_amount }}</span>
       </div>
       <div class="divider"></div>
       <div class="price-row grand-total">

@@ -23,42 +23,7 @@ export class BookingFeedComponent {
   }
 
   private fetchBookingHistory() {
-    // const dummyValue = [
-    //   {
-    //     id: 1,
-    //     bookingCode: 'BK-220204',
-    //     adminId: 1,
-    //     courtId: 1,
-    //     customerName: 'Dadang Gunawan',
-    //     bookingDate: '22-02-04',
-    //     startTime: '14:00',
-    //     endTime: '18:00',
-    //     totalHours: 4,
-    //     baseAmount: 4000000,
-    //     totalAmount: 3500000,
-    //     status: 'ACTIVE',
-    //     createdAt: '22-Februari-2004',
-    //   },
-    //   {
-    //     id: 2,
-    //     bookingCode: 'BK-220204',
-    //     adminId: 1,
-    //     courtId: 1,
-    //     customerName: 'Kurniawan',
-    //     bookingDate: '22-02-04',
-    //     startTime: '14:00',
-    //     endTime: '18:00',
-    //     totalHours: 4,
-    //     baseAmount: 4000000,
-    //     totalAmount: 3500000,
-    //     status: 'ACTIVE',
-    //     createdAt: '22-Februari-2004',
-    //   },
-    // ];
-
-    // this.activeBookings = dummyValue;
-
-    this.bookings.bookings().subscribe({
+    this.bookings.bookings('ACTIVE').subscribe({
       next: (response) => {
         console.log(response);
         this.activeBookings = response;
