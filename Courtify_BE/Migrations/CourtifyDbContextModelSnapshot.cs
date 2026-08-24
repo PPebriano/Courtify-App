@@ -122,7 +122,7 @@ namespace CourtifyBE.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("BOOKING_DATE");
 
-                    b.Property<long>("CourtsId")
+                    b.Property<long>("CourtId")
                         .HasColumnType("bigint")
                         .HasColumnName("COURTS_ID");
 
@@ -160,7 +160,7 @@ namespace CourtifyBE.Migrations
 
                     b.HasIndex("AdminId");
 
-                    b.HasIndex("CourtsId");
+                    b.HasIndex("CourtId");
 
                     b.ToTable("Bookings");
                 });
@@ -351,7 +351,7 @@ namespace CourtifyBE.Migrations
 
                     b.HasOne("CourtifyBE.Models.Courts", "Courts")
                         .WithMany("Bookings")
-                        .HasForeignKey("CourtsId")
+                        .HasForeignKey("CourtId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
