@@ -16,7 +16,7 @@ namespace CourtifyBE.Models
         [ForeignKey(nameof(Admin))]
         [Column("ADMIN_ID")]
         public long AdminId { get; set; }
-        public Admin? Admin { get; set; }
+        public User? Admin { get; set; }
 
         [ForeignKey(nameof(Courts))]
         [Column("COURTS_ID")]
