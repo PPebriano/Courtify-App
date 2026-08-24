@@ -10,10 +10,10 @@ namespace CourtifyBE.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly IRepository<Admin> _adminRepository;
+        private readonly IRepository<User> _adminRepository;
         private readonly IConfiguration _config;
 
-        public AuthService(IRepository<Admin> adminRepository, IConfiguration config)
+        public AuthService(IRepository<User> adminRepository, IConfiguration config)
         {
             _adminRepository = adminRepository;
             _config = config;
@@ -21,8 +21,8 @@ namespace CourtifyBE.Services
 
         public async Task<LoginResponse?> LoginAsync(LoginRequest request)
         {
-            List<Admin> admins = await _adminRepository.GetAllAsync();
-            Admin? admin = admins.FirstOrDefault(a => a.Username == request.Username);
+            List<User> admins = await _adminRepository.GetAllAsync();
+            User? admin = admins.FirstOrDefault(a => a.Username == request.Username);
 
             if (admin == null || admin.Password != request.Password)
             {

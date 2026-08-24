@@ -13,22 +13,6 @@ namespace CourtifyBE.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Admins",
-                columns: table => new
-                {
-                    ID = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    USERNAME = table.Column<string>(type: "text", nullable: false),
-                    PASSWORD = table.Column<string>(type: "text", nullable: false),
-                    NAME = table.Column<string>(type: "text", nullable: false),
-                    CREATED_AT = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Admins", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "CourtCategories",
                 columns: table => new
                 {
@@ -55,6 +39,22 @@ namespace CourtifyBE.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Equipments", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    ID = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    USERNAME = table.Column<string>(type: "text", nullable: false),
+                    PASSWORD = table.Column<string>(type: "text", nullable: false),
+                    NAME = table.Column<string>(type: "text", nullable: false),
+                    CREATED_AT = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -125,17 +125,17 @@ namespace CourtifyBE.Migrations
                 {
                     table.PrimaryKey("PK_Bookings", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Bookings_Admins_ADMIN_ID",
-                        column: x => x.ADMIN_ID,
-                        principalTable: "Admins",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Bookings_Courts_COURTS_ID",
                         column: x => x.COURTS_ID,
                         principalTable: "Courts",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Bookings_Users_ADMIN_ID",
+                        column: x => x.ADMIN_ID,
+                        principalTable: "Users",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -190,12 +190,6 @@ namespace CourtifyBE.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Admins_USERNAME",
-                table: "Admins",
-                column: "USERNAME",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_BookingAddOns_BOOKING_ID",
                 table: "BookingAddOns",
                 column: "BOOKING_ID");
@@ -229,6 +223,12 @@ namespace CourtifyBE.Migrations
                 name: "IX_PaymentReceipts_BOOKING_ID",
                 table: "PaymentReceipts",
                 column: "BOOKING_ID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_USERNAME",
+                table: "Users",
+                column: "USERNAME",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -247,10 +247,10 @@ namespace CourtifyBE.Migrations
                 name: "Bookings");
 
             migrationBuilder.DropTable(
-                name: "Admins");
+                name: "Courts");
 
             migrationBuilder.DropTable(
-                name: "Courts");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "CourtCategories");

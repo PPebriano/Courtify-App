@@ -1,12 +1,13 @@
 
 using CourtifyBE.Data;
+using CourtifyBE.Middlewares;
 using CourtifyBE.Repositories;
 using CourtifyBE.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using Serilog;
+using System.Text;
 
 namespace CourtifyBE
 {
@@ -73,6 +74,8 @@ namespace CourtifyBE
             });
 
             var app = builder.Build();
+
+            app.UseMiddleware<GlobalExceptionMiddleware>();
 
             app.UseCors("AllowAngular");
 

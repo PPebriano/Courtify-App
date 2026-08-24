@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CourtifyBE.Migrations
 {
     [DbContext(typeof(CourtifyDbContext))]
-    [Migration("20260821225634_InitialCreate")]
+    [Migration("20260824030725_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -24,42 +24,6 @@ namespace CourtifyBE.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("CourtifyBE.Models.Admin", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasColumnName("ID");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("CREATED_AT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("NAME");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("PASSWORD");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("USERNAME");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Username")
-                        .IsUnique();
-
-                    b.ToTable("Admins");
-                });
 
             modelBuilder.Entity("CourtifyBE.Models.BookingAddOns", b =>
                 {
@@ -125,7 +89,7 @@ namespace CourtifyBE.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("BOOKING_DATE");
 
-                    b.Property<long>("CourtsId")
+                    b.Property<long>("CourtId")
                         .HasColumnType("bigint")
                         .HasColumnName("COURTS_ID");
 
@@ -163,7 +127,7 @@ namespace CourtifyBE.Migrations
 
                     b.HasIndex("AdminId");
 
-                    b.HasIndex("CourtsId");
+                    b.HasIndex("CourtId");
 
                     b.ToTable("Bookings");
                 });
@@ -292,6 +256,42 @@ namespace CourtifyBE.Migrations
                     b.ToTable("PaymentReceipts");
                 });
 
+            modelBuilder.Entity("CourtifyBE.Models.User", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("ID");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("CREATED_AT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("NAME");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("PASSWORD");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("USERNAME");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Username")
+                        .IsUnique();
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("CourtifyBE.Models.Venues", b =>
                 {
                     b.Property<long>("Id")
@@ -346,7 +346,7 @@ namespace CourtifyBE.Migrations
 
             modelBuilder.Entity("CourtifyBE.Models.Bookings", b =>
                 {
-                    b.HasOne("CourtifyBE.Models.Admin", "Admin")
+                    b.HasOne("CourtifyBE.Models.User", "Admin")
                         .WithMany("Bookings")
                         .HasForeignKey("AdminId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -354,7 +354,7 @@ namespace CourtifyBE.Migrations
 
                     b.HasOne("CourtifyBE.Models.Courts", "Courts")
                         .WithMany("Bookings")
-                        .HasForeignKey("CourtsId")
+                        .HasForeignKey("CourtId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -393,11 +393,6 @@ namespace CourtifyBE.Migrations
                     b.Navigation("Bookings");
                 });
 
-            modelBuilder.Entity("CourtifyBE.Models.Admin", b =>
-                {
-                    b.Navigation("Bookings");
-                });
-
             modelBuilder.Entity("CourtifyBE.Models.Bookings", b =>
                 {
                     b.Navigation("BookingAddOns");
@@ -418,6 +413,11 @@ namespace CourtifyBE.Migrations
             modelBuilder.Entity("CourtifyBE.Models.EquipmentAddOns", b =>
                 {
                     b.Navigation("BookingAddOns");
+                });
+
+            modelBuilder.Entity("CourtifyBE.Models.User", b =>
+                {
+                    b.Navigation("Bookings");
                 });
 
             modelBuilder.Entity("CourtifyBE.Models.Venues", b =>

@@ -9,7 +9,7 @@ namespace CourtifyBE.Data
         { 
         }
 
-        public DbSet<Admin> Admins { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<BookingAddOns> BookingAddOns { get; set; }
         public DbSet<Bookings> Bookings { get; set; }
         public DbSet<CourtCategory> CourtCategories { get; set; }
@@ -22,7 +22,7 @@ namespace CourtifyBE.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Admin>()
+            modelBuilder.Entity<User>()
                 .HasIndex(u => u.Username)
                 .IsUnique();
 

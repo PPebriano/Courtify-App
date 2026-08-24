@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CourtifyBE.Models
 {
-    public class Admin
+    public class User
     {
         [Key]
         [Column("ID")]

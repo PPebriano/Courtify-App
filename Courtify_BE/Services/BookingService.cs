@@ -1,4 +1,5 @@
 ﻿using CourtifyBE.DTOs;
+using CourtifyBE.Exceptions;
 using CourtifyBE.Models;
 using CourtifyBE.Repositories;
 
@@ -10,17 +11,20 @@ namespace CourtifyBE.Services
         private readonly IRepository<Courts> _courtRepository;
         private readonly IRepository<EquipmentAddOns> _equipmentRepository;
         private readonly IRepository<BookingAddOns> _bookingAddOnsRepository;
+        private readonly ILogger<BookingService> _logger;
 
         public BookingService(
             IRepository<Bookings> bookingRepository,
             IRepository<Courts> courtRepository,
             IRepository<EquipmentAddOns> equipmentRepository,
-            IRepository<BookingAddOns> bookingAddOnsRepository)
+            IRepository<BookingAddOns> bookingAddOnsRepository,
+            ILogger<BookingService> logger)
         {
             _bookingRepository = bookingRepository;
             _courtRepository = courtRepository;
             _equipmentRepository = equipmentRepository;
             _bookingAddOnsRepository = bookingAddOnsRepository;
+            _logger = logger;
         }
 
         public async Task<Bookings?> GetByIdAsync(long id)
@@ -44,11 +48,36 @@ namespace CourtifyBE.Services
 
         public async Task<BookingListResponse> CreateFullTransactionAsync(CreateBookingRequest request, long currentAdminId)
         {
+            _logger.LogInformation("Memulai pembuatan transaksi booking untuk Lapangan ID: {CourtId} oleh Admin ID: {AdminId}", request.CourtId, currentAdminId);
+            
             var court = await _courtRepository.GetByIdAsync(request.CourtId);
-            if (court == null) throw new Exception("Lapangan tidak ditemukan");
-
+            if (court == null)
+            {
+                _logger.LogWarning("Pembuatan booking gagal: Lapangan dengan ID {CourtId} tidak ditemukan", request.CourtId);
+                throw new Exception("Lapangan tidak ditemukan");
+            }
             int total_hours = (int)(request.EndTime - request.StartTime).TotalHours;
-            if (total_hours <= 0) throw new Exception("Waktu sewa tidak valid");
+            if (total_hours <= 0)
+            {
+                _logger.LogWarning("Pembuatan booking gagal: Waktu sewa tidak valid (Mulai: {StartTime}, Selesai: {EndTime})", request.StartTime, request.EndTime);
+                throw new Exception("Waktu sewa tidak valid");
+            }
+            var allBookings = await _bookingRepository.GetAllAsync();
+            var isCourtOccupied = allBookings.Any(b =>
+                b.CourtId == request.CourtId &&
+                b.BookingDate.Date == request.BookingDate.Date &&
+                b.Status != BookingStatus.CANCELLED && 
+                ((request.StartTime >= b.StartTime && request.StartTime < b.EndTime) || 
+                 (request.EndTime > b.StartTime && request.EndTime <= b.EndTime) ||   
+                 (request.StartTime <= b.StartTime && request.EndTime >= b.EndTime)));  
+
+            
+            if (isCourtOccupied)
+            {
+                _logger.LogWarning("Pembuatan booking ditolak: Lapangan '{CourtName}' sudah dipesan pada tanggal {Date} jam {Start}-{End}",
+                    court.CourtName, request.BookingDate.ToString("yyyy-MM-dd"), request.StartTime, request.EndTime);
+                throw new CourtNotAvailableException(court.CourtName ?? request.CourtId.ToString());
+            }
 
             decimal baseAmount = 0;
             TimeSpan currentHour = request.StartTime;
@@ -112,15 +141,19 @@ namespace CourtifyBE.Services
 
             if (request.AddOns != null && request.AddOns.Any())
             {
+                _logger.LogInformation("Memproses {Count} item perlengkapan tambahan untuk Kode Booking: {BookingCode}", request.AddOns.Count, bookingCode);
                 foreach (var addOnReq in request.AddOns)
                 {
                     var equipment = await _equipmentRepository.GetByIdAsync(addOnReq.EquipmentAddOnsId);
                     if (equipment == null)
                     {
+                        _logger.LogError("Gagal memproses add-on: Item ID {EquipmentId} tidak ditemukan", addOnReq.EquipmentAddOnsId);
                         throw new Exception($"Item perlengkapan dengan ID {addOnReq.EquipmentAddOnsId} tidak ditemukan");
                     }
                     if (equipment.Stock < addOnReq.Quantity)
                     {
+                        _logger.LogWarning("Gagal memproses add-on: Stok '{ItemName}' tidak mencukupi. Sisa stok: {Stock}, Diminta: {Qty}",
+                            equipment.ItemName, equipment.Stock, addOnReq.Quantity);
                         throw new Exception($"Stok item {equipment.ItemName} tidak mencukupi");
                     }
 
@@ -146,6 +179,8 @@ namespace CourtifyBE.Services
             booking.TotalAmount = totalAmount;
             _bookingRepository.Update(booking);
             await _bookingRepository.SaveChangesAsync();
+
+            _logger.LogInformation("Transaksi BERHASIL dibuat. Kode Booking: {BookingCode}, Total Bayar: {TotalAmount}", bookingCode, totalAmount);
 
             return ToListResponse(booking);
         }
